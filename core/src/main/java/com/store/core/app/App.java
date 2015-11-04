@@ -5,7 +5,6 @@
  */
 package com.store.core.app;
 
-import com.store.core.controller.CategoryController;
 import com.store.core.controller.CustomerController;
 import java.util.Scanner;
 import org.springframework.context.ApplicationContext;
@@ -20,7 +19,7 @@ public class App {
     
     public static void main(String[] argv) {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-        
+
         //final CategoryController categoryController = (CategoryController)context.getBean("categoryController");
         //System.out.println(categoryController.getFromConsole());
         
