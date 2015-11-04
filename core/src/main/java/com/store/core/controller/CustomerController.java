@@ -6,8 +6,10 @@
 package com.store.core.controller;
 
 import com.store.core.entity.Customer;
+import com.store.core.entity.Order;
 import com.store.core.service.CustomerService;
 import com.store.core.util.SystemUtil;
+import java.io.FileWriter;
 import java.util.Scanner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,5 +37,19 @@ public class CustomerController {
         final Long id = SystemUtil.longFromConsole(scanner, "Quel est l'identifiant du client ?");
         
         return this.customerService.getById(id);
+    }
+    
+    public void printIntoFile() {
+        final Customer customer = getFromConsole();
+        
+        try {
+            final FileWriter writer = new FileWriter("/Users/Gyles/Desktop/Orders.txt");
+            for (Order order: customer.getOrders()) {
+                writer.write(order.print());
+            }
+            writer.close();
+        }catch(Throwable e) {
+            e.printStackTrace();
+        }
     }
 }

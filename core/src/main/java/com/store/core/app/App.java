@@ -7,8 +7,6 @@ package com.store.core.app;
 
 import com.store.core.controller.CategoryController;
 import com.store.core.controller.CustomerController;
-import com.store.core.entity.Customer;
-import com.store.core.entity.Order;
 import java.util.Scanner;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -23,15 +21,16 @@ public class App {
     public static void main(String[] argv) {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         
-        final CategoryController categoryController = (CategoryController)context.getBean("categoryController");
-        System.out.println(categoryController.getFromConsole());
+        //final CategoryController categoryController = (CategoryController)context.getBean("categoryController");
+        //System.out.println(categoryController.getFromConsole());
         
         final CustomerController customerController = (CustomerController)context.getBean("customerController");
-        final Customer customer = customerController.getFromConsole();
+        //final Customer customer = customerController.getFromConsole();
         
-        for (Order order: customer.getOrders()) {
+        /*for (Order order: customer.getOrders()) {
             System.out.println(order.print());
-        }
+        }*/
+        customerController.printIntoFile();
         
         //final OrderController orderController = (OrderController)context.getBean("orderController");
         //System.out.println(orderController.getFromConsole());
