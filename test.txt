@@ -1,1 +1,1424 @@
-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
+# Documentation technique du projet Business Sellers Referential MS
+
+## Sommaire
+
+1. Introduction
+2. Architecture Globale
+    - Fondation Spring et OpenFeign
+    - Stockage et Cache (Redis)
+    - Résilience et Monitoring
+    - Sécurité (JWT)
+    - Conteneurisation et Déploiement
+    - Avantages de la stack technique
+    - Schéma d’architecture globale (PlantUML)
+    - Structure du projet
+3. Description Fonctionnelle
+    - Introduction
+    - Cas d’utilisation (Use cases et diagrammes)
+4. Description Technique
+    - Technologies utilisées
+    - Endpoints REST
+5. Services Métier
+    - Introduction
+    - Description détaillée de chaque service (avec schémas PlantUML)
+6. Diagrammes UML
+    - Diagramme de classes
+    - Diagrammes de séquence
+7. Sécurité
+8. CI/CD et Déploiement
+    - Intégration CI/CD
+    - Pipeline CI/CD
+9. Conclusion
+10. Glossaire
+11. Annexe
+
+---
+
+## 1. Introduction
+
+Le microservice **Business Sellers Referential MS** centralise la gestion des utilisateurs et des points de vente pour le projet SmartConnect. Il orchestre la création, la modification, la suspension et la réactivation des utilisateurs, ainsi que l’initialisation et la gestion des points de vente. Ce service s’adresse à plusieurs profils : partenaires, animateurs commerciaux, administrateurs et support[^1].
+
+---
+
+## 2. Architecture Globale
+
+### Fondation Spring et OpenFeign
+
+Le projet est basé sur **Spring Boot** (3.1.9), un framework Java moderne qui facilite la création d’applications web robustes. Il intègre **OpenFeign** pour simplifier les appels HTTP vers d’autres microservices, permettant ainsi une communication fluide et résiliente entre composants[^1].
+
+**Vulgarisation** : Spring Boot permet de créer rapidement des applications tout-en-un, tandis qu’OpenFeign agit comme un traducteur automatique pour parler à d’autres services.
+
+### Stockage et Cache (Redis)
+
+Les informations temporaires et les sessions utilisateurs sont stockées dans **Redis**, une base de données en mémoire ultra-rapide. **Spring Data Redis** permet d’intégrer Redis de façon transparente dans l’application. Cela permet d’accélérer les accès aux données, notamment pour la gestion du cache utilisateur et des processus métiers sensibles à la performance[^1].
+
+**Vulgarisation** : Redis est comme un carnet de notes ultra-rapide pour retenir qui est connecté ou garder des infos critiques prêtes à l’emploi.
+
+### Résilience et Monitoring
+
+La robustesse du système est assurée par **Resilience4j** (gestion des coupures et des erreurs sur les appels externes), **Micrometer** (collecte des métriques pour Prometheus), et **Log4j2** (journalisation des événements). Ces outils garantissent la stabilité du service, la surveillance en temps réel et la traçabilité des incidents[^1].
+
+**Vulgarisation** : Si un service voisin tombe, Resilience4j évite la panne en attendant ou en coupant le lien. Micrometer observe la santé du service, et Log4j2 garde la trace de tout ce qui se passe.
+
+### Sécurité (JWT)
+
+L’accès aux ressources est protégé par des **JWT** (JSON Web Tokens), qui garantissent que seules les personnes ou applications autorisées peuvent effectuer des actions sensibles. Des filtres et des aspects contrôlent systématiquement les droits à chaque appel[^1].
+
+**Vulgarisation** : Le JWT, c’est comme un badge sécurisé : on le vérifie à chaque porte avant de laisser passer quelqu’un.
+
+### Conteneurisation et Déploiement
+
+Le projet utilise **Docker** pour l’empaquetage, **Lombok** pour simplifier le code, **MapStruct** pour transformer les objets métiers, et **Swagger/OpenAPI** pour documenter automatiquement les API. Le déploiement s’appuie sur des pipelines CI/CD (GitLab, ArgoCD) pour automatiser les tests et la mise en production[^1].
+
+**Vulgarisation** : Docker emballe l’application dans une boîte prête à être livrée. Lombok et MapStruct réduisent la paperasse du code. Swagger génère le mode d’emploi des API automatiquement.
+
+### Avantages de la stack technique
+
+- **Haute disponibilité** : Architecture résiliente, gestion des erreurs et redondance.
+- **Sécurité renforcée** : Authentification forte, gestion fine des droits.
+- **Évolutivité** : Microservices, conteneurisation et orchestration facilitent la montée en charge.
+- **Maintenabilité** : Code structuré, documentation générée, tests automatisés.
+- **Observabilité** : Monitoring temps réel, logs détaillés, alertes proactives[^1].
+
+---
+
+### Schéma d’architecture globale (PlantUML)
+
+```plantuml
+@startuml
+!theme spacelab
+actor Utilisateur
+cloud "Frontaux" as Front
+rectangle "Business Sellers Referential MS" as BSR {
+  [API REST]
+  [Service Métier]
+  [Cache Redis]
+  [Sécurité JWT]
+}
+database "Base de données SQL Server" as DB
+cloud "Services externes" as Ext {
+  [Directory API]
+  [Workflow API]
+  [Inwebo API]
+  [Security Log API]
+}
+Utilisateur --&gt; Front
+Front --&gt; BSR : Appels HTTP sécurisés
+BSR --&gt; DB : Accès aux données
+BSR --&gt; [Cache Redis] : Stockage temporaire
+BSR --&gt; Ext : Appels via OpenFeign
+@enduml
+```
+
+---
+
+### Structure du projet
+
+```
+business-sellers-referential-ms
+├── common/         # Utilitaires, annotations, sécurité, cache
+├── infrastructure/ # Connecteurs et DTO pour les APIs externes
+├── resource/       # Contrôleurs REST (ApplicationResource, PointOfSaleResource, UserResource)
+├── service/        # Logique métier (UserService, PointOfSaleService, etc.)
+└── resources/      # Configurations, logs, propriétés d’environnement
+```
+
+---
+
+## 3. Description Fonctionnelle
+
+Le service répond à plusieurs besoins : gestion centralisée des utilisateurs, orchestration des points de vente, initialisation, suspension/réactivation, et gestion des droits. Il vise à fluidifier les processus métiers et à renforcer la sécurité des accès.
+
+
+
+
+
+## 2. Architecture globale (schéma PlantUML)
+
+```plantuml
+@startuml
+actor Utilisateur
+actor Gestionnaire
+actor Administrateur
+actor Support
+
+rectangle "Business Sellers Referential MS" {
+  [API REST]
+  [Service métier]
+  [Sécurité JWT]
+  [Cache Redis]
+}
+
+cloud "Référentiel Utilisateurs &amp; PDV"
+cloud "Provisioning (Inwebo, Workflow, SecurityLog)"
+
+Utilisateur --&gt; [API REST]
+Gestionnaire --&gt; [API REST]
+Administrateur --&gt; [API REST]
+Support --&gt; [API REST]
+
+[API REST] --&gt; [Service métier]
+[Service métier] --&gt; "Référentiel Utilisateurs &amp; PDV"
+[Service métier] --&gt; "Provisioning (Inwebo, Workflow, SecurityLog)"
+[Service métier] --&gt; [Cache Redis]
+[API REST] --&gt; [Sécurité JWT]
+@enduml
+```
+
+---
+
+## 3. Parcours détaillé de chaque endpoint
+
+### Utilisateurs
+
+#### 1. **Créer un utilisateur**
+
+**POST /users**
+
+**Scénario métier**
+Un gestionnaire ou administrateur souhaite ajouter un nouvel utilisateur. Le système vérifie que le demandeur a les droits, contrôle les informations, crée l’utilisateur dans le référentiel, puis notifie les systèmes partenaires pour l’initialisation du compte.
+
+**Diagramme de use case**
+
+```plantuml
+@startuml
+actor "Gestionnaire"
+rectangle "Gestion des utilisateurs" {
+  usecase "Ajouter un nouvel utilisateur"
+}
+"Gestionnaire" --&gt; "Ajouter un nouvel utilisateur"
+@enduml
+```
+
+**Diagramme de séquence**
+
+```plantuml
+@startuml
+actor "Gestionnaire"
+participant "API"
+participant "Service métier"
+participant "Référentiel"
+participant "Système externe (Inwebo)"
+
+"Gestionnaire" -&gt; "API" : Soumet le formulaire d’ajout
+"API" -&gt; "Service métier" : Contrôle des droits et des données
+"Service métier" -&gt; "Référentiel" : Crée l’utilisateur dans la base centrale
+"Service métier" -&gt; "Système externe (Inwebo)" : Provisionne le compte
+"Service métier" -&gt; "API" : Retourne le résultat (succès/erreur)
+"API" -&gt; "Gestionnaire" : Affiche la confirmation ou l’erreur
+@enduml
+```
+
+---
+
+#### 2. **Mettre à jour un utilisateur**
+
+**PATCH /users/{id}**
+
+**Scénario métier**
+Un gestionnaire ou administrateur souhaite modifier les informations d’un utilisateur (ex : changement d’email, de statut). Le système vérifie les droits, met à jour les données dans le référentiel, puis synchronise l’état avec les systèmes externes.
+
+**Diagramme de use case**
+
+```plantuml
+@startuml
+actor "Gestionnaire"
+rectangle "Gestion des utilisateurs" {
+  usecase "Modifier un utilisateur existant"
+}
+"Gestionnaire" --&gt; "Modifier un utilisateur existant"
+@enduml
+```
+
+**Diagramme de séquence**
+
+```plantuml
+@startuml
+actor "Gestionnaire"
+participant "API"
+participant "Service métier"
+participant "Référentiel"
+participant "Système externe (Inwebo)"
+
+"Gestionnaire" -&gt; "API" : Demande de modification
+"API" -&gt; "Service métier" : Vérifie les droits et prépare la mise à jour
+"Service métier" -&gt; "Référentiel" : Met à jour les informations
+"Service métier" -&gt; "Système externe (Inwebo)" : Synchronise le statut (si besoin)
+"Service métier" -&gt; "API" : Retourne le résultat
+"API" -&gt; "Gestionnaire" : Affiche la confirmation ou l’erreur
+@enduml
+```
+
+---
+
+#### 3. **Obtenir un utilisateur**
+
+**GET /users/{id}**
+
+**Scénario métier**
+Un utilisateur ou gestionnaire veut consulter le détail d’un utilisateur. Le système vérifie les droits d’accès et retourne les informations.
+
+**Diagramme de use case**
+
+```plantuml
+@startuml
+actor "Utilisateur"
+rectangle "Gestion des utilisateurs" {
+  usecase "Consulter un utilisateur"
+}
+"Utilisateur" --&gt; "Consulter un utilisateur"
+@enduml
+```
+
+**Diagramme de séquence**
+
+```plantuml
+@startuml
+actor "Utilisateur"
+participant "API"
+participant "Service métier"
+participant "Référentiel"
+
+"Utilisateur" -&gt; "API" : Demande de consultation
+"API" -&gt; "Service métier" : Vérifie droits et récupère l’utilisateur
+"Service métier" -&gt; "Référentiel" : Recherche l’utilisateur
+"Service métier" -&gt; "API" : Retourne les infos
+"API" -&gt; "Utilisateur" : Affiche les infos
+@enduml
+```
+
+---
+
+#### 4. **Rechercher des utilisateurs**
+
+**GET /users/?firstName=\&...**
+
+**Scénario métier**
+Un gestionnaire souhaite rechercher des utilisateurs selon des critères (nom, prénom, email, statut…). Le système filtre les résultats selon les droits du demandeur.
+
+**Diagramme de use case**
+
+```plantuml
+@startuml
+actor "Gestionnaire"
+rectangle "Gestion des utilisateurs" {
+  usecase "Rechercher des utilisateurs"
+}
+"Gestionnaire" --&gt; "Rechercher des utilisateurs"
+@enduml
+```
+
+**Diagramme de séquence**
+
+```plantuml
+@startuml
+actor "Gestionnaire"
+participant "API"
+participant "Service métier"
+participant "Référentiel"
+
+"Gestionnaire" -&gt; "API" : Saisit les critères de recherche
+"API" -&gt; "Service métier" : Contrôle les droits et transmet les critères
+"Service métier" -&gt; "Référentiel" : Recherche les utilisateurs correspondants
+"Service métier" -&gt; "API" : Retourne la liste filtrée
+"API" -&gt; "Gestionnaire" : Affiche les résultats
+@enduml
+```
+
+---
+
+#### 5. **Obtenir la liste des utilisateurs candidats à la revue**
+
+**POST /users/review**
+
+**Scénario métier**
+Un gestionnaire souhaite lister les utilisateurs dont la situation doit être revue (ex : droits à valider, comptes à vérifier). Le système filtre selon le périmètre du gestionnaire.
+
+**Diagramme de use case**
+
+```plantuml
+@startuml
+actor "Gestionnaire"
+rectangle "Gestion des utilisateurs" {
+  usecase "Lister les utilisateurs à revoir"
+}
+"Gestionnaire" --&gt; "Lister les utilisateurs à revoir"
+@enduml
+```
+
+**Diagramme de séquence**
+
+```plantuml
+@startuml
+actor "Gestionnaire"
+participant "API"
+participant "Service métier"
+participant "Référentiel"
+
+"Gestionnaire" -&gt; "API" : Demande la liste à revoir
+"API" -&gt; "Service métier" : Vérifie le périmètre
+"Service métier" -&gt; "Référentiel" : Récupère les utilisateurs concernés
+"Service métier" -&gt; "API" : Retourne la liste
+"API" -&gt; "Gestionnaire" : Affiche la liste
+@enduml
+```
+
+---
+
+#### 6. **Centraliser un gestionnaire sur des points de vente**
+
+**POST /users/{id}/manage**
+
+**Scénario métier**
+Un gestionnaire prend la responsabilité de nouveaux points de vente. Le système vérifie qu’il a le droit de gérer ces entités, puis met à jour la répartition.
+
+**Diagramme de use case**
+
+```plantuml
+@startuml
+actor "Gestionnaire"
+rectangle "Gestion des utilisateurs" {
+  usecase "Prendre en charge des points de vente"
+}
+"Gestionnaire" --&gt; "Prendre en charge des points de vente"
+@enduml
+```
+
+**Diagramme de séquence**
+
+```plantuml
+@startuml
+actor "Gestionnaire"
+participant "API"
+participant "Service métier"
+participant "Référentiel"
+
+"Gestionnaire" -&gt; "API" : Désigne les points de vente à gérer
+"API" -&gt; "Service métier" : Vérifie la légitimité
+"Service métier" -&gt; "Référentiel" : Met à jour la liste des points de vente gérés
+"Service métier" -&gt; "API" : Retourne le résultat
+"API" -&gt; "Gestionnaire" : Affiche la confirmation
+@enduml
+```
+
+---
+
+#### 7. **Décentraliser un gestionnaire**
+
+**POST /users/{id}/unmanage**
+
+**Scénario métier**
+Un gestionnaire souhaite céder la gestion de certains points de vente. Le système vérifie la légitimité de la demande et effectue la modification.
+
+**Diagramme de use case**
+
+```plantuml
+@startuml
+actor "Gestionnaire"
+rectangle "Gestion des utilisateurs" {
+  usecase "Céder la gestion de points de vente"
+}
+"Gestionnaire" --&gt; "Céder la gestion de points de vente"
+@enduml
+```
+
+**Diagramme de séquence**
+
+```plantuml
+@startuml
+actor "Gestionnaire"
+participant "API"
+participant "Service métier"
+participant "Référentiel"
+
+"Gestionnaire" -&gt; "API" : Indique les points de vente à céder
+"API" -&gt; "Service métier" : Vérifie la légitimité
+"Service métier" -&gt; "Référentiel" : Retire les points de vente du périmètre
+"Service métier" -&gt; "API" : Retourne le résultat
+"API" -&gt; "Gestionnaire" : Affiche la confirmation
+@enduml
+```
+
+---
+
+#### 8. **Suspendre des utilisateurs**
+
+**POST /users/suspend**
+
+**Scénario métier**
+Un gestionnaire ou administrateur souhaite suspendre l’accès de certains utilisateurs (départ, inactivité, sécurité). Le système met à jour leur statut et informe les systèmes externes.
+
+**Diagramme de use case**
+
+```plantuml
+@startuml
+actor "Gestionnaire"
+rectangle "Gestion des utilisateurs" {
+  usecase "Suspendre des utilisateurs"
+}
+"Gestionnaire" --&gt; "Suspendre des utilisateurs"
+@enduml
+```
+
+**Diagramme de séquence**
+
+```plantuml
+@startuml
+actor "Gestionnaire"
+participant "API"
+participant "Service métier"
+participant "Référentiel"
+participant "Système externe (Inwebo)"
+
+"Gestionnaire" -&gt; "API" : Sélectionne les utilisateurs à suspendre
+"API" -&gt; "Service métier" : Vérifie les droits
+"Service métier" -&gt; "Référentiel" : Met à jour le statut
+"Service métier" -&gt; "Système externe (Inwebo)" : Désactive les comptes
+"Service métier" -&gt; "API" : Retourne le résultat
+"API" -&gt; "Gestionnaire" : Affiche la confirmation
+@enduml
+```
+
+---
+
+#### 9. **Réactiver des utilisateurs**
+
+**POST /users/reactivate**
+
+**Scénario métier**
+Un gestionnaire ou administrateur souhaite réactiver l’accès d’utilisateurs précédemment suspendus.
+
+**Diagramme de use case**
+
+```plantuml
+@startuml
+actor "Gestionnaire"
+rectangle "Gestion des utilisateurs" {
+  usecase "Réactiver des utilisateurs"
+}
+"Gestionnaire" --&gt; "Réactiver des utilisateurs"
+@enduml
+```
+
+**Diagramme de séquence**
+
+```plantuml
+@startuml
+actor "Gestionnaire"
+participant "API"
+participant "Service métier"
+participant "Référentiel"
+participant "Système externe (Inwebo)"
+
+"Gestionnaire" -&gt; "API" : Sélectionne les utilisateurs à réactiver
+"API" -&gt; "Service métier" : Vérifie les droits
+"Service métier" -&gt; "Référentiel" : Met à jour le statut
+"Service métier" -&gt; "Système externe (Inwebo)" : Réactive les comptes
+"Service métier" -&gt; "API" : Retourne le résultat
+"API" -&gt; "Gestionnaire" : Affiche la confirmation
+@enduml
+```
+
+### 10. Envoyer un lien d’enrôlement
+
+**POST /users/{id}/sendEnrollmentLink**
+**Scénario métier**
+Un gestionnaire ou administrateur souhaite permettre à un utilisateur d’activer son compte ou un nouvel appareil : le système génère un lien sécurisé et l’envoie par mail à l’utilisateur.
+
+**Use case**
+
+```plantuml
+@startuml
+actor "Gestionnaire"
+rectangle "Gestion des utilisateurs" {
+  usecase "Envoyer un lien d’activation à un utilisateur"
+}
+"Gestionnaire" --&gt; "Envoyer un lien d’activation à un utilisateur"
+@enduml
+```
+
+**Diagramme de séquence**
+
+```plantuml
+@startuml
+actor "Gestionnaire"
+participant "API"
+participant "Service métier"
+participant "Système d’envoi de mail"
+
+"Gestionnaire" -&gt; "API" : Demande d’envoi du lien
+"API" -&gt; "Service métier" : Vérifie droits, génère le lien sécurisé
+"Service métier" -&gt; "Système d’envoi de mail" : Envoie le lien à l’utilisateur
+"Service métier" -&gt; "API" : Confirme l’envoi
+"API" -&gt; "Gestionnaire" : Affiche la confirmation
+@enduml
+```
+
+---
+
+### 11. Envoyer un code de déblocage
+
+**POST /users/sendUnlockCode**
+**Scénario métier**
+Un utilisateur ayant perdu l’accès à son compte peut recevoir un code temporaire par email pour débloquer son accès.
+
+**Use case**
+
+```plantuml
+@startuml
+actor "Utilisateur"
+rectangle "Gestion des utilisateurs" {
+  usecase "Recevoir un code de déblocage"
+}
+"Utilisateur" --&gt; "Recevoir un code de déblocage"
+@enduml
+```
+
+**Diagramme de séquence**
+
+```plantuml
+@startuml
+actor "Utilisateur"
+participant "API"
+participant "Service métier"
+participant "Système d’envoi de mail"
+
+"Utilisateur" -&gt; "API" : Demande le code de déblocage
+"API" -&gt; "Service métier" : Vérifie l’éligibilité
+"Service métier" -&gt; "Système d’envoi de mail" : Génère et envoie le code
+"Service métier" -&gt; "API" : Confirme l’envoi
+"API" -&gt; "Utilisateur" : Affiche la confirmation
+@enduml
+```
+
+---
+
+### 12. Envoyer le code d’identifiant
+
+**POST /users/sendLogin**
+**Scénario métier**
+Un utilisateur ayant oublié son identifiant peut demander à le recevoir par email.
+
+**Use case**
+
+```plantuml
+@startuml
+actor "Utilisateur"
+rectangle "Gestion des utilisateurs" {
+  usecase "Recevoir son identifiant par mail"
+}
+"Utilisateur" --&gt; "Recevoir son identifiant par mail"
+@enduml
+```
+
+**Diagramme de séquence**
+
+```plantuml
+@startuml
+actor "Utilisateur"
+participant "API"
+participant "Service métier"
+participant "Système d’envoi de mail"
+
+"Utilisateur" -&gt; "API" : Demande son identifiant
+"API" -&gt; "Service métier" : Vérifie l’identité
+"Service métier" -&gt; "Système d’envoi de mail" : Envoie l’identifiant
+"Service métier" -&gt; "API" : Confirme l’envoi
+"API" -&gt; "Utilisateur" : Affiche la confirmation
+@enduml
+```
+
+---
+
+### 13. Générer un code d’enrôlement
+
+**POST /users/generateEnrollmentCode**
+**Scénario métier**
+Un gestionnaire ou administrateur souhaite générer un code unique pour permettre à un utilisateur d’activer son compte ou un appareil.
+
+**Use case**
+
+```plantuml
+@startuml
+actor "Gestionnaire"
+rectangle "Gestion des utilisateurs" {
+  usecase "Générer un code d’enrôlement"
+}
+"Gestionnaire" --&gt; "Générer un code d’enrôlement"
+@enduml
+```
+
+**Diagramme de séquence**
+
+```plantuml
+@startuml
+actor "Gestionnaire"
+participant "API"
+participant "Service métier"
+participant "Système externe (Inwebo)"
+
+"Gestionnaire" -&gt; "API" : Demande de génération de code
+"API" -&gt; "Service métier" : Vérifie droits et identité
+"Service métier" -&gt; "Système externe (Inwebo)" : Génère le code
+"Service métier" -&gt; "API" : Retourne le code
+"API" -&gt; "Gestionnaire" : Affiche le code
+@enduml
+```
+
+---
+
+### 14. Générer un lien d’enrôlement
+
+**POST /users/{id}/generateEnrollmentLink**
+**Scénario métier**
+Un gestionnaire ou administrateur souhaite générer un lien spécifique pour permettre à un utilisateur d’activer son compte.
+
+**Use case**
+
+```plantuml
+@startuml
+actor "Gestionnaire"
+rectangle "Gestion des utilisateurs" {
+  usecase "Générer un lien d’enrôlement"
+}
+"Gestionnaire" --&gt; "Générer un lien d’enrôlement"
+@enduml
+```
+
+**Diagramme de séquence**
+
+```plantuml
+@startuml
+actor "Gestionnaire"
+participant "API"
+participant "Service métier"
+participant "Système externe (Inwebo)"
+
+"Gestionnaire" -&gt; "API" : Demande de génération de lien
+"API" -&gt; "Service métier" : Vérifie droits et identité
+"Service métier" -&gt; "Système externe (Inwebo)" : Génère le lien
+"Service métier" -&gt; "API" : Retourne le lien
+"API" -&gt; "Gestionnaire" : Affiche le lien
+@enduml
+```
+
+---
+
+### 15. Générer un code de déblocage
+
+**POST /users/{id}/generateUnlockCode**
+**Scénario métier**
+Un gestionnaire ou administrateur souhaite générer un code temporaire pour débloquer un compte utilisateur.
+
+**Use case**
+
+```plantuml
+@startuml
+actor "Gestionnaire"
+rectangle "Gestion des utilisateurs" {
+  usecase "Générer un code de déblocage"
+}
+"Gestionnaire" --&gt; "Générer un code de déblocage"
+@enduml
+```
+
+**Diagramme de séquence**
+
+```plantuml
+@startuml
+actor "Gestionnaire"
+participant "API"
+participant "Service métier"
+participant "Système externe (Inwebo)"
+
+"Gestionnaire" -&gt; "API" : Demande de génération de code
+"API" -&gt; "Service métier" : Vérifie droits et identité
+"Service métier" -&gt; "Système externe (Inwebo)" : Génère le code
+"Service métier" -&gt; "API" : Retourne le code
+"API" -&gt; "Gestionnaire" : Affiche le code
+@enduml
+```
+
+---
+
+### 16. Obtenir les appareils d’un utilisateur
+
+**GET /users/{id}/devices**
+**Scénario métier**
+Un gestionnaire ou l’utilisateur souhaite consulter la liste des appareils connectés à son compte.
+
+**Use case**
+
+```plantuml
+@startuml
+actor "Utilisateur"
+rectangle "Gestion des utilisateurs" {
+  usecase "Consulter la liste de ses appareils"
+}
+"Utilisateur" --&gt; "Consulter la liste de ses appareils"
+@enduml
+```
+
+**Diagramme de séquence**
+
+```plantuml
+@startuml
+actor "Utilisateur"
+participant "API"
+participant "Service métier"
+participant "Système externe (Inwebo)"
+
+"Utilisateur" -&gt; "API" : Demande la liste des appareils
+"API" -&gt; "Service métier" : Vérifie droits et identité
+"Service métier" -&gt; "Système externe (Inwebo)" : Récupère la liste
+"Service métier" -&gt; "API" : Retourne la liste
+"API" -&gt; "Utilisateur" : Affiche les appareils
+@enduml
+```
+
+---
+
+### 17. Débuter une réactivation autonome
+
+**POST /users/{id}/beginSelfReactivation**
+**Scénario métier**
+L’utilisateur lance lui-même le processus de réactivation de son compte (ex : compte suspendu).
+
+**Use case**
+
+```plantuml
+@startuml
+actor "Utilisateur"
+rectangle "Gestion des utilisateurs" {
+  usecase "Démarrer la réactivation de son compte"
+}
+"Utilisateur" --&gt; "Démarrer la réactivation de son compte"
+@enduml
+```
+
+**Diagramme de séquence**
+
+```plantuml
+@startuml
+actor "Utilisateur"
+participant "API"
+participant "Service métier"
+participant "Système externe (Workflow)"
+
+"Utilisateur" -&gt; "API" : Demande de réactivation
+"API" -&gt; "Service métier" : Vérifie l’éligibilité
+"Service métier" -&gt; "Système externe (Workflow)" : Démarre le processus
+"Service métier" -&gt; "API" : Retourne le statut
+"API" -&gt; "Utilisateur" : Affiche la confirmation
+@enduml
+```
+
+---
+
+### 18. Finaliser la réactivation autonome
+
+**POST /users/processSelfReactivation**
+**Scénario métier**
+L’utilisateur termine le processus de réactivation (ex : après validation d’un code ou d’un lien).
+
+**Use case**
+
+```plantuml
+@startuml
+actor "Utilisateur"
+rectangle "Gestion des utilisateurs" {
+  usecase "Finaliser la réactivation de son compte"
+}
+"Utilisateur" --&gt; "Finaliser la réactivation de son compte"
+@enduml
+```
+
+**Diagramme de séquence**
+
+```plantuml
+@startuml
+actor "Utilisateur"
+participant "API"
+participant "Service métier"
+participant "Système externe (Workflow)"
+
+"Utilisateur" -&gt; "API" : Soumet la validation finale
+"API" -&gt; "Service métier" : Vérifie la conformité
+"Service métier" -&gt; "Système externe (Workflow)" : Finalise le processus
+"Service métier" -&gt; "API" : Retourne le résultat
+"API" -&gt; "Utilisateur" : Affiche la confirmation
+@enduml
+```
+
+---
+
+### 19. Obtenir les security logs d’un utilisateur
+
+**GET /users/{id}/securityLogs**
+**Scénario métier**
+Un gestionnaire ou l’utilisateur consulte l’historique des actions de sécurité liées à un compte.
+
+**Use case**
+
+```plantuml
+@startuml
+actor "Gestionnaire"
+rectangle "Gestion des utilisateurs" {
+  usecase "Consulter l’historique de sécurité d’un utilisateur"
+}
+"Gestionnaire" --&gt; "Consulter l’historique de sécurité d’un utilisateur"
+@enduml
+```
+
+**Diagramme de séquence**
+
+```plantuml
+@startuml
+actor "Gestionnaire"
+participant "API"
+participant "Service métier"
+participant "Système externe (SecurityLog)"
+
+"Gestionnaire" -&gt; "API" : Demande l’historique
+"API" -&gt; "Service métier" : Vérifie droits et identité
+"Service métier" -&gt; "Système externe (SecurityLog)" : Récupère les logs
+"Service métier" -&gt; "API" : Retourne les logs
+"API" -&gt; "Gestionnaire" : Affiche les logs
+@enduml
+```
+
+---
+
+## Points de vente
+
+### 1. Mettre à jour un point de vente
+
+**PATCH /pointsOfSale/{id}**
+**Scénario métier**
+Un gestionnaire ou administrateur souhaite modifier les informations d’un point de vente (ex : nom, statut).
+
+**Use case**
+
+```plantuml
+@startuml
+actor "Gestionnaire"
+rectangle "Gestion des points de vente" {
+  usecase "Mettre à jour un point de vente"
+}
+"Gestionnaire" --&gt; "Mettre à jour un point de vente"
+@enduml
+```
+
+**Diagramme de séquence**
+
+```plantuml
+@startuml
+actor "Gestionnaire"
+participant "API"
+participant "Service métier"
+participant "Référentiel Points de vente"
+
+"Gestionnaire" -&gt; "API" : Demande de modification
+"API" -&gt; "Service métier" : Vérifie droits et prépare la mise à jour
+"Service métier" -&gt; "Référentiel Points de vente" : Met à jour les informations
+"Service métier" -&gt; "API" : Retourne le résultat
+"API" -&gt; "Gestionnaire" : Affiche la confirmation
+@enduml
+```
+
+---
+
+### 2. Obtenir un point de vente
+
+**GET /pointsOfSale/{id}**
+**Scénario métier**
+Permet de consulter les informations détaillées d’un point de vente.
+
+**Use case**
+
+```plantuml
+@startuml
+actor "Utilisateur"
+rectangle "Gestion des points de vente" {
+  usecase "Consulter un point de vente"
+}
+"Utilisateur" --&gt; "Consulter un point de vente"
+@enduml
+```
+
+**Diagramme de séquence**
+
+```plantuml
+@startuml
+actor "Utilisateur"
+participant "API"
+participant "Service métier"
+participant "Référentiel Points de vente"
+
+"Utilisateur" -&gt; "API" : Demande de consultation
+"API" -&gt; "Service métier" : Vérifie droits et récupère le point de vente
+"Service métier" -&gt; "Référentiel Points de vente" : Recherche le point de vente
+"Service métier" -&gt; "API" : Retourne les infos
+"API" -&gt; "Utilisateur" : Affiche les infos
+@enduml
+```
+
+---
+
+### 3. Rechercher des points de vente
+
+**GET /pointsOfSale/?label=\&...**
+**Scénario métier**
+Recherche de points de vente selon différents critères (nom, code, etc.).
+
+**Use case**
+
+```plantuml
+@startuml
+actor "Gestionnaire"
+rectangle "Gestion des points de vente" {
+  usecase "Rechercher des points de vente"
+}
+"Gestionnaire" --&gt; "Rechercher des points de vente"
+@enduml
+```
+
+**Diagramme de séquence**
+
+```plantuml
+@startuml
+actor "Gestionnaire"
+participant "API"
+participant "Service métier"
+participant "Référentiel Points de vente"
+
+"Gestionnaire" -&gt; "API" : Saisit les critères de recherche
+"API" -&gt; "Service métier" : Contrôle les droits et transmet les critères
+"Service métier" -&gt; "Référentiel Points de vente" : Recherche les points de vente correspondants
+"Service métier" -&gt; "API" : Retourne la liste filtrée
+"API" -&gt; "Gestionnaire" : Affiche les résultats
+@enduml
+```
+
+---
+
+### 4. Initialiser un point de vente
+
+**POST /pointsOfSale/initialize**
+**Scénario métier**
+Permet de créer un nouveau point de vente ou de l’associer à un gestionnaire.
+
+**Use case**
+
+```plantuml
+@startuml
+actor "Gestionnaire"
+rectangle "Gestion des points de vente" {
+  usecase "Initialiser un point de vente"
+}
+"Gestionnaire" --&gt; "Initialiser un point de vente"
+@enduml
+```
+
+**Diagramme de séquence**
+
+```plantuml
+@startuml
+actor "Gestionnaire"
+participant "API"
+participant "Service métier"
+participant "Référentiel Points de vente"
+
+"Gestionnaire" -&gt; "API" : Demande d’initialisation
+"API" -&gt; "Service métier" : Vérifie droits et prépare la création
+"Service métier" -&gt; "Référentiel Points de vente" : Crée ou associe le point de vente
+"Service métier" -&gt; "API" : Retourne le résultat
+"API" -&gt; "Gestionnaire" : Affiche la confirmation
+@enduml
+```
+
+---
+
+### 5. Valider la revue d’un point de vente
+
+**POST /pointsOfSale/validateReview**
+**Scénario métier**
+Un gestionnaire valide la revue des utilisateurs liés à un point de vente.
+
+**Use case**
+
+```plantuml
+@startuml
+actor "Gestionnaire"
+rectangle "Gestion des points de vente" {
+  usecase "Valider la revue des utilisateurs d’un point de vente"
+}
+"Gestionnaire" --&gt; "Valider la revue des utilisateurs d’un point de vente"
+@enduml
+```
+
+**Diagramme de séquence**
+
+```plantuml
+@startuml
+actor "Gestionnaire"
+participant "API"
+participant "Service métier"
+participant "Référentiel Points de vente"
+
+"Gestionnaire" -&gt; "API" : Demande de validation
+"API" -&gt; "Service métier" : Vérifie droits et prépare la validation
+"Service métier" -&gt; "Référentiel Points de vente" : Valide la revue
+"Service métier" -&gt; "API" : Retourne le résultat
+"API" -&gt; "Gestionnaire" : Affiche la confirmation
+@enduml
+```
+
+---
+
+### 6. Affecter des applications à un point de vente
+
+**POST /pointsOfSale/assignApplications**
+**Scénario métier**
+Permet d’associer des applications ou droits à un point de vente.
+
+**Use case**
+
+```plantuml
+@startuml
+actor "Gestionnaire"
+rectangle "Gestion des points de vente" {
+  usecase "Affecter des applications à un point de vente"
+}
+"Gestionnaire" --&gt; "Affecter des applications à un point de vente"
+@enduml
+```
+
+**Diagramme de séquence**
+
+```plantuml
+@startuml
+actor "Gestionnaire"
+participant "API"
+participant "Service métier"
+participant "Référentiel Points de vente"
+
+"Gestionnaire" -&gt; "API" : Sélectionne les applications à affecter
+"API" -&gt; "Service métier" : Vérifie droits et prépare l’affectation
+"Service métier" -&gt; "Référentiel Points de vente" : Affecte les applications
+"Service métier" -&gt; "API" : Retourne le résultat
+"API" -&gt; "Gestionnaire" : Affiche la confirmation
+@enduml
+```
+
+---
+
+## Applications
+
+### 1. Obtenir la liste des applications
+
+**GET /applications**
+**Scénario métier**
+Permet de lister toutes les applications et rôles disponibles dans le système.
+
+**Use case**
+
+```plantuml
+@startuml
+actor "Utilisateur"
+rectangle "Gestion des applications" {
+  usecase "Consulter la liste des applications"
+}
+"Utilisateur" --&gt; "Consulter la liste des applications"
+@enduml
+```
+
+**Diagramme de séquence**
+
+```plantuml
+@startuml
+actor "Utilisateur"
+participant "API"
+participant "Service métier"
+participant "Référentiel Applications"
+
+"Utilisateur" -&gt; "API" : Demande la liste des applications
+"API" -&gt; "Service métier" : Prépare la requête
+"Service métier" -&gt; "Référentiel Applications" : Récupère la liste
+"Service métier" -&gt; "API" : Retourne la liste
+"API" -&gt; "Utilisateur" : Affiche la liste
+@enduml
+```
+
+---
+
+### 2. Obtenir le détail d’une application
+
+**GET /applications/{id}**
+**Scénario métier**
+Permet de consulter les détails d’une application spécifique.
+
+**Use case**
+
+```plantuml
+@startuml
+actor "Utilisateur"
+rectangle "Gestion des applications" {
+  usecase "Consulter le détail d’une application"
+}
+"Utilisateur" --&gt; "Consulter le détail d’une application"
+@enduml
+```
+
+**Diagramme de séquence**
+
+```plantuml
+@startuml
+actor "Utilisateur"
+participant "API"
+participant "Service métier"
+participant "Référentiel Applications"
+
+"Utilisateur" -&gt; "API" : Demande le détail de l’application
+"API" -&gt; "Service métier" : Prépare la requête
+"Service métier" -&gt; "Référentiel Applications" : Récupère les infos
+"Service métier" -&gt; "API" : Retourne le détail
+"API" -&gt; "Utilisateur" : Affiche le détail
+@enduml
+```
+
+## 4. Sécurité et gestion des droits
+
+### Vulgarisation du fonctionnement
+
+- **Protection de chaque action** :
+Avant chaque opération (création, modification, suspension…), le système vérifie le badge numérique (JWT) présenté par l’appelant.
+Ce badge contient le rôle (gestionnaire, admin, support…) et le périmètre d’action (ex : sur quels utilisateurs ou points de vente l’opération est possible).
+- **Contrôle d’accès dynamique** :
+Un aspect (filtre automatique) intercepte chaque appel :
+    - Si l’action est autorisée pour le rôle et le périmètre, elle est exécutée.
+    - Sinon, l’accès est refusé et un incident de sécurité est tracé.
+- **Traçabilité** :
+Chaque action sensible (suspension, réactivation, génération de code, etc.) est tracée via un appel à un service de logs de sécurité externe.
+
+**Diagramme de séquence de contrôle d’accès**
+
+```plantuml
+@startuml
+actor "Appelant"
+participant "API"
+participant "Filtre de sécurité"
+participant "Service métier"
+
+"Appelant" -&gt; "API" : Fait une requête
+"API" -&gt; "Filtre de sécurité" : Vérifie le badge et les droits
+alt Autorisé
+    "Filtre de sécurité" -&gt; "Service métier" : Laisse passer l’appel
+    "Service métier" -&gt; "API" : Exécute l’action
+else Refusé
+    "Filtre de sécurité" -&gt; "API" : Refuse l’accès et trace l’incident
+end
+"API" -&gt; "Appelant" : Retourne le résultat ou l’erreur
+@enduml
+```
+
+---
+
+## 4. Description Technique
+
+### Technologies utilisées
+
+| Technologie | Version | Rôle |
+| :-- | :-- | :-- |
+| Java | 17 | Langage principal |
+| Spring Boot | 3.1.9 | Framework principal |
+| Spring Data JPA | 3.1.9 | Accès aux données relationnelles |
+| OpenFeign | 3.1.3 | Appels HTTP vers services externes |
+| Resilience4j | 3.1.9 | Gestion de la résilience |
+| Redis | 3.1.3 | Cache distribué |
+| SQL Server | - | Base de données principale |
+| Maven | - | Gestionnaire de dépendances |
+| Swagger/OpenAPI | 3.1.0 | Documentation automatique des APIs |
+| Lombok | - | Réduction du code répétitif |
+| MapStruct | 1.5.5 | Mapping objet-objet |
+| Log4j2 | - | Journalisation |
+
+### Endpoints REST principaux
+
+| Méthode | Endpoint | Description |
+| :-- | :-- | :-- |
+| POST | /users | Création d’un nouvel utilisateur |
+| PATCH | /users/{id} | Mise à jour d’un utilisateur existant |
+| GET | /users/{id} | Récupérer un utilisateur par son identifiant |
+| GET | /users/?firstName=\& | Recherche d’utilisateurs par critères |
+| POST | /users/review | Liste des utilisateurs candidats à la revue |
+| POST | /users/{id}/manage | Centraliser un gestionnaire sur des points de vente |
+| POST | /users/{id}/unmanage | Décentraliser un gestionnaire |
+| POST | /users/suspend | Suspendre des utilisateurs |
+| POST | /users/reactivate | Réactiver des utilisateurs |
+| POST | /users/{id}/sendEnrollmentLink | Envoyer le lien d’enrôlement |
+| POST | /users/sendUnlockCode | Envoyer le code d’activation |
+| POST | /users/sendLogin | Envoyer le code PA par mail |
+| POST | /users/generateEnrollmentCode | Générer le code d’enrôlement |
+| POST | /users/{id}/generateEnrollmentLink | Générer le lien d’enrôlement |
+| POST | /users/{id}/generateUnlockCode | Générer le code d’activation |
+| GET | /users/{id}/devices | Obtenir les appareils d’un utilisateur |
+| POST | /users/{id}/beginSelfReactivation | Débuter la réactivation autonome |
+| POST | /users/processSelfReactivation | Finaliser la réactivation autonome |
+| GET | /users/{id}/securityLogs | Obtenir les security logs d’un utilisateur |
+| PATCH | /pointsOfSale/{id} | Mise à jour d’un point de vente |
+| GET | /pointsOfSale/{id} | Récupérer un point de vente par son identifiant |
+| GET | /pointsOfSale/?label=\& | Recherche de points de vente |
+| POST | /pointsOfSale/initialize | Initialisation d’un point de vente |
+| POST | /pointsOfSale/validateReview | Validation de la revue d’utilisateurs |
+| POST | /pointsOfSale/assignApplications | Affectation des frontaux à un point de vente |
+| GET | /applications | Liste de toutes les applications et rôles liés |
+| GET | /applications/{id} | Détail d’une application |
+
+---
+
+## 5. Services Métier
+
+### Introduction
+
+Les services métiers encapsulent la logique principale : gestion des utilisateurs, des points de vente, de la sécurité, et des interactions avec les systèmes externes.
+
+### Description détaillée de chaque service
+
+#### UserService
+
+- **Rôle** : Orchestrer la création, la modification, la suspension, la réactivation, l’envoi de liens/codes, la gestion des droits et la récupération des informations utilisateur.
+- **Interactions** : Dialogue avec Directory API, Inwebo API, Security Log API, et le cache Redis.
+
+**Schéma PlantUML**
+
+```plantuml
+@startuml
+!theme spacelab
+actor "Utilisateur"
+participant "API REST"
+participant "UserService"
+participant "Directory API"
+participant "Inwebo API"
+participant "Security Log API"
+Utilisateur -&gt; API REST : Demande (création, suspension, etc.)
+API REST -&gt; UserService : Orchestration métier
+UserService -&gt; Directory API : Opérations sur l'utilisateur
+UserService -&gt; Inwebo API : Gestion des codes/enrôlement
+UserService -&gt; Security Log API : Traçabilité des actions
+UserService -&gt; [Cache Redis] : Stockage temporaire
+@enduml
+```
+
+
+#### PointOfSaleService
+
+- **Rôle** : Gérer l’initialisation, la modification, l’affectation d’applications et la revue des points de vente.
+- **Interactions** : Dialogue avec Directory API, gestion des droits, et le cache.
+
+**Schéma PlantUML**
+
+```plantuml
+@startuml
+!theme spacelab
+actor "Administrateur"
+participant "API REST"
+participant "PointOfSaleService"
+participant "Directory API"
+Administrateur -&gt; API REST : Demande d'initialisation PDV
+API REST -&gt; PointOfSaleService : Orchestration métier
+PointOfSaleService -&gt; Directory API : Création/modification PDV
+@enduml
+```
+
+
+#### SecurityService
+
+- **Rôle** : Vérifier les droits, gérer les contextes de sécurité, contrôler les accès via JWT, et publier des événements de sécurité.
+
+**Schéma PlantUML**
+
+```plantuml
+@startuml
+!theme spacelab
+actor "Utilisateur"
+participant "API REST"
+participant "SecurityService"
+Utilisateur -&gt; API REST : Appel sécurisé
+API REST -&gt; SecurityService : Vérification du JWT et des droits
+SecurityService --&gt; API REST : Autorisation ou rejet
+@enduml
+```
+
+---
+
+## 5. CI/CD, déploiement et observabilité
+
+### Vulgarisation du pipeline
+
+- **Intégration continue** :
+À chaque modification du code, le projet est automatiquement compilé, testé et analysé (qualité, sécurité).
+- **Déploiement continu** :
+Si tout est vert, une nouvelle version Docker est générée et déployée automatiquement sur les environnements de test, puis de production.
+- **Observabilité** :
+Grâce à Prometheus et Micrometer, le service expose des métriques : nombre d’appels, erreurs, temps de réponse…
+Les logs sont centralisés pour faciliter le diagnostic.
+
+**Schéma pipeline CI/CD**
+
+```plantuml
+@startuml
+start
+:Développeur pousse du code;
+:CI compile et teste;
+if (Tests OK?) then (oui)
+  :Analyse qualité (Sonar);
+  if (Qualité OK?) then (oui)
+    :Build image Docker;
+    :Déploiement auto;
+  else (non)
+    :Blocage pipeline;
+  endif
+else (non)
+  :Blocage pipeline;
+endif
+stop
+@enduml
+```
+
+---
+
+## 6. Structure logicielle vulgarisée
+
+- **common/** :
+Tout ce qui est partagé : sécurité, annotations, helpers, gestion du cache, aspects de sécurité, DTO communs.
+- **infrastructure/** :
+Les connecteurs vers les systèmes externes (référentiel, provisioning, logs, workflow…).
+- **resource/** :
+Les contrôleurs REST : ils reçoivent les appels, valident les entrées et délèguent au métier.
+- **service/** :
+La logique métier : orchestration des actions, gestion des droits, appels aux systèmes externes.
+- **resources/** :
+Les fichiers de configuration, logs, propriétés d’environnement.
+
+---
+
+## 7. Glossaire vulgarisé
+
+- **JWT** : Badge numérique sécurisé qui prouve l’identité et les droits d’un utilisateur.
+- **Feign** : Outil qui permet de parler facilement à d’autres services via HTTP.
+- **Redis** : Bloc-notes ultra-rapide pour retenir des infos temporaires.
+- **Resilience4j** : Parachute de secours pour éviter les pannes en cas d’erreur réseau.
+- **CI/CD** : Usine automatisée qui construit, teste et déploie le projet.
+- **Swagger/OpenAPI** : Générateur automatique du mode d’emploi des API.
+
+---
+
+## 8. Synthèse
+
+Cette documentation couvre :
+
+- Tous les endpoints, avec leur scénario métier, use case et séquence vulgarisée.
+- Les mécanismes de sécurité, de traçabilité et de gestion des droits.
+- La chaîne de déploiement et d’observabilité.
+- La structure logicielle et le glossaire des termes clés.
