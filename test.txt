@@ -1,1 +1,42 @@
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Base64;
+
+public class FileToBase64 {
+
+    private static final String DESKTOP_PATH = System.getProperty("user.home") + "\\Desktop\\";
+
+    public static void main(String[] args) {
+        String filePath = DESKTOP_PATH + "Test.zip";
+        File file = new File(filePath);
+
+        try (FileInputStream fis = new FileInputStream(file)) {
+            byte[] fileContent = new byte[(int) file.length()];
+            fis.read(fileContent);
+
+            String encodedString          = Base64.getEncoder().encodeToString(fileContent);
+            StringBuilder formattedString = new StringBuilder();
+            int length                    = encodedString.length();
+
+            for (int i = 0; i < length; i += 17000) {
+                int endIndex = Math.min(i + 17000, length);
+                formattedString.append(encodedString, i, endIndex);
+                formattedString.append("\n\n\n"); // Ajout de saut de lignes pour faciliter la copie
+            }
+
+            try (FileOutputStream fos = new FileOutputStream(filePath + ".b64")) {
+                fos.write(encodedString.getBytes());
+                //fos.write(formattedString.toString().getBytes());
+            }
+
+            System.out.println("Le fichier a été converti en Base64 et sauvegardé.");
+        } catch (IOException e) {
+            System.out.println("Erreur lors de la conversion du fichier en Base64.");
+            e.printStackTrace();
+        }
+    }
+}
+
