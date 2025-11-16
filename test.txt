@@ -1,1 +1,146 @@
+Prompt système personnalisable, une configuration conseillée, un set de tests, une grille d’évaluation et les artefacts à partager aux testeurs. Note: sans accès à vos outils/documents internes, ce qui suit est un gabarit prêt à adapter à votre plateforme et à vos 5 documents.
+
+### Prompt système personnalisable
+
+Colle ce bloc dans le champ instructions système/persona de ta plateforme et remplace les éléments entre crochets par vos intitulés réels.
+
+"Tu es l’assistant interne de la tribu Offre de Crédit. Tu aides les collaborateurs (métier, IT, nouveaux arrivants) à comprendre les applications web de crédit, les règles de gestion, et l’architecture fonctionnelle et technique.
+
+Périmètre
+- Répondre sur les applications de crédit, leurs parcours, flux, et intégrations.
+- Expliquer les règles de gestion, cas d’exception et contrôles.
+- Donner une vue synthétique d’architecture et des échanges entre briques.
+- Aider l’onboarding: glossaire, acronymes, kit de survie.
+
+Sources
+- Tu disposes uniquement des documents suivants: [DOC1 Règles de gestion], [DOC2 Applications], [DOC3 Architecture], [DOC4 Kit de survie], [DOC5 FAQ].
+- Quand tu utilises une info, cite le document et si possible la section: ex. “Voir [DOC1 §2.3 Conditions d’éligibilité]”.
+
+Règles de réponse
+- Réponds en français, de manière claire et professionnelle.
+- Commence par 2–3 phrases de synthèse, puis détaille en listes ou étapes si utile.
+- Appuie-toi uniquement sur les documents fournis. Si l’info manque ou est incertaine, dis-le et indique quel document vérifier.
+- Ne fournis pas d’avis juridique ou réglementaire; ne prends pas de décisions de crédit.
+- Si la question est hors périmètre, indique-le et oriente vers un type d’interlocuteur (équipe métier, PO, conformité).
+
+Style et méthode
+- Pour un flux/processus, présente des étapes numérotées.
+- Pour une règle, donne la condition, l’action, les exceptions, et un exemple court.
+- Si la question est ambiguë, explicite tes hypothèses avant de répondre.
+
+Sécurité et confidentialité
+- Ne divulgue aucune donnée client ou sensible.
+- Ne réponds pas sur des environnements, secrets, ou accès techniques non documentés.
+- Préfère dire “information absente des documents” plutôt que d’inventer.
+
+Exemples
+- “Quelles sont les conditions d’éligibilité pour un crédit conso dans [APPLI_X] ?” → Liste des conditions depuis [DOC1], précision des contrôles depuis [DOC2], citations explicites.
+- “Que se passe-t-il en cas d’incident de paiement en cours ?” → Décrire contrôles/conséquences selon [DOC1], cheminement applicatif selon [DOC2], rappeler limites et renvoyer à l’équipe métier si zone grise."
+
+### Structurer les 5 documents
+
+- DOC1 Règles de gestion
+  - Objectif, portée, définitions
+  - Règles par cas d’usage: condition → action → exception → exemple
+  - Annexes: tableaux de paramètres, SLA, calendriers
+- DOC2 Applications web
+  - Par application: mission, profils, écrans clés, flux entrants/sortants, API majeures, erreurs fréquentes
+  - Parcours utilisateurs en étapes
+- DOC3 Architecture
+  - Schéma logique textuel (même si vous avez des images, fournissez aussi la description en texte)
+  - Briques, contrats d’interface, événements, dépendances, points de résilience
+- DOC4 Kit de survie
+  - Contexte, acronymes/glossaire, environnements, rituels, référents, playlists de lectures
+- DOC5 FAQ
+  - 30–50 Q/R fréquentes, réponses concises, liens vers sections DOC1–DOC4
+
+Conseils: titres H1/H2/H3 clairs, listes, exemples, éviter informations critiques uniquement en images, versionner (vX.Y, date), et ajouter un index/TOC.
+
+### Réglages de la plateforme
+
+- Ton et longueur
+  - Température 0.1–0.3 (prudent)
+  - Réponses moyennes avec suivi optionnel “détaille”
+- RAG/Recherche (si disponible)
+  - Chunk size 600–1 000 tokens, overlap 100–150
+  - Champs de métadonnées: document, section, version, date
+  - Booster titres/headers, déprioriser annexes obsolètes
+- Citations
+  - Forcer inclusion du nom du document et section si connue
+  - En absence de section détectée, au moins le document
+- Garde-fous
+  - Bloquer réponses sans source lorsque c’est factuel
+  - Interdire sortie de secrets, credentials, PII
+  - Stratégie en cas de manque: “déclarer l’absence et proposer la référence interne”
+
+### Jeu de tests à donner aux collègues
+
+- Glossaire et contexte
+  - “Que signifie [ACRONYME] et où est-il défini ?”
+  - “Quelle est la mission de [APPLI_X] et pour quels profils ?”
+- Règles de gestion
+  - “Conditions d’éligibilité crédit conso pour client [profil Y] ?”
+  - “Traitement si incident de paiement actif lors de la souscription ?”
+  - “Délais de validité d’une décision et exceptions ?”
+- Parcours et flux
+  - “Étapes du parcours standard de souscription dans [APPLI_X]”
+  - “Que se passe-t-il si le justificatif Z manque au step 3 ?”
+- Architecture
+  - “Briques impliquées dans la décision et leurs échanges”
+  - “Quelles dépendances externes critiques et que se passe-t-il en dégradation ?”
+- Support/ops
+  - “Erreurs fréquentes [CODE/SCÉNARIO] et résolution”
+  - “SLA des traitements batch et impacts en cas de retard”
+- Limites/ambiguïtés
+  - “Si le domicile est à l’étranger et que la pièce d’identité est expirée ?”
+  - “Que faire si la règle A et la règle B semblent contradictoires ?”
+
+Objectif: 5–10 questions par testeur, couvrant au moins 3 catégories.
+
+### Grille d’évaluation simple (1–5)
+
+- Exactitude: la réponse est correcte selon la doc
+- Complétude: couvre les points essentiels
+- Clarté: compréhensible et bien structurée
+- Références: cite doc et section
+- Comportement: gère l’incertitude sans inventer
+
+Note globale = moyenne des 5. Accepter ≥4, retravailler 3–, bloquant ≤2.
+
+Modèle de collecte (CSV/Excel/Form):
+- Testeur | Équipe | Date | Question | Réponse de l’agent (copier/coller) | Doc/sections citées | Notes (1–5) pour chaque critère | Commentaires | Manques de la doc | Idées d’amélioration
+
+### Procédure de campagne
+
+- Préparation (2–3 jours)
+  - Finaliser 5 documents, titres cohérents, version/date, FAQ riche
+  - Configurer agent avec prompt et réglages ci-dessus
+  - Dry-run interne: 15–20 questions, corriger gros défauts
+- Test (1 semaine)
+  - Kickoff 10 min: objectif, périmètre, consignes, lien vers formulaire
+  - Cible: 5–10 questions/testeur; panacher métier/IT/juniors
+- Analyse et itérations (2–3 jours)
+  - Agréger notes, lister erreurs, zones floues, docs manquantes
+  - Mettre à jour DOC1–DOC5 et prompt (rappels de citation, limites)
+  - Mini-retest ciblé sur les points faibles
+
+### Artefacts prêts à copier
+
+- Modèle d’email lancement
+  - “Bonjour, nous testons l’assistant IA de la tribu Offre de Crédit. Périmètre: doc, règles, parcours, architecture. Merci de poser 5–10 questions variées d’ici [date]. Collez la réponse et notez-la via ce formulaire [lien]. Citez si possible la section attendue. Objectif: améliorer la doc et l’agent. Merci !”
+- DoR/DoD de la campagne
+  - DoR: 5 docs versionnés, prompt chargé, formulaire prêt, 10 testeurs confirmés
+  - DoD: ≥80% réponses notées ≥4/5; 100% des erreurs connues documentées dans FAQ; prompt mis à jour
+
+### Pour personnaliser finement
+
+Donne ces infos et le prompt sera ajusté à ta plateforme:
+- Type de plateforme: RAG natif, connecteurs, fonctions d’outillage, politiques de sécurité
+- Formats des 5 documents: PDF/HTML/Markdown/Confluence, images ou texte, taille moyenne
+- Besoins de conformité: mentions spécifiques, bandeau de disclaimer, rétention des logs
+- Contraintes de citation: nom de doc seulement ou nom+section+numéro de page
+- Cas d’usage prioritaires: onboarding, support quotidien, règles complexes, architecture
+
+Si tu partages la liste des 5 titres réels et 3–5 questions représentatives de ton contexte, un prompt ultra-ciblé avec exemples few-shot et gabarits de réponses sera fourni pour coller exactement à votre environnement.
+
 
