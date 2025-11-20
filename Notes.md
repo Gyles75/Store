@@ -1,15 +1,27 @@
 
 
-Ce schéma montre comment est organisée l’architecture MyCA côté **parcours client CA**, c’est‑à‑dire tout ce qui se passe entre l’écran vu par le client et les briques techniques qui gèrent réellement les crédits.
+Ce schéma représente l’architecture technique globale entre CATS, Internet, l’extranet CACF et le réseau interne (CARMEN / VLAN Cloud), c’est‑à‑dire tous les “sauts” réseau que franchissent les flux de RenouvUtil entre les serveurs CACF et les utilisateurs.
 
-À gauche, on voit le **client CA** qui se connecte via son navigateur au portail MyCA, avec une authentification gérée par l’IdP/groupe (SSO du groupe Crédit Agricole).
-Son navigateur consomme un **micro‑front‑end Vue.js** (partie "FRONT") qui affiche les écrans et envoie les actions de l’utilisateur, pendant qu’un **micro‑front‑end Node.js** côté serveur orchestre les appels vers les API, la sécurité et les tags de communication.
+### Vue générale des zones  
+En haut du schéma, une légende rappelle les grandes zones : zone Users CACF, zone CACF, zone CA‑GIP et zone CATS, chacune étant colorée pour distinguer les périmètres réseau.
+Le corps du schéma est découpé horizontalement en plusieurs blocs : à gauche les serveurs CATS, au centre la zone Internet et l’extranet CACF, à droite la zone CARMEN puis, en bas, le VLAN Cloud PROD / intranet avec les serveurs d’applications et les gateways.
 
-Au centre, MyCA ne parle pas directement aux applications de back‑office : il passe par un ensemble d’**API CACF** exposées derrière un niveau d’API management (**APIM ISKM**).
-Ces API sont spécialisées par usage : API de **synthèse** pour récupérer la vue globale du crédit, API lisant la **liste des mouvements**, API d’**utilisation standard** du crédit, API de **changement de jour d’échéance**, API de **remboursement**, API de **rétarification**, etc., chacune correspondant à une fonctionnalité métier disponible dans le parcours client.
+### Zone CATS (gauche du schéma)  
+Tout à gauche, le bloc **CATS** regroupe les serveurs applicatifs qui exposent les services de crédit, derrière un périmètre réseau dédié. [1]
+Les flux sortants de CATS traversent un premier niveau de filtrage (pare‑feu / équipements réseau) pour rejoindre la zone Internet, ce qui permet de contrôler et sécuriser les appels vers l’extérieur.
 
-À droite, on trouve le **COM** (couche de communication / bus) qui relaie les appels des API vers les différents **systèmes métier** : outils de gestion des contrats, moteur de stratégie / tarification, outils d’assurance, applications de suivi et d’exploitation. [1]
-Concrètement, lorsqu’un client fait une action dans MyCA (par exemple modifier sa mensualité ou utiliser son disponible), le micro‑front appelle l’API correspondante, l’API passe par le COM, puis le COM appelle la bonne application métier, avant de renvoyer la réponse jusqu’à l’écran du client.
+### Traverse Internet et accès extranet CACF  
+Au centre, la grande zone **INTERNET** montre que les flux CATS passent par des équipements de type routeurs/ADSL ou frontaux de sécurité avant d’atteindre la zone "CACF Internet – Zone extranet". [1]
+Dans cette zone extranet CACF, on voit les équipements frontaux (par exemple un cluster d’accès sécurisé) qui hébergent les entrées HTTP(s) publiques de CACF et font le lien entre Internet et le cœur du SI via des règles de filtrage et de routage. [1]
 
-Les flèches de couleurs représentent les différents **types de flux** : nouveaux flux créés pour la refonte MyCA, flux CARMEN existants réutilisés, flux internes entre briques CACF et flux externes entre MyCA et le reste du SI.
-L’idée générale est que le parcours client CA dans MyCA repose sur une façade d’API claire et stable, ce qui permet de faire évoluer le front (micro‑front‑ends) sans impacter directement les applications de gestion de crédit en profondeur.
+### Colonne CARMEN (cœur réseau CACF)  
+À droite de la zone extranet se trouve la colonne **CARMEN**, qui symbolise le backbone réseau interne du groupe, protégée par des pare‑feu à l’entrée et à la sortie.
+Tous les flux applicatifs qui doivent atteindre le SI interne (bases de données, applications métier) traversent CARMEN, ce qui permet de centraliser le contrôle réseau entre les différentes zones (extranet, intranet, data centers, etc.).
+
+### VLAN Cloud PROD – Intranet (serveurs applicatifs)  
+Dans la partie basse/des captures zoomées, le bloc **VLAN Cloud – PROD – Intranet** contient les serveurs d’applications (par exemple plusieurs nœuds **WSO2 Gateway** et des gateways techniques supplémentaires) sur lesquels tournent les frontaux d’API et de routage.
+Ces gateways reçoivent les appels en provenance d’Internet / extranet via CARMEN, appliquent les règles de sécurité (authentification, contrôle de headers, routage d’URL) puis redirigent les requêtes vers les bons services back‑end ou vers CATS selon la configuration.
+
+### Accès aux données et aux utilisateurs internes  
+On voit aussi, en bas à droite, un bloc de type **proxy / base de données / utilisateur CACF**, ce qui illustre que, depuis ce VLAN Cloud intranet, les flux peuvent soit aller vers des bases et proxys internes, soit être consommés directement par des utilisateurs CACF sur leur poste interne.
+L’ensemble montre que la production repose sur une chaîne : CATS → Internet → extranet CACF → CARMEN → VLAN Cloud PROD (gateways et services) → données internes et utilisateurs, chaque maillon étant isolé dans sa zone avec des pare‑feu et équipements réseau dédiés.
