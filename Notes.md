@@ -1,14 +1,15 @@
 
-Ce schéma décrit la cinématique complète d’authentification OpenID/OAuth entre l’utilisateur final, l’application source, un premier fournisseur OpenID de l’entreprise, éventuellement un second fournisseur, puis l’application métier qui consomme le jeton.   
 
-Sur la ligne du haut, on voit les différentes colonnes : **End User**, **Application source**, **OpenID Provider 1**, **OpenID Provider 2** et la **Relying Party / Application** qui va utiliser le résultat de l’authentification.   
-Le scénario commence quand l’application source envoie une **requête de lancement de l’IHM** vers la Relying Party, qui redirige ensuite le navigateur vers l’OpenID Provider 1 avec une **Authentication Request**.   
+Ce schéma montre comment est organisée l’architecture MyCA côté **parcours client CA**, c’est‑à‑dire tout ce qui se passe entre l’écran vu par le client et les briques techniques qui gèrent réellement les crédits.
 
-Le schéma précise que si l’utilisateur n’a pas encore de session ouverte, l’OP affiche l’**écran de login** et fait saisir l’identifiant/mot de passe ou le moyen d’authentification prévu.   
-Si l’utilisateur n’a pas non plus de session d’identification valide côté entreprise, une étape de **consentement ou d’information** peut s’afficher, puis, une fois l’authentification réussie, l’OP renvoie une **Authentication Response** à l’application.   
+À gauche, on voit le **client CA** qui se connecte via son navigateur au portail MyCA, avec une authentification gérée par l’IdP/groupe (SSO du groupe Crédit Agricole).
+Son navigateur consomme un **micro‑front‑end Vue.js** (partie "FRONT") qui affiche les écrans et envoie les actions de l’utilisateur, pendant qu’un **micro‑front‑end Node.js** côté serveur orchestre les appels vers les API, la sécurité et les tags de communication.
 
-Dans la partie centrale, on voit ensuite une ou deux étapes de **Token Request / Token Response** : la Relying Party appelle l’OpenID Provider pour échanger le code reçu contre un **ID Token** (et éventuellement un access token), avec vérification de l’ID Token (signature, audience, nonce, etc.).   
-Le schéma montre aussi un second enchaînement “Token Request 2 / Token Response 2” vers un **OpenID Provider 2**, utilisé quand un second fournisseur doit être appelé (par exemple pour obtenir un jeton adapté à un autre domaine applicatif).   
+Au centre, MyCA ne parle pas directement aux applications de back‑office : il passe par un ensemble d’**API CACF** exposées derrière un niveau d’API management (**APIM ISKM**).
+Ces API sont spécialisées par usage : API de **synthèse** pour récupérer la vue globale du crédit, API lisant la **liste des mouvements**, API d’**utilisation standard** du crédit, API de **changement de jour d’échéance**, API de **remboursement**, API de **rétarification**, etc., chacune correspondant à une fonctionnalité métier disponible dans le parcours client.
 
-En bas, les commentaires indiquent que si l’ID Token est **valide**, l’application peut créer ou mettre à jour la session utilisateur interne en se basant sur les claims (identité, rôles, contexte), puis retourner une **Authentication Response** finale à l’application source.   
-Si au contraire l’ID Token est **invalidé** ou qu’une étape échoue (erreur, refus, session expirée), l’application doit renvoyer une erreur d’authentification à l’application source, qui décidera de l’affichage à l’utilisateur (message d’erreur, nouvelle tentative, etc.).
+À droite, on trouve le **COM** (couche de communication / bus) qui relaie les appels des API vers les différents **systèmes métier** : outils de gestion des contrats, moteur de stratégie / tarification, outils d’assurance, applications de suivi et d’exploitation. [1]
+Concrètement, lorsqu’un client fait une action dans MyCA (par exemple modifier sa mensualité ou utiliser son disponible), le micro‑front appelle l’API correspondante, l’API passe par le COM, puis le COM appelle la bonne application métier, avant de renvoyer la réponse jusqu’à l’écran du client.
+
+Les flèches de couleurs représentent les différents **types de flux** : nouveaux flux créés pour la refonte MyCA, flux CARMEN existants réutilisés, flux internes entre briques CACF et flux externes entre MyCA et le reste du SI.
+L’idée générale est que le parcours client CA dans MyCA repose sur une façade d’API claire et stable, ce qui permet de faire évoluer le front (micro‑front‑ends) sans impacter directement les applications de gestion de crédit en profondeur.
