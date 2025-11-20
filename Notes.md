@@ -1,15 +1,14 @@
 
-Le schéma montre comment l’authentification et le contexte utilisateur sont transmis depuis le portail NPC CATS jusqu’à RenouvUtil (MyCA) et aux API métier, en utilisant l’IDP CACF et des jetons de type OAuth2/OpenID.
+Ce schéma décrit la cinématique complète d’authentification OpenID/OAuth entre l’utilisateur final, l’application source, un premier fournisseur OpenID de l’entreprise, éventuellement un second fournisseur, puis l’application métier qui consomme le jeton.   
 
-Sur la partie haute, on voit les différentes colonnes techniques : **NPC CATS** à gauche, puis **IDP CACF**, puis **Front MyCA (navigateur)**, ensuite **MyCA (serverside)** et enfin les **API Business** à droite. [2]
-NPC CATS appelle d’abord un webservice (bloc vert "MWS") vers l’IDP CACF en lui transmettant des informations comme le `sub` (identifiant utilisateur), un `userId`, un éventuel identifiant d’authentification IdP et des références de contrat (`codeContrat`, `numContrat`).
+Sur la ligne du haut, on voit les différentes colonnes : **End User**, **Application source**, **OpenID Provider 1**, **OpenID Provider 2** et la **Relying Party / Application** qui va utiliser le résultat de l’authentification.   
+Le scénario commence quand l’application source envoie une **requête de lancement de l’IHM** vers la Relying Party, qui redirige ensuite le navigateur vers l’OpenID Provider 1 avec une **Authentication Request**.   
 
-Ensuite, le navigateur lance l’**authentification client** auprès de l’IDP CACF, qui renvoie un **code d’autorisation** ("AZ Code" sur le diagramme), puis un **ID Token** contenant de nouveau le `sub` et le `userId`, avec un scope de type `user` pour autoriser l’accès aux services.
-Ces informations sont récupérées côté **Front MyCA**, puis remontées vers **MyCA serverside**, où elles sont enrichies et consolidées : on retrouve le `sub`, un contexte OIDC (`imp_Oidcp`), les contextes applicatifs, l’IdP d’authentification et les références de contrat.
+Le schéma précise que si l’utilisateur n’a pas encore de session ouverte, l’OP affiche l’**écran de login** et fait saisir l’identifiant/mot de passe ou le moyen d’authentification prévu.   
+Si l’utilisateur n’a pas non plus de session d’identification valide côté entreprise, une étape de **consentement ou d’information** peut s’afficher, puis, une fois l’authentification réussie, l’OP renvoie une **Authentication Response** à l’application.   
 
-La zone rouge décrit trois **options de stockage** de ce contexte utilisateur pour la suite du parcours RenouvUtil :  
-- **Option 1** : stocker les données dans des **cookies sécurisés**, afin que le navigateur les renvoie automatiquement à chaque appel.
-- **Option 2** : stocker les données directement dans le **token** (par exemple un jeton JWT enrichi), que l’on transmet ensuite aux services aval.
-- **Option 3** : utiliser un mécanisme de **bearerDataTransfer**, c’est‑à‑dire un portage explicite du jeton/porteur dans les appels vers les API Business.
+Dans la partie centrale, on voit ensuite une ou deux étapes de **Token Request / Token Response** : la Relying Party appelle l’OpenID Provider pour échanger le code reçu contre un **ID Token** (et éventuellement un access token), avec vérification de l’ID Token (signature, audience, nonce, etc.).   
+Le schéma montre aussi un second enchaînement “Token Request 2 / Token Response 2” vers un **OpenID Provider 2**, utilisé quand un second fournisseur doit être appelé (par exemple pour obtenir un jeton adapté à un autre domaine applicatif).   
 
-En bas du diagramme, on voit que ce contexte (IDToken avec `sub`, `userId`, etc.) est finalement utilisé pour appeler les **API Business** en apportant la preuve d’authentification et l’identité de l’utilisateur, après un contrôle de type "scope" et de validité du jeton côté backend.
+En bas, les commentaires indiquent que si l’ID Token est **valide**, l’application peut créer ou mettre à jour la session utilisateur interne en se basant sur les claims (identité, rôles, contexte), puis retourner une **Authentication Response** finale à l’application source.   
+Si au contraire l’ID Token est **invalidé** ou qu’une étape échoue (erreur, refus, session expirée), l’application doit renvoyer une erreur d’authentification à l’application source, qui décidera de l’affichage à l’utilisateur (message d’erreur, nouvelle tentative, etc.).
