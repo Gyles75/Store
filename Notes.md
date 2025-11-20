@@ -1,21 +1,21 @@
-Le schéma montre le parcours type d’un conseiller LCL dans DigiConso quand il construit un dossier de crédit, depuis la première demande jusqu’à l’émission de l’offre.
+Ce schéma décrit le **parcours client en self‑care** quand le client lui‑même souscrit un crédit en ligne, étape par étape depuis le choix du compte jusqu’à la signature.
 
-### Vue globale du parcours
+### Vue d’ensemble du parcours client  
+- Le parcours est intitulé "PARCOURS CLIENT – Les étapes de la souscription Client" et enchaîne les écrans tels qu’ils sont vus par le client dans l’interface web.
+- Chaque écran correspond à une étape métier bien identifiée : préparation (compte, besoin), simulation, saisie des infos, décision, puis finalisation et signature.
 
-Le conseiller démarre avec une **demande préliminaire**, puis crée une **nouvelle demande client** qui l’amène dans l’**univers de besoins** de DigiConso, où il qualifie le projet et le type de financement recherché. [1]
-À partir de là, il bascule sur l’écran de **simulation**, prépare un ou plusieurs scénarios, et peut **sauvegarder la simulation / le projet** pour y revenir plus tard ou l’ajuster avec le client.
+### Les grandes étapes du parcours  
+- **Choix du compte** : le client commence par sélectionner le compte sur lequel le crédit sera rattaché ou servi.
 
-### Passage de la simulation à la souscription
+- **Univers de besoin** : il indique la nature de son projet (type de besoin) pour orienter vers le bon produit de crédit.
+- **Choix du montant** : il saisit ou ajuste le montant souhaité pour son financement.
+- **Simulation** : un écran de simulation lui présente les conditions (mensualités, durée, coût, etc.) et lui permet de tester différents paramètres.
+- **Infos intervenant(s)** : le client renseigne ou confirme ses informations personnelles et, s’il y en a, celles des co‑emprunteurs ou garants.
+- **Caractéristiques** : il valide les caractéristiques finales du crédit (montant définitif, durée choisie, options éventuelles).
+- **Réponse délivrable / Réponse RAV en étude** : le système affiche ensuite une réponse ; soit une réponse immédiate délivrable, soit une mention du type "RAV en étude" indiquant que la demande nécessite un examen complémentaire.
 
-Une fois la simulation validée avec le client, le conseiller passe en mode **souscription**, ce qui ouvre une série d’écrans métiers dans DigiConso.
-Il commence par l’écran **Informations intervenant** pour vérifier ou compléter les informations sur le client et, le cas échéant, co‑emprunteurs ou garants, puis enchaine sur **Choix des caractéristiques** pour figer les paramètres du contrat (montant, durée, options, etc.)
-
-### Décision et émission de l’offre
-
-Sur l’écran **Réponse**, DigiConso restitue la décision du système (accord, refus, demandes complémentaires, etc.) et permet au conseiller de voir la synthèse de la demande.
-Si tout est conforme, le parcours se termine par l’**émission de l’offre**, étape où l’offre de crédit est générée pour être ensuite signée selon le mode prévu dans le processus LCL.
-
-### Rôle des autres applications en arrière‑plan
-
-Sur la partie basse du schéma, on voit que DigiConso s’appuie sur d’autres applications : **DOCM** pour la **mise à jour des informations clients**, **JUST DEMANDE** pour la gestion des justificatifs, et **CESAM** pour la gestion des contrats une fois le crédit en place.
-Ces applications sont appelées automatiquement au fil du parcours (par exemple lors de la mise à jour des données ou de la création du contrat), même si, côté conseiller LCL, tout se présente comme une suite d’écrans intégrés dans DigiConso.
+### Les issues possibles en fin de parcours  
+- **Finalisation T1 non éligible ST / Finalisation avec T2 / Finalisation T1 éligible ST** : plusieurs écrans de "finalisation" illustrent les variantes selon le profil du client et l’éligibilité (par exemple T1 non éligible au sans‑papier, recours à un T2, ou T1 éligible).
+- **Souscription impossible** : un écran spécifique indique les cas où la souscription ne peut pas se faire (blocage métier ou risque).
+- **Transmission justificatifs** : si des pièces sont nécessaires, un écran présente la transmission des justificatifs à fournir.
+- **Signature Client** : le parcours se termine par l’écran de signature où le client réalise la signature de son contrat (souvent en signature électronique).
