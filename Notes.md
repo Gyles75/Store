@@ -1,27 +1,23 @@
+Pour le parcours LCL, ces deux schémas montrent à quoi se connecte DigiConso quand un client ou un conseiller utilise le parcours, et comment les échanges techniques sont routés vers les briques CACF.
 
-### Schéma 1 – Parcours DigiConso Client dans l’architecture CACF
+### Schéma 1 – Parcours DigiConso Client LCL  
 
-Ce schéma montre comment le **parcours DigiConso Client** s’insère dans l’architecture technique entre le monde LCL (front web client) et le monde CA/CACF.
-L’idée est de visualiser que l’écran client DigiConso n’est qu’une “porte d’entrée” vers plusieurs briques back‑office qui gèrent les règles, les décisions, les documents et le stockage des dossiers.
+Ce schéma représente l’architecture “vue de LCL” quand un client utilise le parcours DigiConso Client.
+En haut, la “Partition maîtrisée pour le monde LCL” regroupe les briques internes LCL (BRMS, LO, ELOQUENCE) qui portent les règles, la logique d’offre et la génération de courriers/documents.
 
-En haut, la **“Partition maîtrisée pour le monde CA”** regroupe les briques centrales de CACF : BRMS (moteur de règles métier), LO, ELOQUENCE (gestion des courriers / documents), etc., toutes connectées à un bus ou une couche d’intégration appelée **CIM**.
-CIM joue le rôle de chef d’orchestre : il reçoit les demandes venant de DigiConso et les route vers les bons moteurs (règles, décision, génération documentaire, stockage…).
+Au centre, la barre **CIM** fait office de bus d’intégration : elle relie ces briques LCL au **Parcours DigiConso Client** et à la brique **CEE**, qui gère les échanges crédit avec CACF.
+Le parcours DigiConso Client s’appuie donc sur CEE pour envoyer les demandes vers CACF et récupérer les décisions ou informations nécessaires au traitement du dossier.
 
-Au centre, on voit le **Parcours DigiConso Client** qui discute principalement avec la brique **CEE** (cœur de la décision / des échanges crédit) et avec d’autres composants comme NPC ou NMB.
-Les flèches en pointillés ou en continu montrent les flux entre le parcours client, CEE, CIM et les autres briques : selon l’étape (simulation, décision, génération d’offre…), CEE passe par CIM pour interroger BRMS, alimenter le quai de stockage ou déclencher de la gestion de documents.
+En bas, on voit la “Couche pour l’exposition des WS CAPFM et LCL”, ainsi que des composants comme **Bee** et **NotifyLead**.
+Cette couche d’exposition permet de transformer les actions faites dans l’interface client en appels webservices, à la fois vers les systèmes CACF (via CAPFM) et vers les systèmes LCL (notification, stockage ou pilotage commercial via NotifyLead).
 
-En bas, sont représentés des **dispatchers B2B** qui font la jonction entre les flux NPC/NMB et les **webservices CATS / CAPFM** côté CACF. 
-Concrètement, cela signifie que quand un client agit dans DigiConso (parcours self‑care), sa demande traverse ces dispatchers qui traduisent les appels front en appels WS techniques vers les systèmes CACF, tout en restant transparents pour l’utilisateur final.
+### Schéma 2 – Parcours DigiConso Conseiller LCL  
 
-***
+Le second schéma décrit la même architecture côté **Parcours DigiConso Conseiller** pour LCL.
+La partie haute “Partition maîtrisée pour le monde LCL” est strictement la même : BRMS, LO et ELOQUENCE sont partagés entre le parcours client et le parcours conseiller.
 
-### Schéma 2 – Parcours DigiConso Conseiller dans l’architecture CACF
+Au centre, on trouve cette fois le **Parcours DigiConso Conseiller**, toujours connecté à **CEE** et à **CIM**, ce qui signifie que conseiller et client exploitent les mêmes moteurs de décision, de règles et de documents.
+Les flux partent du front conseiller (Oxygène, CEC, ETAP) et remontent vers DigiConso, qui dialogue avec CEE et CIM pour piloter les traitements crédit.
 
-Le deuxième schéma présente la même architecture vue du côté **Parcours DigiConso Conseiller**, c’est‑à‑dire quand le conseiller traite un dossier depuis ses outils (PUC, GED, etc.) plutôt que le client en direct.
-On retrouve la même “Partition maîtrisée pour le monde CA” avec BRMS, LO, ELOQUENCE reliés à CIM, ce qui signifie que conseiller et client s’appuient sur les mêmes moteurs de décision et de documents.
-
-Sur la gauche, sont ajoutées les briques propres au monde conseiller : **PUC** (poste utilisateur conseiller), **GED** (gestion électronique de documents) et d’autres outils du poste de travail.
-Le **Parcours DigiConso Conseiller** se situe au centre et échange, comme pour le client, avec **CEE**, CIM et les autres briques CACF pour simuler, décider, générer les offres et stocker les dossiers.
-
-En bas, on voit cette fois des **dispatchers B2B PUC** qui exposent des webservices **CATS** et **CAPFM** adaptés au monde conseiller. [2]
-Cela illustre qu’un dossier lancé depuis PUC puis traité dans DigiConso suit un chemin technique très proche de celui d’un dossier client : les mêmes moteurs et les mêmes stockages sont utilisés, seule la “porte d’entrée” change (front conseiller au lieu de front client), via ces dispatchers spécifiques PUC.
+En bas, la “Couche pour l’exposition des WS CAPFM et LCL” est de nouveau présente, mais cette fois orientée vers les outils LCL du conseiller (Oxygène, CEC, ETAP).
+Concrètement, cela montre qu’un dossier initié et suivi par le conseiller à LCL traverse la même chaîne technique que le parcours client : seules les applications d’entrée/sortie changent, mais la logique de crédit centrale est commune.
