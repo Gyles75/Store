@@ -1,21 +1,24 @@
-Ce schéma décrit le **parcours client en self‑care** quand le client lui‑même souscrit un crédit en ligne, étape par étape depuis le choix du compte jusqu’à la signature.
+Ce tableau résume, pour LCL, les grands moments où DigiConso appelle des webservices CACF pendant le parcours client, et à quoi servent ces appels sur chaque écran.
 
-### Vue d’ensemble du parcours client  
-- Le parcours est intitulé "PARCOURS CLIENT – Les étapes de la souscription Client" et enchaîne les écrans tels qu’ils sont vus par le client dans l’interface web.
-- Chaque écran correspond à une étape métier bien identifiée : préparation (compte, besoin), simulation, saisie des infos, décision, puis finalisation et signature.
+### Principe général du tableau  
+- La colonne **Fonctionnalité** liste les écrans clefs du parcours (univers de besoins, informations, choix des caractéristiques, réponse, signature).
+- La colonne **Appels de WS** décrit, pour chaque écran, les webservices CATS/CAPFI/CEE utilisés pour récupérer ou mettre à jour les données côté CACF.
+### Ligne 1 – Ouverture de l’écran DigiConso « univers des besoins »  
+- Quand l’écran univers de besoins s’ouvre, DigiConso appelle des WS CACF pour **rechercher le client** et rapatrier ses informations de base.
+- L’objectif est que, dès cette première étape, le front LCL dispose d’une vision à jour du client/groupe pour proposer le bon type de besoin.
 
-### Les grandes étapes du parcours  
-- **Choix du compte** : le client commence par sélectionner le compte sur lequel le crédit sera rattaché ou servi.
+### Ligne 2 – Souscription (ouverture écran « Mes informations »)  
+- À l’ouverture de l’écran Mes informations, plusieurs WS sont invoqués pour **restituer les données client, co‑titulaire / titulaire** et éventuellement mettre à jour certaines infos.
+- C’est là que le front vérifie que les informations d’état civil, coordonnées, etc. sont cohérentes avec le référentiel CACF avant de poursuivre la souscription.
 
-- **Univers de besoin** : il indique la nature de son projet (type de besoin) pour orienter vers le bon produit de crédit.
-- **Choix du montant** : il saisit ou ajuste le montant souhaité pour son financement.
-- **Simulation** : un écran de simulation lui présente les conditions (mensualités, durée, coût, etc.) et lui permet de tester différents paramètres.
-- **Infos intervenant(s)** : le client renseigne ou confirme ses informations personnelles et, s’il y en a, celles des co‑emprunteurs ou garants.
-- **Caractéristiques** : il valide les caractéristiques finales du crédit (montant définitif, durée choisie, options éventuelles).
-- **Réponse délivrable / Réponse RAV en étude** : le système affiche ensuite une réponse ; soit une réponse immédiate délivrable, soit une mention du type "RAV en étude" indiquant que la demande nécessite un examen complémentaire.
+### Ligne 3 – Ouverture de l’écran DigiConso « Choix des caractéristiques »  
+- Sur cet écran, les appels WS servent à **journaliser l’action** (trace technique) et à récupérer les paramètres nécessaires pour le choix des caractéristiques (plages de montants, durées, options).
+- Concrètement, DigiConso interroge CACF pour savoir quelles combinaisons sont autorisées afin de ne pas proposer au client des configurations interdites
 
-### Les issues possibles en fin de parcours  
-- **Finalisation T1 non éligible ST / Finalisation avec T2 / Finalisation T1 éligible ST** : plusieurs écrans de "finalisation" illustrent les variantes selon le profil du client et l’éligibilité (par exemple T1 non éligible au sans‑papier, recours à un T2, ou T1 éligible).
-- **Souscription impossible** : un écran spécifique indique les cas où la souscription ne peut pas se faire (blocage métier ou risque).
-- **Transmission justificatifs** : si des pièces sont nécessaires, un écran présente la transmission des justificatifs à fournir.
-- **Signature Client** : le parcours se termine par l’écran de signature où le client réalise la signature de son contrat (souvent en signature électronique).
+### Ligne 4 – Ouverture de l’écran DigiConso « Réponse »  
+- Cette ligne regroupe plusieurs WS : contrôle des **pièces justificatives**, consultation de la **décision** et des motifs, mise à jour de l’état du dossier et du client si besoin.
+- C’est ici que DigiConso va chercher la **réponse métier CACF** (accord, refus, étude, etc.) et les informations associées pour afficher au conseiller ou au client un écran de réponse complet.
+
+### Ligne 5 – Signature électronique du dossier  
+- La dernière ligne indique qu’au moment de la **signature électronique**, un WS dédié est appelé pour enregistrer l’opération de signature et lier l’ID de signature au dossier CACF.
+- Ce webservice assure la traçabilité juridique de la signature (preuve associée au contrat) et permet ensuite de retrouver l’état de signature dans les systèmes CACF/LCL.
