@@ -1,24 +1,27 @@
-Ce tableau résume, pour LCL, les grands moments où DigiConso appelle des webservices CACF pendant le parcours client, et à quoi servent ces appels sur chaque écran.
 
-### Principe général du tableau  
-- La colonne **Fonctionnalité** liste les écrans clefs du parcours (univers de besoins, informations, choix des caractéristiques, réponse, signature).
-- La colonne **Appels de WS** décrit, pour chaque écran, les webservices CATS/CAPFI/CEE utilisés pour récupérer ou mettre à jour les données côté CACF.
-### Ligne 1 – Ouverture de l’écran DigiConso « univers des besoins »  
-- Quand l’écran univers de besoins s’ouvre, DigiConso appelle des WS CACF pour **rechercher le client** et rapatrier ses informations de base.
-- L’objectif est que, dès cette première étape, le front LCL dispose d’une vision à jour du client/groupe pour proposer le bon type de besoin.
+### Schéma 1 – Parcours DigiConso Client dans l’architecture CACF
 
-### Ligne 2 – Souscription (ouverture écran « Mes informations »)  
-- À l’ouverture de l’écran Mes informations, plusieurs WS sont invoqués pour **restituer les données client, co‑titulaire / titulaire** et éventuellement mettre à jour certaines infos.
-- C’est là que le front vérifie que les informations d’état civil, coordonnées, etc. sont cohérentes avec le référentiel CACF avant de poursuivre la souscription.
+Ce schéma montre comment le **parcours DigiConso Client** s’insère dans l’architecture technique entre le monde LCL (front web client) et le monde CA/CACF.
+L’idée est de visualiser que l’écran client DigiConso n’est qu’une “porte d’entrée” vers plusieurs briques back‑office qui gèrent les règles, les décisions, les documents et le stockage des dossiers.
 
-### Ligne 3 – Ouverture de l’écran DigiConso « Choix des caractéristiques »  
-- Sur cet écran, les appels WS servent à **journaliser l’action** (trace technique) et à récupérer les paramètres nécessaires pour le choix des caractéristiques (plages de montants, durées, options).
-- Concrètement, DigiConso interroge CACF pour savoir quelles combinaisons sont autorisées afin de ne pas proposer au client des configurations interdites
+En haut, la **“Partition maîtrisée pour le monde CA”** regroupe les briques centrales de CACF : BRMS (moteur de règles métier), LO, ELOQUENCE (gestion des courriers / documents), etc., toutes connectées à un bus ou une couche d’intégration appelée **CIM**.
+CIM joue le rôle de chef d’orchestre : il reçoit les demandes venant de DigiConso et les route vers les bons moteurs (règles, décision, génération documentaire, stockage…).
 
-### Ligne 4 – Ouverture de l’écran DigiConso « Réponse »  
-- Cette ligne regroupe plusieurs WS : contrôle des **pièces justificatives**, consultation de la **décision** et des motifs, mise à jour de l’état du dossier et du client si besoin.
-- C’est ici que DigiConso va chercher la **réponse métier CACF** (accord, refus, étude, etc.) et les informations associées pour afficher au conseiller ou au client un écran de réponse complet.
+Au centre, on voit le **Parcours DigiConso Client** qui discute principalement avec la brique **CEE** (cœur de la décision / des échanges crédit) et avec d’autres composants comme NPC ou NMB.
+Les flèches en pointillés ou en continu montrent les flux entre le parcours client, CEE, CIM et les autres briques : selon l’étape (simulation, décision, génération d’offre…), CEE passe par CIM pour interroger BRMS, alimenter le quai de stockage ou déclencher de la gestion de documents.
 
-### Ligne 5 – Signature électronique du dossier  
-- La dernière ligne indique qu’au moment de la **signature électronique**, un WS dédié est appelé pour enregistrer l’opération de signature et lier l’ID de signature au dossier CACF.
-- Ce webservice assure la traçabilité juridique de la signature (preuve associée au contrat) et permet ensuite de retrouver l’état de signature dans les systèmes CACF/LCL.
+En bas, sont représentés des **dispatchers B2B** qui font la jonction entre les flux NPC/NMB et les **webservices CATS / CAPFM** côté CACF. 
+Concrètement, cela signifie que quand un client agit dans DigiConso (parcours self‑care), sa demande traverse ces dispatchers qui traduisent les appels front en appels WS techniques vers les systèmes CACF, tout en restant transparents pour l’utilisateur final.
+
+***
+
+### Schéma 2 – Parcours DigiConso Conseiller dans l’architecture CACF
+
+Le deuxième schéma présente la même architecture vue du côté **Parcours DigiConso Conseiller**, c’est‑à‑dire quand le conseiller traite un dossier depuis ses outils (PUC, GED, etc.) plutôt que le client en direct.
+On retrouve la même “Partition maîtrisée pour le monde CA” avec BRMS, LO, ELOQUENCE reliés à CIM, ce qui signifie que conseiller et client s’appuient sur les mêmes moteurs de décision et de documents.
+
+Sur la gauche, sont ajoutées les briques propres au monde conseiller : **PUC** (poste utilisateur conseiller), **GED** (gestion électronique de documents) et d’autres outils du poste de travail.
+Le **Parcours DigiConso Conseiller** se situe au centre et échange, comme pour le client, avec **CEE**, CIM et les autres briques CACF pour simuler, décider, générer les offres et stocker les dossiers.
+
+En bas, on voit cette fois des **dispatchers B2B PUC** qui exposent des webservices **CATS** et **CAPFM** adaptés au monde conseiller. [2]
+Cela illustre qu’un dossier lancé depuis PUC puis traité dans DigiConso suit un chemin technique très proche de celui d’un dossier client : les mêmes moteurs et les mêmes stockages sont utilisés, seule la “porte d’entrée” change (front conseiller au lieu de front client), via ces dispatchers spécifiques PUC.
