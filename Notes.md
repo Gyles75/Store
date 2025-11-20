@@ -1,19 +1,21 @@
-| N° | Fonctionnalité / Écran                                                | Appels WS ou API (structure vue dans le tableau, texte exact à vérifier dans Word) |
-|----|------------------------------------------------------------------------|-------------------------------------------------------------------------------------|
-|  1 | Ouverture de l’écran PUC – Vision globale Crédit                      | Actions CATS : plusieurs appels de WS CATS listés (récupération des infos client / groupe, simulations, etc.) – libellés techniques à reprendre depuis le document. |
-|  2 | Ouverture de l’écran DigiConso – univers des besoins                  | Actions CATS / CAPFI : série d’appels WS CATS pour récupérer le contexte client et les informations nécessaires à l’univers des besoins – noms de services et paramètres à reprendre depuis Word. |
-|  3 | Édition de la IPFEN (intitulé exact à vérifier)                       | Actions CATS : un bloc d’appels WS CATS (type restitution d’informations, génération/édition de document) – libellés techniques à recopier depuis le tableau original. |
-|  4 | Ouverture de l’écran DigiConso – informations intervenants            | Actions CATS : appels WS CATS de restitution des informations intervenants (conseiller, tiers…) – reprendre les noms de services et codes d’environnement dans Word. |
-|  5 | Rafraîchir les données emprunteur(s)                                  | Actions CATS / CEE : appels WS CATS de restitution des informations personne (T1, T2, etc.) et éventuels WS CEE – copier les noms exacts (SRVT_...) depuis le document. |
-|  6 | Ouverture de l’écran DigiConso – Choix des caractéristiques           | Actions CATS : appels WS CATS pour récupérer les données de configuration/crédit et les caractéristiques possibles – reprendre la liste détaillée des WS depuis Word. |
-|  7 | Ouverture de l’écran DigiConso – Réponse                              | Actions CAPFI / CATS : bloc d’appels côté CAPFI + appels WS CATS de restitution de réponse/décision – contenu technique à recopier tel quel depuis le tableau Word. |
-|  8 | Modification IBAN                                                      | Actions CAPFI / CEE : appels WS CATS / CEE liés à la modification de l’IBAN et à la mise à jour des données de compte – noms et paramètres précis à reprendre. |
-|  9 | Rattacher un dossier non déjà présent en GED                          | Actions CATS / CEE : appels WS de rattachement du dossier dans la GED, création/référence de pièces – reprendre les identifiants de WS depuis le tableau. |
-| 10 | Ouverture de l’écran DigiConso – Finalisation                         | Actions CAPFI / CATS : bloc d’appels WS CATS pour finalisation du dossier (création de contrat, mise à jour de statut, etc.) – détails exacts à copier depuis Word. |
-| 11 | Mise en GED de la liasse signée et de la FAD                          | Actions CATS : appels WS CATS / GED pour déposer la liasse signée et la FAD en GED – noms de services techniques à reprendre dans le document d’origine. |
-| 12 | Acquisition d’une Pièce                                               | Actions CATS : appels WS CATS d’acquisition de pièce (scan / dépôt en GED) – liste exacte des WS à recopier depuis le tableau. |
-| 13 | Rattacher au dossier une nouvelle Pièce                               | Actions CATS : appels WS CATS de rattachement d’une pièce supplémentaire au dossier – reprendre noms de WS et codes paramètre depuis Word. |
-| 14 | Émettre l’offre                                                       | Actions CAPFI / CATS / CEE : bloc d’appels pour l’émission de l’offre (éligibilité, génération, envoi, etc.) – lister précisément les WS depuis le tableau original. |
-| 15 | Choix de la signature (Papier ou SE)                                  | Actions CATS : appels WS liés au choix du mode de signature (papier ou signature électronique) – reprendre les libellés techniques dans Word. |
-| 16 | Rétractation                                                          | Actions CATS : appels WS de gestion de la rétractation (annulation, mise à jour des statuts) – noms de services à recopier fidèlement depuis le document. |
-| 17 | Demande de délégation                                                 | Actions CAPFI / CATS : appels WS pour la demande et le traitement de délégation – liste exacte des WS à reprendre telle quelle dans le tableau Word. |
+Le schéma montre le parcours type d’un conseiller LCL dans DigiConso quand il construit un dossier de crédit, depuis la première demande jusqu’à l’émission de l’offre.
+
+### Vue globale du parcours
+
+Le conseiller démarre avec une **demande préliminaire**, puis crée une **nouvelle demande client** qui l’amène dans l’**univers de besoins** de DigiConso, où il qualifie le projet et le type de financement recherché. [1]
+À partir de là, il bascule sur l’écran de **simulation**, prépare un ou plusieurs scénarios, et peut **sauvegarder la simulation / le projet** pour y revenir plus tard ou l’ajuster avec le client.
+
+### Passage de la simulation à la souscription
+
+Une fois la simulation validée avec le client, le conseiller passe en mode **souscription**, ce qui ouvre une série d’écrans métiers dans DigiConso.
+Il commence par l’écran **Informations intervenant** pour vérifier ou compléter les informations sur le client et, le cas échéant, co‑emprunteurs ou garants, puis enchaine sur **Choix des caractéristiques** pour figer les paramètres du contrat (montant, durée, options, etc.)
+
+### Décision et émission de l’offre
+
+Sur l’écran **Réponse**, DigiConso restitue la décision du système (accord, refus, demandes complémentaires, etc.) et permet au conseiller de voir la synthèse de la demande.
+Si tout est conforme, le parcours se termine par l’**émission de l’offre**, étape où l’offre de crédit est générée pour être ensuite signée selon le mode prévu dans le processus LCL.
+
+### Rôle des autres applications en arrière‑plan
+
+Sur la partie basse du schéma, on voit que DigiConso s’appuie sur d’autres applications : **DOCM** pour la **mise à jour des informations clients**, **JUST DEMANDE** pour la gestion des justificatifs, et **CESAM** pour la gestion des contrats une fois le crédit en place.
+Ces applications sont appelées automatiquement au fil du parcours (par exemple lors de la mise à jour des données ou de la création du contrat), même si, côté conseiller LCL, tout se présente comme une suite d’écrans intégrés dans DigiConso.
