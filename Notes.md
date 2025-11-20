@@ -1,25 +1,33 @@
 
 
-Ce tableau liste, pour le parcours client (desktop et mobile), les grandes fonctionnalités de l’espace crédit et indique si chacune est déjà cadrée dans la cible ou simplement revue.   
+Le schéma décrit la cinématique complète des écrans de DIGICONSO Renouv’Util côté client : on part toujours de l’écran de synthèse du crédit, puis on entre dans un sous‑parcours dédié selon l’action choisie (utiliser le disponible, changer le jour d’échéance, modifier la mensualité, faire une pause, rembourser, profiter d’une offre, etc.), jusqu’à la confirmation de la demande.   
 
-### Fonctionnalités autour du contrat
+### Point de départ : l’écran de synthèse  
+L’écran central s’appelle “Synthèse” et sert de tableau de bord du crédit renouvelable : le client y voit son disponible, ses mensualités, son historique, et depuis cet écran il choisit l’action qu’il veut réaliser.   
+Depuis cette synthèse partent plusieurs flèches vers les grandes fonctionnalités : “Demande de fond (utilisation standard)”, “Liste des opérations”, “Changement jour d’échéance”, “Gérer ma mensualité”, “Pause mensualité”, “Remboursement Total/Partiel”, “Multi‑propositions & Offre promotionnelle”.   
 
-- La **synthèse** correspond à un écran récapitulatif du crédit où le client voit en un coup d’œil les infos clés du contrat (montant, durée, mensualité, disponible, etc.), et cette vue est indiquée comme revue/cadrée.   
-- L’**utilisation standard** couvre les usages de base du crédit renouvelable ou amortissable (consulter son disponible, réaliser une utilisation simple, suivre ses opérations), et elle est marquée comme fonctionnalité déjà chartrée dans le périmètre.   
-- La **solvabilité triennale** renvoie au contrôle périodique de la capacité de remboursement du client tous les trois ans, présenté comme une fonctionnalité spécifique mise en avant dans le tableau.   
+### Parcours d’utilisation standard (demande de fonds)  
+Quand le client clique sur la **demande de fond / utilisation standard**, il arrive sur un écran de **saisie du montant**, où il choisit combien il veut utiliser sur son disponible.   
+Le système enchaîne sur un écran de **résultat de simulation** (mensualité, coût, durée) puis sur un écran de **confirmation de la demande**, où le client valide définitivement l’utilisation du crédit.   
 
-### Ajustement du crédit et des mensualités
+### Parcours de changement de jour d’échéance  
+En choisissant **changement jour d’échéance** depuis la synthèse, le client ouvre un écran de **choix du nouveau jour d’échéance** dans le mois.   
+Une **simulation du changement de jour d’échéance** est ensuite présentée (impact éventuel sur la prochaine mensualité ou sur le calendrier), puis un écran de **confirmation de la demande** permet de valider la modification.   
 
-- Le **choix montant** permet au client de choisir ou ajuster le montant qu’il souhaite utiliser ou emprunter dans l’interface, cette possibilité étant identifiée comme cadrée dans la cible.   
-- Les rubriques **RAT/RAP** font référence aux remboursements anticipés (totaux ou partiels) que le client peut déclencher ou simuler, intégrés comme fonctionnalités du parcours.   
-- La **pause mensualité** correspond à la possibilité de décaler ou suspendre une ou plusieurs échéances selon les règles du produit, et cette option fait partie des fonctions chartrées.   
-- La fonction **gérer ma mensualité** permet au client d’ajuster le niveau de sa mensualité (dans les bornes autorisées), par exemple pour accélérer ou lisser son remboursement, et elle apparaît comme un point important du périmètre.   
+### Parcours “Gérer ma mensualité”  
+Le lien **gérer ma mensualité** mène à un écran de **choix du type de mensualité / montant mensuel souhaité** (par exemple, mensualité minimale, intermédiaire, plus forte).   
+Le client voit alors un **résultat de simulation** montrant l’impact sur la durée et le coût, avant d’arriver à la **confirmation de la demande** qui enregistre le nouveau niveau de mensualité.   
 
-### Suivi, opérations et relation client
+### Parcours “Pause mensualité”  
+Depuis la synthèse, l’entrée **pause mensualité** ouvre un sous‑parcours spécifique où l’on paramètre la pause (mois concerné, conditions d’éligibilité).   
+L’écran suivant est une **simulation de la pause**, qui montre comment les échéances seront décalées, puis un écran de **confirmation de la demande** permet de lancer officiellement la pause si le client accepte les conditions.   
 
-- Le **changement de jour d’échéance** permet au client de modifier le jour du mois où sa mensualité est prélevée, pour l’aligner avec ses revenus ou d’autres charges.   
-- La **liste des opérations** donne accès à l’historique des mouvements liés au contrat (utilisations, remboursements, frais, etc.), sous forme d’extrait ou de liste consultable.   
-- La fonction **multi‑propositions** correspond à la capacité de proposer plusieurs scénarios de financement ou de réaménagement au client, qu’il peut comparer avant de faire son choix.   
-- Les **offres commerciales ciblées** regroupent les propositions spécifiques faites au client dans son espace (par exemple augmentation de disponible, offre promo, rachat, etc.), affichées en fonction de son profil et de son comportement.   
-- La ligne **communication clients** renvoie à l’ensemble des messages et informations adressés au client dans le parcours (notifications, infos réglementaires, messages contextuels), gérés comme une fonctionnalité à part entière du périmètre.
+### Parcours de remboursement total ou partiel  
+Le bouton **Remboursement Total/Partiel** permet au client de saisir le montant qu’il souhaite rembourser (tout ou partie du capital restant dû).   
+Une **simulation du remboursement** présente alors le nouvel état du contrat (reste à payer, prochaine mensualité, éventuelle clôture), suivie d’un écran de **confirmation de la demande** pour valider le remboursement.   
 
+### Parcours multi‑propositions et offres promotionnelles  
+En entrant par **Multi‑propositions & Offre promotionnelle**, le client accède d’abord à un écran de **choix du type de proposition** ou de l’offre à étudier (par exemple réaménagement, augmentation de disponible, offre spéciale).   
+Le parcours enchaîne ensuite sur un ou plusieurs écrans de **détail des offres et simulations associées** (montant, mensualité, avantages), pour finir là encore sur une **confirmation de la demande** si le client accepte une des propositions.   
+
+Au final, ce schéma montre que Renouv’Util fonctionne toujours sur le même principe : point de départ à la synthèse, entrée dans un mini‑parcours dédié à l’action choisie, étape(s) de simulation pour montrer l’impact, puis écran de confirmation qui transforme la simulation en demande ferme.
