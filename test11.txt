@@ -1,1 +1,90 @@
 
+<mxfile host="Electron" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.0.3 Chrome/140.0.7339.249 Electron/38.7.0 Safari/537.36" version="29.0.3">
+  <diagram name="Architecture Contract Synthesis" id="simplified">
+    <mxGraphModel dx="1520" dy="978" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="900" background="#ffffff" math="0" shadow="1">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="🏗️ Architecture globale - Synthèse de contrats de crédit" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=18;fontStyle=1;fontColor=#111827;" parent="1" vertex="1">
+          <mxGeometry x="100" y="30" width="1200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="zone_cats" value="CATS - Canaux digitaux" style="swimlane;whiteSpace=wrap;html=1;fillColor=#DBEAFE;strokeColor=#2563EB;strokeWidth=3;fontSize=14;fontStyle=1;fontColor=#1E3A8A;startSize=50;rounded=1;arcSize=10;shadow=1;" parent="1" vertex="1">
+          <mxGeometry x="80" y="120" width="240" height="280" as="geometry" />
+        </mxCell>
+        <mxCell id="mb" value="💻&lt;br&gt;&lt;b&gt;MaBanque&lt;/b&gt;&lt;br&gt;Application web/mobile" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#3B82F6;strokeColor=#2563EB;strokeWidth=2;fontColor=#FFFFFF;fontSize=12;arcSize=12;shadow=1;" parent="zone_cats" vertex="1">
+          <mxGeometry x="40" y="80" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="npc" value="👤&lt;br&gt;&lt;b&gt;NPC&lt;/b&gt;&lt;br&gt;Outil conseillers" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#3B82F6;strokeColor=#2563EB;strokeWidth=2;fontColor=#FFFFFF;fontSize=12;arcSize=12;shadow=1;" parent="zone_cats" vertex="1">
+          <mxGeometry x="40" y="180" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="zone_digiconso" value="CAPFM - Middleware" style="swimlane;whiteSpace=wrap;html=1;fillColor=#EDE9FE;strokeColor=#7C3AED;strokeWidth=3;fontSize=14;fontStyle=1;fontColor=#5B21B6;startSize=50;rounded=1;arcSize=10;shadow=1;" parent="1" vertex="1">
+          <mxGeometry x="400" y="120" width="280" height="280" as="geometry" />
+        </mxCell>
+        <mxCell id="gw" value="🔐&lt;br&gt;&lt;b&gt;API Gateway&lt;/b&gt;&lt;br&gt;Sécurité &amp; routage" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#8B5CF6;strokeColor=#7C3AED;strokeWidth=2;fontColor=#FFFFFF;fontSize=12;arcSize=12;shadow=1;" parent="zone_digiconso" vertex="1">
+          <mxGeometry x="60" y="80" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="cs" value="⚙️&lt;br&gt;&lt;b&gt;Contract Synthesis&lt;/b&gt;&lt;br&gt;API REST" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#8B5CF6;strokeColor=#7C3AED;strokeWidth=2;fontColor=#FFFFFF;fontSize=12;arcSize=12;shadow=1;" parent="zone_digiconso" vertex="1">
+          <mxGeometry x="60" y="180" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="zone_reflet" value="Base Reflet SQL Server" style="swimlane;whiteSpace=wrap;html=1;fillColor=#D1FAE5;strokeColor=#059669;strokeWidth=3;fontSize=14;fontStyle=1;fontColor=#065F46;startSize=50;rounded=1;arcSize=10;shadow=1;" parent="1" vertex="1">
+          <mxGeometry x="760" y="120" width="240" height="280" as="geometry" />
+        </mxCell>
+        <mxCell id="db" value="🗄️&lt;br&gt;&lt;b&gt;Base Reflet&lt;/b&gt;&lt;br&gt;SQL Server AlwaysOn" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#10B981;strokeColor=#059669;strokeWidth=2;fontColor=#FFFFFF;fontSize=12;shadow=1;" parent="zone_reflet" vertex="1">
+          <mxGeometry x="50" y="120" width="140" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="zone_mainframe" value="Mainframe - Système source" style="swimlane;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;strokeWidth=3;fontSize=14;fontStyle=1;fontColor=#92400E;startSize=50;rounded=1;arcSize=10;shadow=1;" parent="1" vertex="1">
+          <mxGeometry x="1080" y="120" width="240" height="280" as="geometry" />
+        </mxCell>
+        <mxCell id="cim" value="SYPRET / SYREV" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F59E0B;strokeColor=#D97706;strokeWidth=2;fontColor=#FFFFFF;fontSize=12;arcSize=12;shadow=1;" parent="zone_mainframe" vertex="1">
+          <mxGeometry x="40" y="80" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="mf" value="🖥️&lt;br&gt;&lt;b&gt;Applications Crédit&lt;/b&gt;&lt;br&gt;Système source" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F59E0B;strokeColor=#D97706;strokeWidth=2;fontColor=#FFFFFF;fontSize=12;arcSize=12;shadow=1;" parent="zone_mainframe" vertex="1">
+          <mxGeometry x="40" y="180" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow1" value="Requêtes REST" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#3B82F6;strokeWidth=3;fontColor=#1E40AF;fontSize=11;fontStyle=1;labelBackgroundColor=#EFF6FF;exitX=1;exitY=0.5;entryX=0;entryY=0.25;endArrow=classic;endFill=1;shadow=1;" parent="1" source="mb" target="gw" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow2" value="Requêtes REST" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#3B82F6;strokeWidth=3;fontColor=#1E40AF;fontSize=11;fontStyle=1;labelBackgroundColor=#EFF6FF;exitX=1;exitY=0.5;entryX=0;entryY=0.75;endArrow=classic;endFill=1;shadow=1;" parent="1" source="npc" target="gw" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow3" value="Routage sécurisé" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#8B5CF6;strokeWidth=3;fontColor=#5B21B6;fontSize=11;fontStyle=1;labelBackgroundColor=#F5F3FF;exitX=0.5;exitY=1;entryX=0.5;entryY=0;endArrow=classic;endFill=1;shadow=1;" parent="1" source="gw" target="cs" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow4" value="SELECT SQL&lt;br&gt;(Niveau 1)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#22C55E;strokeWidth=3;fontColor=#166534;fontSize=11;fontStyle=1;labelBackgroundColor=#F0FDF4;exitX=1;exitY=0.25;entryX=0;entryY=0.5;endArrow=classic;endFill=1;shadow=1;" parent="1" source="cs" target="db" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="720" y="318" />
+              <mxPoint x="720" y="300" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arrow5" value="Appel temps réel&lt;br&gt;(Niveau 2)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#EF4444;strokeWidth=3;fontColor=#991B1B;fontSize=11;fontStyle=1;labelBackgroundColor=#FEE2E2;exitX=1;exitY=0.75;entryX=0;entryY=0.5;endArrow=classic;endFill=1;shadow=1;" parent="1" source="cs" target="cim" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="740" y="350" />
+              <mxPoint x="740" y="235" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arrow6" value="Requête Mainframe" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#F59E0B;strokeWidth=3;fontColor=#92400E;fontSize=11;fontStyle=1;labelBackgroundColor=#FEF3C7;exitX=0.5;exitY=1;entryX=0.5;entryY=0;endArrow=classic;endFill=1;shadow=1;" parent="1" source="cim" target="mf" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="legend" value="📋 LÉGENDE&lt;br&gt;&lt;br&gt;&lt;b&gt;Flux de données :&lt;/b&gt;&lt;br&gt;→ Bleu : Appels des canaux digitaux&lt;br&gt;→ Violet : Routage middleware&lt;br&gt;→ Vert : Niveau 1 (Base Reflet)&lt;br&gt;→ Rouge : Niveau 2 (Mainframe)&lt;br&gt;→ Orange : Communications Mainframe&lt;br&gt;&lt;br&gt;&lt;b&gt;Composants :&lt;/b&gt;&lt;br&gt;🔵 CATS : Interfaces clients&lt;br&gt;🟣 CAPFM : Middleware SAV&lt;br&gt;🟢 Reflet : SQL Server&lt;br&gt;🟠 Mainframe : Source de vérité" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F9FAFB;strokeColor=#6B7280;strokeWidth=2;fontColor=#111827;fontSize=11;align=left;verticalAlign=top;arcSize=8;shadow=1;" parent="1" vertex="1">
+          <mxGeometry x="80" y="480" width="300" height="340" as="geometry" />
+        </mxCell>
+        <mxCell id="info" value="💡 &lt;b&gt;Architecture en couches&lt;/b&gt;&lt;br&gt;&lt;br&gt;Cette architecture suit un modèle en 4 couches :&lt;br&gt;&lt;br&gt;1️⃣ &lt;b&gt;Présentation&lt;/b&gt; : Canaux CATS pour l&#39;interaction utilisateur&lt;br&gt;2️⃣ &lt;b&gt;Middleware&lt;/b&gt; : Gateway et API pour la logique métier&lt;br&gt;3️⃣ &lt;b&gt;Cache&lt;/b&gt; : Base Reflet pour les accès rapides&lt;br&gt;4️⃣ &lt;b&gt;Source&lt;/b&gt; : Mainframe pour les données complètes&lt;br&gt;&lt;br&gt;🎯 Objectif : Combiner performance (Reflet) et exhaustivité (Mainframe)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#3B82F6;strokeWidth=2;fontColor=#1E3A8A;fontSize=11;align=left;verticalAlign=top;arcSize=8;shadow=1;" parent="1" vertex="1">
+          <mxGeometry x="440" y="480" width="880" height="340" as="geometry" />
+        </mxCell>
+        <mxCell id="note1" value="⚡ Performance&lt;br&gt;~150ms" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D1FAE5;strokeColor=#10B981;strokeWidth=2;fontColor=#065F46;fontSize=10;fontStyle=1;arcSize=12;" parent="1" vertex="1">
+          <mxGeometry x="810" y="430" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="note2" value="🔒 Sécurisé&lt;br&gt;OAuth 2.0" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EDE9FE;strokeColor=#8B5CF6;strokeWidth=2;fontColor=#5B21B6;fontSize=10;fontStyle=1;arcSize=12;" parent="1" vertex="1">
+          <mxGeometry x="460" y="430" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="note3" value="📊 Source&lt;br&gt;Référentielle" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#F59E0B;strokeWidth=2;fontColor=#92400E;fontSize=10;fontStyle=1;arcSize=12;" parent="1" vertex="1">
+          <mxGeometry x="1160" y="430" width="100" height="40" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
