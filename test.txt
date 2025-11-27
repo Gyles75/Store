@@ -1,1 +1,30 @@
+Voici une réponse structurée, claire et pro que tu peux leur envoyer :
+
+
+---
+
+Bonjour Margaux, bonjour Mathilde,
+
+Merci pour vos retours.
+
+Après échange avec Cagip, il s’avère que, côté Secure Transport (l’entité qui reçoit les flux), le nom du fichier déposé ne correspond pas au masque attendu.
+Le masque actuellement configuré de leur côté est : nmbsms*.
+C’est ce qui explique la non-réception du fichier de notre côté sur l’environnement de recette.
+
+Afin d’éviter de devoir modifier ce masque — une opération qui leur prendrait beaucoup de temps — serait-il possible que le fichier soit nommé selon le format suivant :
+
+nmbsms-dclc-datejour.csv
+
+De cette manière, le flux serait bien reconnu et réceptionné sans modification supplémentaire côté Secure Transport.
+
+Merci beaucoup pour votre aide.
+N’hésitez pas si besoin d’éclaircissements.
+
+Bien cordialement,
+Nathan
+
+
+---
+
+Si tu veux, je peux aussi rédiger une version plus courte, plus formelle, ou adaptée en mode "réponse directe" dans un fil Teams.
 
