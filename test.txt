@@ -1,30 +1,22 @@
-Voici une réponse structurée, claire et pro que tu peux leur envoyer :
-
-
----
-
 Bonjour Margaux, bonjour Mathilde,
 
-Merci pour vos retours.
+Merci pour vos retours, et désolé, nous découvrons le sujet en même temps que vous.
 
-Après échange avec Cagip, il s’avère que, côté Secure Transport (l’entité qui reçoit les flux), le nom du fichier déposé ne correspond pas au masque attendu.
+Après échange avec CAGIP, il s’avère que, côté Secure Transport (l’entité qui reçoit les flux), le nom du fichier déposé ne correspond pas au masque attendu.  
 Le masque actuellement configuré de leur côté est : nmbsms*.
+
 C’est ce qui explique la non-réception du fichier de notre côté sur l’environnement de recette.
 
-Afin d’éviter de devoir modifier ce masque — une opération qui leur prendrait beaucoup de temps — serait-il possible que le fichier soit nommé selon le format suivant :
+Pour éviter de leur demander une modification de ce masque — opération lourde et longue pour eux — serait-il possible d’adapter le nom du fichier selon le format suivant, à titre d’exemple :
 
-nmbsms-dclc-datejour.csv
+nmbsms-XXX-horodatage.csv
 
-De cette manière, le flux serait bien reconnu et réceptionné sans modification supplémentaire côté Secure Transport.
+Vous pouvez mettre ce que vous souhaitez à la place de « XXX » (par exemple un code fonctionnel, un identifiant, etc.), l’important étant que le nom commence par « nmbsms » et se termine par l’horodatage. De cette manière, le flux serait bien reconnu et réceptionné sans modification supplémentaire côté Secure Transport.
 
-Merci beaucoup pour votre aide.
+Dites-moi si ce format vous convient. Si ce n’est pas le cas ou si cela n’est pas possible de votre côté, nous demanderons à CAGIP de modifier le masque de réception.
+
+Merci beaucoup pour votre aide.  
 N’hésitez pas si besoin d’éclaircissements.
 
-Bien cordialement,
+Bien cordialement,  
 Nathan
-
-
----
-
-Si tu veux, je peux aussi rédiger une version plus courte, plus formelle, ou adaptée en mode "réponse directe" dans un fil Teams.
-
