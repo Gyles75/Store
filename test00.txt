@@ -1,1 +1,6 @@
+Merci pour pour l'information.
+
+Si je comprends bien, cette règle est implémentée directement dans le code plutôt que d’être une contrainte imposée nativement.
+
+De notre côté, renommer ces appNames serait un process assez lourd (création/modification d’applis, coordination avec les équipes consommatrices..etc). Est-ce qu’il serait possible de faire évoluer ce contrôle pour prendre aussi en compte ces nouvelles applications ?
 
