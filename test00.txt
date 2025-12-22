@@ -1,1 +1,191 @@
 
+    <!-- Bandeau titre -->
+    <mxCell id="hdr" value="Solution cible — Débranchement du NPC vers le parcours CACF Renouv’Util — OIDC + JWT (Norme IHM Groupe)" style="rounded=1;whiteSpace=wrap;html=1;spacing=12;fillColor=#C7D2FE;gradientColor=#EEF2FF;gradientDirection=north;strokeColor=#6C5CE7;fontColor=#111827;fontStyle=1;fontSize=18;fontFamily=Inter;align=left;shadow=0;" vertex="1" parent="1">
+      <mxGeometry x="20" y="20" width="1880" height="72" as="geometry"/>
+    </mxCell>
+
+    <!-- Légende moderne -->
+    <mxCell id="legend" value="<b>Légende moderne</b><br><font color='#2D8CFF'>Bleu</font> = Redirection navigateur (front‑channel)<br><font color='#12C48B'>Vert</font> = Appel API serveur (back‑channel)<br><font color='#FF9F1A'>Orange</font> = Émission/échange JWT &amp; /token<br><font color='#E64AAC'>Rose</font> = Échange de contexte (CTX9)<br><font color='#64748B'>Pointillé gris</font> = Ligne de vie / attente<br><hr>Astuce: survolez les flèches pour lire la description vulgarisée." style="rounded=1;whiteSpace=wrap;html=1;spacing=10;align=left;verticalAlign=top;fillColor=#FFFFFF;strokeColor=#CBD5E1;fontColor=#0F172A;fontSize=12;fontFamily=Inter;shadow=0;" vertex="1" parent="1">
+      <mxGeometry x="1510" y="110" width="390" height="210" as="geometry"/>
+    </mxCell>
+
+    <!-- Colonne/Swimlanes -->
+    <mxCell id="lane1" value="Client CAEL" style="swimlane;horizontal=0;startSize=40;rounded=1;fillColor=#FFFFFF;strokeColor=#CBD5E1;fontStyle=1;fontColor=#0F172A;fontSize=13;fontFamily=Inter;" vertex="1" parent="1">
+      <mxGeometry x="20" y="110" width="300" height="860" as="geometry"/>
+    </mxCell>
+    <mxCell id="lane2" value="NPC" style="swimlane;horizontal=0;startSize=40;rounded=1;fillColor=#FFFFFF;strokeColor=#CBD5E1;fontStyle=1;fontColor=#0F172A;fontSize=13;fontFamily=Inter;" vertex="1" parent="1">
+      <mxGeometry x="330" y="110" width="300" height="860" as="geometry"/>
+    </mxCell>
+    <mxCell id="lane3" value="Producteur / IDP Broker CACF" style="swimlane;horizontal=0;startSize=40;rounded=1;fillColor=#FFFFFF;strokeColor=#CBD5E1;fontStyle=1;fontColor=#0F172A;fontSize=13;fontFamily=Inter;" vertex="1" parent="1">
+      <mxGeometry x="640" y="110" width="300" height="860" as="geometry"/>
+    </mxCell>
+    <mxCell id="lane4" value="IDP CACR" style="swimlane;horizontal=0;startSize=40;rounded=1;fillColor=#FFFFFF;strokeColor=#CBD5E1;fontStyle=1;fontColor=#0F172A;fontSize=13;fontFamily=Inter;" vertex="1" parent="1">
+      <mxGeometry x="950" y="110" width="300" height="860" as="geometry"/>
+    </mxCell>
+    <mxCell id="lane5" value="Contexte API CTX9" style="swimlane;horizontal=0;startSize=40;rounded=1;fillColor=#FFFFFF;strokeColor=#CBD5E1;fontStyle=1;fontColor=#0F172A;fontSize=13;fontFamily=Inter;" vertex="1" parent="1">
+      <mxGeometry x="1260" y="110" width="300" height="860" as="geometry"/>
+    </mxCell>
+    <mxCell id="lane6" value="Renouv’Util CACF" style="swimlane;horizontal=0;startSize=40;rounded=1;fillColor=#FFFFFF;strokeColor=#CBD5E1;fontStyle=1;fontColor=#0F172A;fontSize=13;fontFamily=Inter;" vertex="1" parent="1">
+      <mxGeometry x="1570" y="110" width="330" height="860" as="geometry"/>
+    </mxCell>
+
+    <!-- Lignes de vie (pointillés) -->
+    <mxCell id="lifeline1" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#94A3B8;dashed=1;dashPattern=6 6;fillColor=none;" vertex="1" parent="lane1">
+      <mxGeometry x="148" y="60" width="4" height="780" as="geometry"/>
+    </mxCell>
+    <mxCell id="lifeline2" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#94A3B8;dashed=1;dashPattern=6 6;fillColor=none;" vertex="1" parent="lane2">
+      <mxGeometry x="148" y="60" width="4" height="780" as="geometry"/>
+    </mxCell>
+    <mxCell id="lifeline3" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#94A3B8;dashed=1;dashPattern=6 6;fillColor=none;" vertex="1" parent="lane3">
+      <mxGeometry x="148" y="60" width="4" height="780" as="geometry"/>
+    </mxCell>
+    <mxCell id="lifeline4" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#94A3B8;dashed=1;dashPattern=6 6;fillColor=none;" vertex="1" parent="lane4">
+      <mxGeometry x="148" y="60" width="4" height="780" as="geometry"/>
+    </mxCell>
+    <mxCell id="lifeline5" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#94A3B8;dashed=1;dashPattern=6 6;fillColor=none;" vertex="1" parent="lane5">
+      <mxGeometry x="148" y="60" width="4" height="780" as="geometry"/>
+    </mxCell>
+    <mxCell id="lifeline6" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#94A3B8;dashed=1;dashPattern=6 6;fillColor=none;" vertex="1" parent="lane6">
+      <mxGeometry x="148" y="60" width="4" height="780" as="geometry"/>
+    </mxCell>
+
+    <!-- Etape 1: Client -> NPC -->
+    <mxCell id="e1" value="1) GET /accueil — L’utilisateur ouvre la page; le navigateur appelle le NPC." style="endArrow=block;html=1;strokeWidth=2;rounded=1;curved=1;strokeColor=#2D8CFF;fontFamily=Inter;fontSize=11;labelBackgroundColor=#E6F0FF;align=center;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="170" y="220" as="sourcePoint"/>
+        <mxPoint x="480" y="220" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Etape 2: NPC -> IDP Broker -->
+    <mxCell id="e2" value="2) 302 → /authorize — Redirection OIDC vers l’IDP Broker." style="endArrow=block;html=1;strokeWidth=2;rounded=1;curved=1;strokeColor=#2D8CFF;fontFamily=Inter;fontSize=11;labelBackgroundColor=#E6F0FF;align=center;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="480" y="260" as="sourcePoint"/>
+        <mxPoint x="790" y="260" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Etape 3: Broker -> IDP CACR (fédération/authn) -->
+    <mxCell id="e3" value="3) Redirections d’authentification (SAML/OIDC) — L’utilisateur s’authentifie sur l’IDP CACR." style="endArrow=block;html=1;strokeWidth=2;rounded=1;curved=1;strokeColor=#2D8CFF;fontFamily=Inter;fontSize=11;labelBackgroundColor=#E6F0FF;align=center;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="790" y="300" as="sourcePoint"/>
+        <mxPoint x="1100" y="300" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Etape 4: IDP CACR -> Broker (code) -->
+    <mxCell id="e4" value="4) Code d’autorisation renvoyé au Broker (via front-channel)." style="endArrow=block;html=1;strokeWidth=2;rounded=1;curved=1;strokeColor=#2D8CFF;fontFamily=Inter;fontSize=11;labelBackgroundColor=#E6F0FF;align=center;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="1100" y="340" as="sourcePoint"/>
+        <mxPoint x="790" y="340" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Etape 5: Broker -> IDP CACR (token) -->
+    <mxCell id="e5" value="5) POST /token — Échange code → tokens (ID/Access/Refresh); signature et claims standard." style="endArrow=block;html=1;strokeWidth=2;rounded=1;curved=1;strokeColor=#FF9F1A;fontFamily=Inter;fontSize=11;labelBackgroundColor=#FFF4E6;align=center;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="790" y="380" as="sourcePoint"/>
+        <mxPoint x="1100" y="380" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Etape 6: Broker -> CTX9 (context) -->
+    <mxCell id="e6" value="6) GET /context / POST /context — Enrichissement de contexte fonctionnel (CTx, profil, habilitations)." style="endArrow=block;html=1;strokeWidth=2;rounded=1;curved=1;strokeColor=#E64AAC;fontFamily=Inter;fontSize=11;labelBackgroundColor=#FFE6F6;align=center;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="790" y="430" as="sourcePoint"/>
+        <mxPoint x="1410" y="430" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Etape 7: Broker -> CACF Renouv'Util -->
+    <mxCell id="e7" value="7) POST /renouvutil — Appel API sécurisé avec bearer token (scopes + claims métier)." style="endArrow=block;html=1;strokeWidth=2;rounded=1;curved=1;strokeColor=#12C48B;fontFamily=Inter;fontSize=11;labelBackgroundColor=#E6FFF6;align=center;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="790" y="480" as="sourcePoint"/>
+        <mxPoint x="1735" y="480" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Etape 8: CACF -> Broker (résultat) -->
+    <mxCell id="e8" value="8) 200 + Payload (dossier, éligibilité, étapes UI) — Réponse métier pour l’IHM." style="endArrow=block;html=1;strokeWidth=2;rounded=1;curved=1;strokeColor=#12C48B;fontFamily=Inter;fontSize=11;labelBackgroundColor=#E6FFF6;align=center;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="1735" y="520" as="sourcePoint"/>
+        <mxPoint x="790" y="520" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Etape 9: Broker -> NPC (JWT de lancement) -->
+    <mxCell id="e9" value="9) JWT de lancement (JWS) — Contexte signé transmis au NPC pour l’initialisation UI." style="endArrow=block;html=1;strokeWidth=2;rounded=1;curved=1;strokeColor=#FF9F1A;fontFamily=Inter;fontSize=11;labelBackgroundColor=#FFF4E6;align=center;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="790" y="560" as="sourcePoint"/>
+        <mxPoint x="480" y="560" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Etape 10: NPC -> Client (302 retour appli) -->
+    <mxCell id="e10" value="10) 302 retour — Le navigateur est redirigé vers l’application avec session établie." style="endArrow=block;html=1;strokeWidth=2;rounded=1;curved=1;strokeColor=#2D8CFF;fontFamily=Inter;fontSize=11;labelBackgroundColor=#E6F0FF;align=center;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="480" y="600" as="sourcePoint"/>
+        <mxPoint x="170" y="600" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Etape 11: Client -> CACF (navigation métier) -->
+    <mxCell id="e11" value="11) Navigation métier — L’utilisateur poursuit le parcours Renouv’Util en UI (étapes, pièces, validation)." style="endArrow=block;html=1;strokeWidth=2;rounded=1;curved=1;strokeColor=#2D8CFF;fontFamily=Inter;fontSize=11;labelBackgroundColor=#E6F0FF;align=center;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="170" y="640" as="sourcePoint"/>
+        <mxPoint x="1735" y="640" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Notes explicatives -->
+    <mxCell id="notes1" value="Notes clés&#10;-  Conformité OIDC: authorize → code → token (PKCE possible).&#10;-  JWT: JWS signé (alg entreprise), claims aud/iss/exp/sub + scopes.&#10;-  Sécurité: TLS mutualisé côté SI, rotation clés (JWKS), durées de vie maîtrisées.&#10;-  Observabilité: corrélation (traceId), journaux redirections, échecs d’authN/authZ.&#10;-  Résilience: timeouts, retry idempotent, gestion des codes 4xx/5xx." style="rounded=1;whiteSpace=wrap;html=1;spacing=10;align=left;verticalAlign=top;fillColor=#FFFFFF;strokeColor=#CBD5E1;fontColor=#0F172A;fontSize=12;fontFamily=Inter;" vertex="1" parent="1">
+      <mxGeometry x="1510" y="330" width="390" height="210" as="geometry"/>
+    </mxCell>
+
+    <!-- Encadré 'Parcours utilisateur' -->
+    <mxCell id="uxbox" value="<b>Parcours utilisateur (vulgarisé)</b><br>1. J’ouvre l’application (appel NPC).<br>2. On me redirige pour m’authentifier de façon sécurisée.<br>3. Une fois connecté, le système échange des jetons et récupère le contexte.<br>4. Mon dossier Renouv’Util s’affiche avec mes infos à jour." style="rounded=1;whiteSpace=wrap;html=1;spacing=10;align=left;verticalAlign=top;fillColor=#FFFFFF;strokeColor=#CBD5E1;fontColor=#0F172A;fontSize=12;fontFamily=Inter;" vertex="1" parent="1">
+      <mxGeometry x="1510" y="550" width="390" height="200" as="geometry"/>
+    </mxCell>
+
+    <!-- Repères visuels (pastilles étapes) -->
+    <mxCell id="p1" value="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#2D8CFF;strokeColor=#1E6FD7;fontColor=#FFFFFF;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="150" y="205" width="22" height="22" as="geometry"/>
+    </mxCell>
+    <mxCell id="p2" value="2" style="ellipse;whiteSpace=wrap;html=1;fillColor=#2D8CFF;strokeColor=#1E6FD7;fontColor=#FFFFFF;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="460" y="245" width="22" height="22" as="geometry"/>
+    </mxCell>
+    <mxCell id="p3" value="3" style="ellipse;whiteSpace=wrap;html=1;fillColor=#2D8CFF;strokeColor=#1E6FD7;fontColor=#FFFFFF;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="770" y="285" width="22" height="22" as="geometry"/>
+    </mxCell>
+    <mxCell id="p4" value="4" style="ellipse;whiteSpace=wrap;html=1;fillColor=#2D8CFF;strokeColor=#1E6FD7;fontColor=#FFFFFF;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="1080" y="325" width="22" height="22" as="geometry"/>
+    </mxCell>
+    <mxCell id="p5" value="5" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FF9F1A;strokeColor=#D97E00;fontColor=#FFFFFF;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="770" y="365" width="22" height="22" as="geometry"/>
+    </mxCell>
+    <mxCell id="p6" value="6" style="ellipse;whiteSpace=wrap;html=1;fillColor=#E64AAC;strokeColor=#B33182;fontColor=#FFFFFF;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="1390" y="415" width="22" height="22" as="geometry"/>
+    </mxCell>
+    <mxCell id="p7" value="7" style="ellipse;whiteSpace=wrap;html=1;fillColor=#12C48B;strokeColor=#0FA77A;fontColor=#FFFFFF;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="1715" y="465" width="22" height="22" as="geometry"/>
+    </mxCell>
+    <mxCell id="p8" value="8" style="ellipse;whiteSpace=wrap;html=1;fillColor=#12C48B;strokeColor=#0FA77A;fontColor=#FFFFFF;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="1715" y="505" width="22" height="22" as="geometry"/>
+    </mxCell>
+    <mxCell id="p9" value="9" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FF9F1A;strokeColor=#D97E00;fontColor=#FFFFFF;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="760" y="545" width="22" height="22" as="geometry"/>
+    </mxCell>
+    <mxCell id="p10" value="10" style="ellipse;whiteSpace=wrap;html=1;fillColor=#2D8CFF;strokeColor=#1E6FD7;fontColor=#FFFFFF;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="450" y="585" width="24" height="24" as="geometry"/>
+    </mxCell>
+    <mxCell id="p11" value="11" style="ellipse;whiteSpace=wrap;html=1;fillColor=#2D8CFF;strokeColor=#1E6FD7;fontColor=#FFFFFF;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="1715" y="625" width="24" height="24" as="geometry"/>
+    </mxCell>
+
+    <!-- Encadré conformité -->
+    <mxCell id="compliance" value="<b>Conformité &amp; normes</b><br>-  OIDC Authorization Code (PKCE recommandé).<br>-  JWT JWS (alg d’entreprise), JWKS rotation clés.<br>-  Scopes minimaux, claims stricts, TTL courts.<br>-  RGPD: minimisation des données, journaux pseudonymisés." style="rounded=1;whiteSpace=wrap;html=1;spacing=10;align=left;verticalAlign=top;fillColor=#FFFFFF;strokeColor=#CBD5E1;fontColor=#0F172A;fontSize=12;fontFamily=Inter;" vertex="1" parent="1">
+      <mxGeometry x="1510" y="760" width="390" height="180" as="geometry"/>
+    </mxCell>
+
+  </root>
+</mxGraphModel>
