@@ -1,1 +1,328 @@
+<template>
+  <div class="min-h-screen bg-white">
+    <!-- Header gris foncé avec numéro dossier -->
+    <div class="bg-gray-700 text-white px-6 py-2 flex items-center justify-between text-sm">
+      <div class="font-semibold">{{ numeroDossier }}</div>
+      <div>{{ currentDateTime }}</div>
+    </div>
+
+    <!-- Navigation Tabs principale -->
+    <div class="flex border-b-2 border-gray-300 relative">
+      <!-- TAB CONSULTATION -->
+      <div class="flex-1 relative"
+           @mouseenter="activeMenu = 'consultation'"
+           @mouseleave="activeMenu = null">
+        <router-link to="/consultation"
+                     :class="[
+                       'block text-center py-3 px-6 m-1 font-bold text-xl transition-all uppercase rounded-xl',
+                       isActiveTab('/consultation') ? 'bg-primary text-white' : 'bg-gray-300 text-gray-700 hover:bg-gray-400']">
+          CONSULTATION
+        </router-link>
+
+        <!-- Mega Menu Consultation -->
+        <div v-if="activeMenu === 'consultation'"
+             class="absolute left-0 top-full bg-white shadow-xl border border-gray-300 rounded-b-2xl z-50 p-6"
+             style="min-width: 800px;">
+          <div class="grid grid-cols-3 gap-8">
+            <div>
+              <h3 class="text-primary font-bold text-base mb-3">Synthèse contrat</h3>
+              <div class="space-y-2">
+                <router-link to="/consultation"
+                             class="block text-gray-600 hover:text-primary hover:underline text-sm"
+                             @click="activeMenu = null">
+                  Synthèse
+                </router-link>
+                <router-link to="/consultation/detail-plan"
+                             class="block text-gray-600 hover:text-primary hover:underline text-sm"
+                             @click="activeMenu = null">
+                  Détail plan
+                </router-link>
+                <router-link to="/consultation/memento"
+                             class="block text-gray-600 hover:text-primary hover:underline text-sm"
+                             @click="activeMenu = null">
+                  Mémento
+                </router-link>
+              </div>
+            </div>
+            <div>
+              <h3 class="text-primary font-bold text-base mb-3">Opérations de gestion</h3>
+              <div class="space-y-2">
+                <router-link to="/consultation/gestion-credit"
+                             class="block text-gray-600 hover:text-primary hover:underline text-sm"
+                             @click="activeMenu = null">
+                  Gestion crédit
+                </router-link>
+              </div>
+            </div>
+            <div>
+              <h3 class="text-primary font-bold text-base mb-3">Mouvements financiers</h3>
+              <div class="space-y-2">
+                <router-link to="/consultation/mouvements"
+                             class="block text-gray-600 hover:text-primary hover:underline text-sm"
+                             @click="activeMenu = null">
+                  Liste des mouvements
+                </router-link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB UTILISATIONS -->
+      <div
+          class="flex-1 relative"
+          @mouseenter="activeMenu = 'utilisations'"
+          @mouseleave="activeMenu = null">
+        <router-link to="/utilisations"
+                     :class="[
+                       'block text-center py-3 px-6 m-1 font-bold text-xl transition-all uppercase rounded-xl',
+                       isActiveTab('/utilisations') ? 'bg-primary text-white' : 'bg-gray-300 text-gray-700 hover:bg-gray-400']">
+          UTILISATIONS
+        </router-link>
+
+        <!-- Mega Menu Utilisations -->
+        <div v-if="activeMenu === 'utilisations'"
+             class="absolute left-0 top-full bg-white shadow-xl border border-gray-300 rounded-b-2xl z-50 p-6"
+             style="min-width: 300px;">
+          <div>
+            <h3 class="text-primary font-bold text-base mb-3">Utilisations</h3>
+            <div class="space-y-2">
+              <router-link to="/utilisations"
+                           class="block text-gray-600 hover:text-primary hover:underline text-sm"
+                           @click="activeMenu = null">
+                Utilisation
+              </router-link>
+              <router-link to="/utilisations/annulation"
+                           class="block text-gray-600 hover:text-primary hover:underline text-sm"
+                           @click="activeMenu = null">
+                Annulation
+              </router-link>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB ACTES de SAV -->
+      <div class="flex-1 relative"
+           @mouseenter="activeMenu = 'actes'"
+           @mouseleave="activeMenu = null">
+        <router-link to="/actes"
+                     :class="[
+                       'block text-center py-3 px-6 m-1 font-bold text-xl transition-all uppercase rounded-xl',
+                       isActiveTab('/actes') ? 'bg-primary text-white' : 'bg-gray-300 text-gray-700 hover:bg-gray-400']">
+          ACTES de SAV
+        </router-link>
+
+        <!-- Mega Menu Actes - LARGE avec 6 colonnes -->
+        <div v-if="activeMenu === 'actes'"
+             class="absolute right-0 top-full bg-white shadow-xl border border-gray-300 rounded-b-2xl z-50 p-6"
+             style="min-width: 1200px;">
+        <div class="grid grid-cols-6 gap-6 text-sm">
+            <!-- Colonne 1 -->
+            <div>
+              <h3 class="text-primary font-bold text-sm mb-2">Pause mensualité</h3>
+              <div class="space-y-1.5">
+                <router-link to="/actes/pause-mensualite/saisie"
+                             class="block text-gray-600 hover:text-primary hover:underline text-xs"
+                             @click="activeMenu = null">
+                  Saisie
+                </router-link>
+                <router-link to="/actes/pause-mensualite/annulation"
+                             class="block text-gray-600 hover:text-primary hover:underline text-xs"
+                             @click="activeMenu = null">
+                  Annulation
+                </router-link>
+              </div>
+
+              <h3 class="text-primary font-bold text-sm mb-2 mt-4">Jour d'échéance</h3>
+              <div class="space-y-1.5">
+                <router-link to="/actes/jour-echeance/changement"
+                             class="block text-gray-600 hover:text-primary hover:underline text-xs"
+                             @click="activeMenu = null">
+                  Changement
+                </router-link>
+                <router-link to="/actes/jour-echeance/annulation"
+                             class="block text-gray-600 hover:text-primary hover:underline text-xs"
+                             @click="activeMenu = null">
+                  Annulation
+                </router-link>
+              </div>
+
+              <h3 class="text-primary font-bold text-sm mb-2 mt-4">Mensualité</h3>
+              <div class="space-y-1.5">
+                <router-link to="/actes/mensualite/changement"
+                             class="block text-gray-600 hover:text-primary hover:underline text-xs"
+                             @click="activeMenu = null">
+                  Changement
+                </router-link>
+              </div>
+
+              <h3 class="text-primary font-bold text-sm mb-2 mt-4">Remboursement Anticipé</h3>
+              <div class="space-y-1.5">
+                <router-link to="/actes/ra/total"
+                             class="block text-gray-600 hover:text-primary hover:underline text-xs"
+                             @click="activeMenu = null">
+                  RA Total (tous plans / un plan)
+                </router-link>
+                <router-link to="/actes/ra/partiel"
+                             class="block text-gray-600 hover:text-primary hover:underline text-xs"
+                             @click="activeMenu = null">
+                  RA Partiel
+                </router-link>
+              </div>
+            </div>
+
+            <!-- Colonne 2 -->
+            <div>
+              <h3 class="text-primary font-bold text-sm mb-2">Domiciliation bancaire</h3>
+              <div class="space-y-1.5">
+                <router-link to="/actes/domiciliation/changement"
+                             class="block text-gray-600 hover:text-primary hover:underline text-xs"
+                             @click="activeMenu = null">
+                  Changement
+                </router-link>
+              </div>
+
+              <h3 class="text-primary font-bold text-sm mb-2 mt-4">Agence de gestion</h3>
+              <div class="space-y-1.5">
+                <router-link to="/actes/agence/changement"
+                             class="block text-gray-600 hover:text-primary hover:underline text-xs"
+                             @click="activeMenu = null">
+                  Changement
+                </router-link>
+              </div>
+            </div>
+
+            <!-- Colonne 3 -->
+            <div>
+              <h3 class="text-primary font-bold text-sm mb-2">Hamon</h3>
+              <div class="space-y-1.5">
+                <router-link to="/actes/hamon/reception-bordereau"
+                             class="block text-gray-600 hover:text-primary hover:underline text-xs"
+                             @click="activeMenu = null">
+                  Réception bordereau reconduction (2-RESH)
+                </router-link>
+                <router-link to="/actes/hamon/edition-formulaire"
+                             class="block text-gray-600 hover:text-primary hover:underline text-xs"
+                             @click="activeMenu = null">
+                  Edition formulaire levée de suspension (4H- RESH)
+                </router-link>
+                <router-link to="/actes/hamon/reception-formulaire"
+                             class="block text-gray-600 hover:text-primary hover:underline text-xs"
+                             @click="activeMenu = null">
+                  Réception formulaire levée de suspension (4H- RESH)
+                </router-link>
+              </div>
+            </div>
+
+            <!-- Colonne 4 -->
+            <div>
+              <h3 class="text-primary font-bold text-sm mb-2">Vérification Triennale Solvabilité</h3>
+              <div class="space-y-1.5">
+                <router-link to="/actes/vts/verification"
+                             class="block text-gray-600 hover:text-primary hover:underline text-xs"
+                             @click="activeMenu = null">
+                  Vérification triennale
+                </router-link>
+                <router-link to="/actes/vts/reedition"
+                             class="block text-gray-600 hover:text-primary hover:underline text-xs"
+                             @click="activeMenu = null">
+                  Réédition Fiche de solvabilité
+                </router-link>
+                <router-link to="/actes/vts/forcage"
+                             class="block text-gray-600 hover:text-primary hover:underline text-xs"
+                             @click="activeMenu = null">
+                  Forçage
+                </router-link>
+              </div>
+            </div>
+
+            <!-- Colonne 5 -->
+            <div>
+              <h3 class="text-primary font-bold text-sm mb-2">Modification capital</h3>
+              <div class="space-y-1.5">
+                <router-link to="/actes/capital/diminution"
+                             class="block text-gray-600 hover:text-primary hover:underline text-xs"
+                             @click="activeMenu = null">
+                  Diminution
+                </router-link>
+              </div>
+
+              <h3 class="text-primary font-bold text-sm mb-2 mt-4">Régularisation</h3>
+              <div class="space-y-1.5">
+                <router-link to="/actes/regularisation/rbt-solde"
+                             class="block text-gray-600 hover:text-primary hover:underline text-xs"
+                             @click="activeMenu = null">
+                  Rbt solde créditeur
+                </router-link>
+              </div>
+            </div>
+
+            <!-- Colonne 6 -->
+            <div>
+              <h3 class="text-primary font-bold text-sm mb-2">Mémento</h3>
+              <div class="space-y-1.5">
+                <router-link to="/actes/memento/saisie"
+                             class="block text-gray-600 hover:text-primary hover:underline text-xs"
+                             @click="activeMenu = null">
+                  Saisie
+                </router-link>
+              </div>
+
+              <h3 class="text-primary font-bold text-sm mb-2 mt-4">Blocage contrat</h3>
+              <div class="space-y-1.5">
+                <router-link to="/actes/blocage/saisie"
+                             class="block text-gray-600 hover:text-primary hover:underline text-xs"
+                             @click="activeMenu = null">
+                  Saisie
+                </router-link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contenu -->
+    <slot />
+  </div>
+</template>
+
+<script setup lang="ts">
+import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { useRoute } from 'vue-router'
+import { useDossierStore } from '@/store/modules/dossier'
+
+const route = useRoute()
+const dossierStore = useDossierStore()
+
+const currentDateTime = ref('')
+const numeroDossier = computed(() => dossierStore.currentDossier?.numeroDossier || 'V17TST09')
+const activeMenu = ref<string | null>(null)
+
+const isActiveTab = (path: string) => {
+  return route.path.startsWith(path)
+}
+
+const updateDateTime = () => {
+  const now = new Date()
+  const day = String(now.getDate()).padStart(2, '0')
+  const month = String(now.getMonth() + 1).padStart(2, '0')
+  const year = now.getFullYear()
+  const hours = String(now.getHours()).padStart(2, '0')
+  const minutes = String(now.getMinutes()).padStart(2, '0')
+  currentDateTime.value = `${day}/${month}/${year} ${hours}:${minutes}`
+}
+
+let intervalId: number | null = null
+
+onMounted(() => {
+  updateDateTime()
+  intervalId = window.setInterval(updateDateTime, 60000)
+})
+
+onUnmounted(() => {
+  if (intervalId) clearInterval(intervalId)
+})
+</script>
 
