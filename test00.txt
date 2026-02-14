@@ -142,7 +142,7 @@
           "swagger": "https://swagger.example.com/signature/rec"
         },
         {
-          "name": "QA",
+          "name": "PREPROD",
           "gitlab": "https://gitlab.example.com/signature/qa",
           "argocd": "https://argocd.example.com/signature/qa",
           "elisa": "https://logs.example.com/signature/qa",
@@ -181,7 +181,7 @@
           "swagger": "https://swagger.example.com/user/rec"
         },
         {
-          "name": "QA",
+          "name": "PREPROD",
           "gitlab": "https://gitlab.example.com/user/qa",
           "argocd": "https://argocd.example.com/user/qa",
           "elisa": "https://logs.example.com/user/qa",
@@ -220,7 +220,7 @@
           "swagger": "https://swagger.example.com/payment/rec"
         },
         {
-          "name": "QA",
+          "name": "PREPROD",
           "gitlab": "https://gitlab.example.com/payment/qa",
           "argocd": "https://argocd.example.com/payment/qa",
           "elisa": "https://logs.example.com/payment/qa",
@@ -259,7 +259,7 @@
           "swagger": "https://swagger.example.com/notify/rec"
         },
         {
-          "name": "QA",
+          "name": "PREPROD",
           "gitlab": "https://gitlab.example.com/notify/qa",
           "argocd": "https://argocd.example.com/notify/qa",
           "elisa": "https://logs.example.com/notify/qa",
@@ -298,7 +298,7 @@
           "swagger": "https://swagger.example.com/analytics/rec"
         },
         {
-          "name": "QA",
+          "name": "PREPROD",
           "gitlab": "https://gitlab.example.com/analytics/qa",
           "argocd": "https://argocd.example.com/analytics/qa",
           "elisa": "https://logs.example.com/analytics/qa",
@@ -337,7 +337,7 @@
           "swagger": "https://swagger.example.com/doc/rec"
         },
         {
-          "name": "QA",
+          "name": "PREPROD",
           "gitlab": "https://gitlab.example.com/doc/qa",
           "argocd": "https://argocd.example.com/doc/qa",
           "elisa": "https://logs.example.com/doc/qa",
@@ -376,7 +376,7 @@
           "link": "https://summary.example.com/summary/rec"
         },
         {
-          "name": "QA",
+          "name": "PREPROD",
           "gitlab": "https://gitlab.example.com/summary/qa",
           "argocd": "https://argocd.example.com/summary/qa",
           "elisa": "https://logs.example.com/summary/qa",
@@ -430,7 +430,7 @@
     switch (envName) {
       case 'PROD':
         return 'bg-pink-500/10 text-pink-600 dark:text-pink-300 border border-pink-500/30';
-      case 'QA':
+      case 'PREPROD':
         return 'bg-lime-500/10 text-lime-600 dark:text-lime-300 border border-lime-500/30';
       case 'REC':
         return 'bg-violet-500/10 text-violet-600 dark:text-violet-300 border border-violet-500/30';
@@ -532,7 +532,7 @@
                   <span class="inline-flex items-center gap-1.5 text-xs font-medium rounded-full px-2 py-0.5 ${envBadgeClasses(env.name)}">
                     <span class="h-1.5 w-1.5 rounded-full ${
                       env.name === 'PROD' ? 'bg-pink-500' :
-                      env.name === 'QA' ? 'bg-lime-400' :
+                      env.name === 'PREPROD' ? 'bg-lime-400' :
                       env.name === 'REC' ? 'bg-violet-400' :
                       'bg-stone-400'
                     }"></span>
