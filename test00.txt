@@ -1,1 +1,619 @@
+<!DOCTYPE html>
+<html lang="fr" class="h-full">
+<head>
+  <meta charset="UTF-8" />
+  <title>DIGICONSO - Apps Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    // Config Tailwind pour le dark mode
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50:  '#f0f9ff',
+              100: '#e0f2fe',
+              500: '#0ea5e9',
+              600: '#0284c7',
+              900: '#0b1120'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-thumb { background: rgba(148,163,184,0.7); border-radius: 4px; }
+  </style>
+</head>
+<body class="h-full bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-300">
+<div id="app" class="min-h-screen flex flex-col">
+  <!-- Top bar -->
+  <header class="border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 backdrop-blur">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <img src="https://s3-eu-west-1.amazonaws.com/talentview/uploads/company/logo/2vzUagSmReiWpZpqXo4M_1715844291774.png"
+             alt="Logo"
+             class="h-16 w-auto object-contain"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+        <div class="hidden items-center gap-3">
+          <div class="h-8 w-8 rounded-xl bg-gradient-to-tr from-emerald-400 to-cyan-500 flex items-center justify-center text-white font-bold text-sm shadow-md">
+            CAPFM
+          </div>
+          <div>
+            <div class="text-sm font-semibold tracking-tight">Personal Finance &amp; Mobility</div>
+            <div class="text-xs text-slate-500 dark:text-slate-400">DIGICONSO Apps &amp; OPS</div>
+          </div>
+        </div>
+      </div>
 
+      <!-- Search + Theme toggle -->
+      <div class="flex items-center gap-3 w-1/2 max-w-md">
+        <div class="relative flex-1">
+          <span class="absolute inset-y-0 left-3 flex items-center text-slate-400">
+            <!-- loupe -->
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <circle cx="11" cy="11" r="7" stroke-width="2"></circle>
+              <line x1="16.5" y1="16.5" x2="21" y2="21" stroke-width="2" stroke-linecap="round"></line>
+            </svg>
+          </span>
+          <input id="searchInput"
+                 type="text"
+                 placeholder="Rechercher une app ou une catégorie…"
+                 class="w-full pl-9 pr-3 py-2 text-sm rounded-full border border-slate-200 dark:border-slate-700 bg-slate-50/80 dark:bg-slate-900/80 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent">
+        </div>
+
+        <!-- Theme toggle -->
+        <button id="themeToggle"
+                class="inline-flex items-center justify-center w-9 h-9 rounded-full border border-slate-200 dark:border-slate-700 bg-white/80 dark:bg-slate-900/80 shadow-sm text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                aria-label="Basculer thème clair/sombre">
+          <svg id="sunIcon" class="w-4 h-4 hidden dark:inline-block" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <circle cx="12" cy="12" r="4" stroke-width="2"></circle>
+            <path d="M12 2v2m0 16v2m10-10h-2M4 12H2m16.95-6.95-1.41 1.41M6.46 17.54l-1.41 1.41m0-12.9L6.46 7.46m11.09 11.09-1.41-1.41" stroke-width="2" stroke-linecap="round"></path>
+          </svg>
+          <svg id="moonIcon" class="w-4 h-4 dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M21 12.79A9 9 0 0 1 12.21 3 7 7 0 1 0 21 12.79z"
+                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Content -->
+  <main class="flex-1">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-4">
+
+      <!-- Small info bar -->
+      <div class="flex flex-wrap items-center justify-between gap-3 text-xs text-slate-500 dark:text-slate-400">
+        <div class="flex items-center gap-2">
+          <span class="inline-flex h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_0_4px_rgba(52,211,153,0.25)]"></span>
+          <span>DIGICONSO - Vue globale des MicroServices &amp; MicroFronts</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="inline-flex items-center gap-1">
+            <span class="h-2 w-2 rounded-full bg-emerald-500"></span><span>OK</span>
+          </span>
+          <span class="inline-flex items-center gap-1">
+            <span class="h-2 w-2 rounded-full bg-amber-400"></span><span>Attention</span>
+          </span>
+          <span class="inline-flex items-center gap-1">
+            <span class="h-2 w-2 rounded-full bg-rose-500"></span><span>Incident</span>
+          </span>
+        </div>
+      </div>
+
+      <!-- Grid des apps -->
+      <!--<div id="appsGrid" class="grid gap-5 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">-->
+      <div id="appsGrid" class="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- JSON de configuration -->
+<script id="appsConfig" type="application/json">
+{
+  "apps": [
+    {
+      "name": "signature-life-cycle-ms",
+      "category": "Signature",
+      "status": "healthy",
+      "type": "MicroService",
+      "description": "Gestion du cycle de vie des signatures électroniques.",
+      "dynatrace": "https://dynatrace.example.com",
+      "grafana": "https://grafana.example.com",
+      "environments": [
+        {
+          "name": "DEV",
+          "gitlab": "https://gitlab.example.com/signature/dev",
+          "argocd": "https://argocd.example.com/signature/dev",
+          "elisa": "https://logs.example.com/signature/dev",
+          "swagger": "https://swagger.example.com/signature/dev"
+        },
+        {
+          "name": "REC",
+          "gitlab": "https://gitlab.example.com/signature/rec",
+          "argocd": "https://argocd.example.com/signature/rec",
+          "elisa": "https://logs.example.com/signature/rec",
+          "swagger": "https://swagger.example.com/signature/rec"
+        },
+        {
+          "name": "QA",
+          "gitlab": "https://gitlab.example.com/signature/qa",
+          "argocd": "https://argocd.example.com/signature/qa",
+          "elisa": "https://logs.example.com/signature/qa",
+          "swagger": "https://swagger.example.com/signature/qa"
+        },
+        {
+          "name": "PROD",
+          "gitlab": "https://gitlab.example.com/signature/prod",
+          "argocd": "https://argocd.example.com/signature/prod",
+          "elisa": "https://logs.example.com/signature/prod",
+          "swagger": "https://swagger.example.com/signature/prod"
+        }
+      ]
+    },
+    {
+      "name": "user-management",
+      "category": "Core",
+      "status": "warning",
+      "type": "MicroService",
+      "description": "Comptes, rôles et habilitations utilisateurs.",
+      "dynatrace": "https://dynatrace.example.com",
+      "grafana": "https://grafana.example.com",
+      "environments": [
+        {
+          "name": "DEV",
+          "gitlab": "https://gitlab.example.com/user/dev",
+          "argocd": "https://argocd.example.com/user/dev",
+          "elisa": "https://logs.example.com/user/dev",
+          "swagger": "https://swagger.example.com/user/dev"
+        },
+        {
+          "name": "REC",
+          "gitlab": "https://gitlab.example.com/user/rec",
+          "argocd": "https://argocd.example.com/user/rec",
+          "elisa": "https://logs.example.com/user/rec",
+          "swagger": "https://swagger.example.com/user/rec"
+        },
+        {
+          "name": "QA",
+          "gitlab": "https://gitlab.example.com/user/qa",
+          "argocd": "https://argocd.example.com/user/qa",
+          "elisa": "https://logs.example.com/user/qa",
+          "swagger": "https://swagger.example.com/user/qa"
+        },
+        {
+          "name": "PROD",
+          "gitlab": "https://gitlab.example.com/user/prod",
+          "argocd": "https://argocd.example.com/user/prod",
+          "elisa": "https://logs.example.com/user/prod",
+          "swagger": "https://swagger.example.com/user/prod"
+        }
+      ]
+    },
+    {
+      "name": "payment-service",
+      "category": "Paiement",
+      "status": "incident",
+      "type": "MicroService",
+      "description": "Orchestration des paiements et callbacks.",
+      "dynatrace": "https://dynatrace.example.com",
+      "grafana": "https://grafana.example.com",
+      "environments": [
+        {
+          "name": "DEV",
+          "gitlab": "https://gitlab.example.com/payment/dev",
+          "argocd": "https://argocd.example.com/payment/dev",
+          "elisa": "https://logs.example.com/payment/dev",
+          "swagger": "https://swagger.example.com/payment/dev"
+        },
+        {
+          "name": "REC",
+          "gitlab": "https://gitlab.example.com/payment/rec",
+          "argocd": "https://argocd.example.com/payment/rec",
+          "elisa": "https://logs.example.com/payment/rec",
+          "swagger": "https://swagger.example.com/payment/rec"
+        },
+        {
+          "name": "QA",
+          "gitlab": "https://gitlab.example.com/payment/qa",
+          "argocd": "https://argocd.example.com/payment/qa",
+          "elisa": "https://logs.example.com/payment/qa",
+          "swagger": "https://swagger.example.com/payment/qa"
+        },
+        {
+          "name": "PROD",
+          "gitlab": "https://gitlab.example.com/payment/prod",
+          "argocd": "https://argocd.example.com/payment/prod",
+          "elisa": "https://logs.example.com/payment/prod",
+          "swagger": "https://swagger.example.com/payment/prod"
+        }
+      ]
+    },
+    {
+      "name": "notification-center",
+      "category": "Communication",
+      "status": "healthy",
+      "type": "MicroService",
+      "description": "Emails, SMS, push et notifications internes.",
+      "dynatrace": "https://dynatrace.example.com",
+      "grafana": "https://grafana.example.com",
+      "environments": [
+        {
+          "name": "DEV",
+          "gitlab": "https://gitlab.example.com/notify/dev",
+          "argocd": "https://argocd.example.com/notify/dev",
+          "elisa": "https://logs.example.com/notify/dev",
+          "swagger": "https://swagger.example.com/notify/dev"
+        },
+        {
+          "name": "REC",
+          "gitlab": "https://gitlab.example.com/notify/rec",
+          "argocd": "https://argocd.example.com/notify/rec",
+          "elisa": "https://logs.example.com/notify/rec",
+          "swagger": "https://swagger.example.com/notify/rec"
+        },
+        {
+          "name": "QA",
+          "gitlab": "https://gitlab.example.com/notify/qa",
+          "argocd": "https://argocd.example.com/notify/qa",
+          "elisa": "https://logs.example.com/notify/qa",
+          "swagger": "https://swagger.example.com/notify/qa"
+        },
+        {
+          "name": "PROD",
+          "gitlab": "https://gitlab.example.com/notify/prod",
+          "argocd": "https://argocd.example.com/notify/prod",
+          "elisa": "https://logs.example.com/notify/prod",
+          "swagger": "https://swagger.example.com/notify/prod"
+        }
+      ]
+    },
+    {
+      "name": "analytics-api",
+      "category": "Analytics",
+      "status": "healthy",
+      "type": "MicroService",
+      "description": "API d’agrégation et d’exports analytiques.",
+      "dynatrace": "https://dynatrace.example.com",
+      "grafana": "https://grafana.example.com",
+      "environments": [
+        {
+          "name": "DEV",
+          "gitlab": "https://gitlab.example.com/analytics/dev",
+          "argocd": "https://argocd.example.com/analytics/dev",
+          "elisa": "https://logs.example.com/analytics/dev",
+          "swagger": "https://swagger.example.com/analytics/dev"
+        },
+        {
+          "name": "REC",
+          "gitlab": "https://gitlab.example.com/analytics/rec",
+          "argocd": "https://argocd.example.com/analytics/rec",
+          "elisa": "https://logs.example.com/analytics/rec",
+          "swagger": "https://swagger.example.com/analytics/rec"
+        },
+        {
+          "name": "QA",
+          "gitlab": "https://gitlab.example.com/analytics/qa",
+          "argocd": "https://argocd.example.com/analytics/qa",
+          "elisa": "https://logs.example.com/analytics/qa",
+          "swagger": "https://swagger.example.com/analytics/qa"
+        },
+        {
+          "name": "PROD",
+          "gitlab": "https://gitlab.example.com/analytics/prod",
+          "argocd": "https://argocd.example.com/analytics/prod",
+          "elisa": "https://logs.example.com/analytics/prod",
+          "swagger": "https://swagger.example.com/analytics/prod"
+        }
+      ]
+    },
+    {
+      "name": "document-storage",
+      "category": "Documents",
+      "status": "healthy",
+      "type": "MicroService",
+      "description": "Stockage sécurisé des documents clients.",
+      "dynatrace": "https://dynatrace.example.com",
+      "grafana": "https://grafana.example.com",
+      "environments": [
+        {
+          "name": "DEV",
+          "gitlab": "https://gitlab.example.com/doc/dev",
+          "argocd": "https://argocd.example.com/doc/dev",
+          "elisa": "https://logs.example.com/doc/dev",
+          "swagger": "https://swagger.example.com/doc/dev"
+        },
+        {
+          "name": "REC",
+          "gitlab": "https://gitlab.example.com/doc/rec",
+          "argocd": "https://argocd.example.com/doc/rec",
+          "elisa": "https://logs.example.com/doc/rec",
+          "swagger": "https://swagger.example.com/doc/rec"
+        },
+        {
+          "name": "QA",
+          "gitlab": "https://gitlab.example.com/doc/qa",
+          "argocd": "https://argocd.example.com/doc/qa",
+          "elisa": "https://logs.example.com/doc/qa",
+          "swagger": "https://swagger.example.com/doc/qa"
+        },
+        {
+          "name": "PROD",
+          "gitlab": "https://gitlab.example.com/doc/prod",
+          "argocd": "https://argocd.example.com/doc/prod",
+          "elisa": "https://logs.example.com/doc/prod",
+          "swagger": "https://swagger.example.com/doc/prod"
+        }
+      ]
+    },
+    {
+      "name": "summary-myca-mf",
+      "category": "RENOUVUtil",
+      "status": "warning",
+      "type": "MicroFront",
+      "description": "Synthèse d'un contract Supplétis.",
+      "dynatrace": "https://dynatrace.example.com",
+      "grafana": "https://grafana.example.com",
+      "environments": [
+        {
+          "name": "DEV",
+          "gitlab": "https://gitlab.example.com/summary/dev",
+          "argocd": "https://argocd.example.com/summary/dev",
+          "elisa": "https://logs.example.com/summary/dev",
+          "link": "https://summary.example.com/summary/dev"
+        },
+        {
+          "name": "REC",
+          "gitlab": "https://gitlab.example.com/summary/rec",
+          "argocd": "https://argocd.example.com/summary/rec",
+          "elisa": "https://logs.example.com/summary/rec",
+          "link": "https://summary.example.com/summary/rec"
+        },
+        {
+          "name": "QA",
+          "gitlab": "https://gitlab.example.com/summary/qa",
+          "argocd": "https://argocd.example.com/summary/qa",
+          "elisa": "https://logs.example.com/summary/qa",
+          "link": "https://summary.example.com/summary/qa"
+        },
+        {
+          "name": "PROD",
+          "gitlab": "https://gitlab.example.com/summary/prod",
+          "argocd": "https://argocd.example.com/summary/prod",
+          "elisa": "https://logs.example.com/summary/prod",
+          "link": "https://summary.example.com/summary/prod"
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<script>
+  // --- Helpers ---
+  function readConfig() {
+    const raw = document.getElementById('appsConfig').textContent;
+    return JSON.parse(raw);
+  }
+
+  function statusPillClasses(status) {
+    switch (status) {
+      case 'healthy':
+        return 'bg-emerald-500/15 text-emerald-600 dark:text-emerald-300 border border-emerald-500/30';
+      case 'warning':
+        return 'bg-amber-500/15 text-amber-600 dark:text-amber-300 border border-amber-500/30';
+      case 'incident':
+        return 'bg-rose-500/15 text-rose-600 dark:text-rose-300 border border-rose-500/30';
+      default:
+        return 'bg-slate-500/10 text-slate-600 dark:text-slate-300 border border-slate-500/30';
+    }
+  }
+
+  function typeBadgeClasses(type) {
+    switch (type) {
+      case 'MicroService':
+        return 'bg-blue-700 text-white dark:text-white border border-blue-700';
+      case 'MicroFront':
+        return 'bg-rose-700 text-white dark:text-white border border-rose-700';
+      default:
+        return 'bg-slate-700 text-white dark:text-white border border-slate-700';
+    }
+  }
+
+  function envBadgeClasses(envName) {
+    switch (envName) {
+      case 'PROD':
+        return 'bg-pink-500/10 text-pink-600 dark:text-pink-300 border border-pink-500/30';
+      case 'QA':
+        return 'bg-lime-500/10 text-lime-600 dark:text-lime-300 border border-lime-500/30';
+      case 'REC':
+        return 'bg-violet-500/10 text-violet-600 dark:text-violet-300 border border-violet-500/30';
+      case 'DEV':
+      default:
+        return 'bg-stone-500/10 text-stone-600 dark:text-stone-300 border border-stone-500/30';
+    }
+  }
+
+  // --- Render ---
+  function renderApps(apps, query = '') {
+    const grid = document.getElementById('appsGrid');
+    grid.innerHTML = '';
+
+    const normalizedQuery = query.trim().toLowerCase();
+
+    const filtered = apps.filter(app => {
+      if (!normalizedQuery) return true;
+      const haystack = [
+        app.name,
+        app.category,
+        app.description,
+        //...app.environments.map(e => e.name)
+      ].join(' ').toLowerCase();
+      return haystack.includes(normalizedQuery);
+    });
+
+    if (!filtered.length) {
+      grid.innerHTML = `
+        <div class="col-span-full text-sm text-slate-500 dark:text-slate-400">
+          Aucune application ne correspond à la recherche.
+        </div>`;
+      return;
+    }
+
+    filtered.forEach(app => {
+      const card = document.createElement('article');
+      card.className = [
+        "group flex flex-col gap-3 rounded-2xl border border-slate-200/80 dark:border-slate-800/80",
+        "bg-white/80 dark:bg-slate-900/70 shadow-sm hover:shadow-[0_18px_45px_rgba(15,23,42,0.35)]",
+        "hover:border-brand-500/70 transition-all duration-200 overflow-hidden"
+      ].join(' ');
+
+      const statusClass = statusPillClasses(app.status);
+      const typeClass = typeBadgeClasses(app.type)
+
+      card.innerHTML = `
+        <div class="px-4 pt-4 pb-0 flex items-start justify-between gap-3">
+          <div class="min-w-0">
+            <div class="flex items-center gap-2">
+              <span class="h-2.5 w-2.5 rounded-full ${
+                app.type === 'MicroService' ? 'bg-blue-600' :
+                app.type === 'MicroFront' ? 'bg-rose-600' :
+                'bg-slate-600'
+              } shadow-[0_0_0_1px_rgba(0,0,0,1)]"></span>
+              <span class="text-[11px] uppercase tracking-[0.2em] text-slate-400 dark:text-slate-500">${app.category}</span>
+            </div>
+            <h2 class="mt-1 text-sm font-semibold tracking-tight text-slate-900 dark:text-slate-100 truncate">
+              ${app.name}
+            </h2>
+            <p class="mt-1 text-xs text-slate-500 dark:text-slate-400 line-clamp-2">
+              ${app.description || ''}
+            </p>
+            <div class="flex gap-1.5 mt-2 items-center">
+              ${app.dynatrace ? `
+                <a href="${app.dynatrace}" target="_blank"
+                   class="inline-flex items-center gap-1 px-2 py-1 rounded-full text-[11px] font-medium bg-purple-500/10 text-purple-600 dark:text-purple-300 border border-purple-500/40 hover:bg-purple-500/20 transition-colors">
+                  <svg class="w-3 h-3" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z"></path>
+                  </svg>
+                  Dynatrace
+                </a>` : ''}
+              ${app.grafana ? `
+                <a href="${app.grafana}" target="_blank"
+                   class="inline-flex items-center gap-1 px-2 py-1 rounded-full text-[11px] font-medium bg-orange-500/10 text-orange-600 dark:text-orange-300 border border-orange-500/40 hover:bg-orange-500/20 transition-colors">
+                  <svg class="w-3 h-3" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2L2 12L12 22L22 12L12 2Z"></path>
+                  </svg>
+                  Grafana
+                </a>` : ''}
+            </div>
+          </div>
+          <span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-[11px] font-medium ${typeClass}">
+            ${app.type}
+          </span>
+        </div>
+        <div class="px-4 pb-3 pt-2 border-t border-slate-200/80 dark:border-slate-800/80">
+          <div class="space-y-2.5">
+            ${app.environments.map(env => `
+              <div class="rounded-xl bg-zinc-100/80 dark:bg-slate-900/80 border border-zinc-100/80 dark:border-slate-800/80 px-3 py-2.5 flex flex-col gap-1.5">
+                <div class="flex items-center justify-between">
+                  <span class="inline-flex items-center gap-1.5 text-xs font-medium rounded-full px-2 py-0.5 ${envBadgeClasses(env.name)}">
+                    <span class="h-1.5 w-1.5 rounded-full ${
+                      env.name === 'PROD' ? 'bg-pink-500' :
+                      env.name === 'QA' ? 'bg-lime-400' :
+                      env.name === 'REC' ? 'bg-violet-400' :
+                      'bg-stone-400'
+                    }"></span>
+                    ${env.name}
+                  </span>
+                  <span class="text-[10px] text-slate-400 dark:text-slate-500 uppercase tracking-[0.18em]">env</span>
+                </div>
+                <div class="flex flex-wrap gap-1.5 mt-1">
+                  ${env.gitlab ? `
+                    <a href="${env.gitlab}" target="_blank"
+                       class="inline-flex items-center gap-1 px-2 py-1 rounded-full text-[11px] font-medium bg-red-500 text-slate-100 dark:bg-red-500 dark:text-slate-900 hover:bg-red-600 hover:text-white dark:hover:bg-red-600 transition-colors">
+                      <span class="w-3 h-3 inline-block bg-gradient-to-tr from-red-300 to-red-300 rounded-[4px]"></span>
+                      GitLab
+                    </a>` : ''}
+                  ${env.argocd ? `
+                    <a href="${env.argocd}" target="_blank"
+                       class="inline-flex items-center gap-1 px-2 py-1 rounded-full text-[11px] font-medium bg-amber-500/10 text-amber-600 dark:text-amber-300 border border-amber-500/40 hover:bg-amber-500/20 transition-colors">
+                      <span class="w-3 h-3 rounded-sm bg-amber-400/90"></span>
+                      ArgoCD
+                    </a>` : ''}
+                  ${env.elisa ? `
+                    <a href="${env.elisa}" target="_blank"
+                       class="inline-flex items-center gap-1 px-2 py-1 rounded-full text-[11px] font-medium bg-sky-500/10 text-sky-600 dark:text-sky-300 border border-sky-500/40 hover:bg-sky-500/20 transition-colors">
+                      <span class="w-3 h-3 rounded-full bg-sky-500/80"></span>
+                      Elisa
+                    </a>` : ''}
+                  ${app.type ? `
+                    <a href="${app.type === 'MicroService' ? env.swagger : env.link}" target="_blank"
+                       class="inline-flex items-center gap-1 px-2 py-1 rounded-full text-[11px] font-medium bg-green-500/10 text-green-600 dark:text-green-300 border border-green-500/40 hover:bg-green-500/20 transition-colors">
+                      <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                        <path d="M9 3v18M3 9h18M3 15h18"></path>
+                      </svg>
+                      ${app.type === 'MicroService' ? 'Swagger' : 'Preview'}
+                    </a>` : ''}
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+
+      grid.appendChild(card);
+    });
+  }
+
+  // --- Theme handling ---
+  function applyTheme(theme) {
+    const root = document.documentElement;
+    if (theme === 'dark') {
+      root.classList.add('dark');
+    } else {
+      root.classList.remove('dark');
+    }
+  }
+
+  function initTheme() {
+    const stored = localStorage.getItem('theme');
+    if (stored === 'dark' || stored === 'light') {
+      applyTheme(stored);
+    } else {
+      const prefersDark = window.matchMedia &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches;
+      applyTheme(prefersDark ? 'dark' : 'light');
+    }
+  }
+
+  function toggleTheme() {
+    const root = document.documentElement;
+    const newTheme = root.classList.contains('dark') ? 'light' : 'dark';
+    applyTheme(newTheme);
+    localStorage.setItem('theme', newTheme);
+  }
+
+  // --- Init ---
+  document.addEventListener('DOMContentLoaded', () => {
+    const { apps } = readConfig();
+    initTheme();
+    renderApps(apps);
+
+    const searchInput = document.getElementById('searchInput');
+    searchInput.addEventListener('input', (e) => {
+      renderApps(apps, e.target.value);
+    });
+
+    const themeToggle = document.getElementById('themeToggle');
+    themeToggle.addEventListener('click', toggleTheme);
+  });
+</script>
+</body>
+</html>
