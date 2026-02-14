@@ -448,13 +448,17 @@
     const normalizedQuery = query.trim().toLowerCase();
 
     const filtered = apps.filter(app => {
-      if (!normalizedQuery) return true;
+      if (!normalizedQuery) {
+        return true;
+      }
+
       const haystack = [
         app.name,
         app.category,
         app.description,
         //...app.environments.map(e => e.name)
       ].join(' ').toLowerCase();
+
       return haystack.includes(normalizedQuery);
     });
 
@@ -465,6 +469,9 @@
         </div>`;
       return;
     }
+
+    // Trier sur le nom
+    filtered.sort((a, b) => a.name.localeCompare(b.name));
 
     filtered.forEach(app => {
       const card = document.createElement('article');
