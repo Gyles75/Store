@@ -1,1 +1,220 @@
+### 3.X — Resources JAX-RS — Règles obligatoires
+
+#### Annotations Jakarta REST
+
+Chaque classe resource (équivalent controller) doit utiliser **exclusivement** les annotations
+du package `jakarta.ws.rs` — **pas** `@RestController`, `@GetMapping` ou toute annotation Spring MVC.
+
+```java
+import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.POST;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.QueryParam;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
+```
+
+**Structure type d'une classe resource :**
+
+```java
+@Path("/v1/{ressource-metier}")           // ← URI racine de la resource en kebab-case pluriel
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
+public class {Domaine}Resource {
+
+    private final {Action}{Domaine}UseCase useCase;
+    private final {Domaine}Mapper mapper;
+
+    // Injection par constructeur — jamais @Autowired sur un champ
+    public {Domaine}Resource({Action}{Domaine}UseCase useCase, {Domaine}Mapper mapper) {
+        this.useCase = useCase;
+        this.mapper  = mapper;
+    }
+
+    @GET
+    @Path("/{id}")
+    public Response getById(@PathParam("id") String id) {
+        var result = useCase.findById(id);
+        return Response.ok(mapper.toResponse(result)).build();
+    }
+}
+```
+
+#### Documentation OpenAPI des endpoints
+
+Chaque endpoint **doit** être documenté avec les annotations `@Operation` et `@Parameter`
+du package `io.swagger.v3.oas.annotations`, en cohérence avec ce qui est fait dans le package `resource` du socle **happy-demo-ms**.
+
+
+### 3.X — Remplacement des appels CIM/SOAP par des clients REST ou SOAP
+
+#### Contexte
+
+Certaines méthodes du service CIM `{{CIM_SERVICE_NAME}}` ne font pas appel à un programme
+IMS mais appellent **d'autres services externes** : un service SOAP, un backend SOAP,
+le progiciel LO, ou un composant d'un autre module CIM qui sera fourni dans le workspace
+
+Tu dois identifier chacun de ces appels dans le code source, puis les remplacer par le
+mécanisme d'appel adéquat décrit ci-dessous.
+
+---
+
+#### 3.X.1 — Table de correspondance : fonctions CIM → API REST cibles
+
+La variable `EXTERNAL_CALLS` recense les fonctions appelées à remplacer et leur équivalent REST.
+
+```yaml
+EXTERNAL_CALLS:
+  # ─── Format ────────────────────────────────────────────────────────────────
+  # - function:  Nom exact de la méthode CIM à remplacer
+  #   swagger:   Chemin vers le fichier openapi.json/yml OU URL du swagger
+  #              → "unknown" ou absent = l'agent doit chercher dans design-authority
+  #
+  # ─── Exemples ──────────────────────────────────────────────────────────────
+  - function:  "getClientInfo"
+    swagger:   "../design-authority/client-api/openapi.json"
+
+  - function:  "simulateCredit"
+    swagger:   "https://api.internal.ca/credit-simulation/openapi.yaml"
+
+  - function:  "checkEligibility"
+    swagger:   "unknown"    # ← l'agent cherchera dans design-authority
+
+  - function:  "getProductList"
+    swagger:   ""           # ← idem
+```
+
+> **RÈGLE :** Ne modifie pas les noms de fonctions dans cette table — ils doivent
+> correspondre exactement aux noms présents dans le code source de `{{CIM_SERVICE_PATH}}`.
+
+---
+
+#### 3.X.2 — Résolution automatique via `design-authority`
+
+Pour chaque entrée dont le champ `swagger` est **vide, absent ou égal à `unknown`** :
+
+1. Parcours **récursivement** le module `design-authority` présent dans le workspace
+2. Pour chaque sous-projet trouvé, lis uniquement les fichiers `openapi.json` et `openapi.yaml`
+   — **ne lis pas** les fichiers `fapi.pptx` ni aucun fichier binaire
+3. Analyse le contenu de chaque swagger :
+    - Lis les `paths`, les `operationId`, les `summary` et les `description` des endpoints
+    - Compare la **sémantique** de chaque endpoint avec ce que fait la fonction CIM
+      (déduis ce que fait la fonction en lisant son implémentation dans `{{CIM_SERVICE_PATH}}` ou un autre module CIM)
+4. Sélectionne l'endpoint qui correspond le mieux fonctionnellement
+5. Si aucun endpoint ne correspond avec certitude, **indique-le clairement** dans
+   `ANALYSE_{{CIM_SERVICE_NAME}}.md` sous la section "Appels externes non résolus"
+   et continue sans bloquer
+
+---
+
+#### 3.X.3 — Règles de détection des autres types d'appels
+
+Si une fonction appelée dans le code du module {{CIM_SERVICE_NAME}} ou autre module CIM utilisé dans l'appel n'est **pas listée dans `EXTERNAL_CALLS`**,
+applique les règles de détection suivantes dans l'ordre :
+
+| Cas | Critères de détection                                                                                 | Action                                                                                                       |
+|---|-------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|
+| **Appel IMS** | Appel vers un programme MainFrame via le bean IMS du socle Happy                                      | → Voir section **3.7 — Clients IMS** déjà décrite dans cette spec                                            |
+| **Appel LO (SOAP)** | Appel vers `loService`, `LoClient`, ou tout service contenant `LO` dans son nom                       | → Voir section **3.X.5 — Appel service SOAP LO** ci-dessous                                                  |
+| **Appel autre module CIM** | Appel vers une classe ou un composant d'un projet utilisé dans {{CIM_SERVICE_NAME}} dans le workspace | → Lis ce module CIM dans le workspace pour avoir le contexte complet, puis réplique la logique dans le code` |
+| **API REST non résolue** | Aucun des cas ci-dessus ne correspond                                                                 | → Note dans "Appels externes non résolus" et marque `// TODO: À résoudre` dans le code généré                |
+
+---
+
+#### 3.X.4 — Génération du client Feign pour les appels REST
+
+Pour chaque appel REST résolu (via `EXTERNAL_CALLS` ou via `design-authority`),
+génère un client Feign en t'inspirant **exactement** de ce qui est fait dans le
+package dédié du socle `{{HAPPY_DEMO_PATH}}` — structure, config, nommage, fallback.
+
+
+##### Interface Feign — patron à suivre
+
+Inspire-toi du client Feign présent dans {{HAPPY_DEMO_PATH}} pour :
+  - les annotations à importer (MicroProfile REST Client ou Feign selon le socle)
+  - la gestion du timeout
+  - la gestion des erreurs HTTP
+  - le nom et le positionnement de l'annotation @RegisterRestClient
+
+##### Fallback — patron à suivre
+
+Le fallback doit :
+  - Logger l'erreur avec le contexte (nom API, paramètres d'appel)
+  - Lever une exception métier claire plutôt que retourner null
+  - Être cohérent avec le pattern de fallback de {{HAPPY_DEMO_PATH}}
+
+```
+
+##### Configuration `application.properties` — variables obligatoires
+
+Pour chaque client Feign généré, ajoute ces propriétés dans `application.properties`
+et dans chaque fichier de profil (`local`, `dev`, `int`, `rec`).
+**Inspire-toi des propriétés existantes dans `{{HAPPY_DEMO_PATH}}`** pour le nommage exact :
+
+```
+
+Mapper pour le client REST
+
+Ajoute dans le mapper MapStruct du domaine concerné si besoin
+
+
+---
+
+#### 3.X.5 — Appel service SOAP LO
+
+Pour les appels vers le progiciel **LO** (détectés via `loService`, `LoClient` ou
+tout service contenant `LO` dans son nom), le processus est le suivant :
+
+**1. Lis le socle `{{HAPPY_DEMO_PATH}}`** pour trouver comment les appels SOAP LO
+sont déjà implémentés (cherche : `SoapClient`, `WebServiceTemplate`, `JAXBContext`,
+ou tout composant d'appel SOAP) — **réplique exactement ce pattern**.
+
+**2. Les enveloppes SOAP** (request/response) seront fournies ci-dessous si disponibles.
+Dans le cas contraire, extrais-les depuis les fichiers WSDL présents dans
+`{{CIM_SERVICE_PATH}}` ou dans les ressources du projet.
+
+```yaml
+LO_SOAP_CALLS:
+  # Renseigne ici les opérations LO à appeler
+```
+
+Bien structurer les appels LO et les properties.
+
+---
+
+#### 3.X.6 — Document de synthèse des appels externes
+
+Dans `ANALYSE_{{CIM_SERVICE_NAME}}.md`, ajoute une section dédiée :
+
+```markdown
+## Appels externes identifiés
+
+### Clients REST Feign à générer
+
+| Fonction CIM | API cible | Endpoint | Swagger source |
+|---|---|---|---|
+| getXXXX | client-api | GET /clients/{id} | design-authority/client-api/openapi.json |
+| ... | ... | ... | ... |
+
+### Appels SOAP LO à migrer
+
+| Fonction CIM | Opération WSDL | WSDL source |
+|---|---|---|
+| ... | ... | ... |
+
+### Appels vers autres modules CIM
+
+| Fonction CIM | Module CIM source | Logique à répliquer |
+|---|---|---|
+| ... | ... | ... |
+
+### Appels externes non résolus (TODO)
+
+| Fonction CIM | Raison non résolue | Action recommandée |
+|---|---|---|
+| ... | Aucun endpoint trouvé dans design-authority | Confirmer avec l'équipe API |
+```
 
