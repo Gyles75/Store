@@ -1,1 +1,93 @@
 
+@Configuration
+@EnableCaching
+public class RedisCacheConfig {
+
+    @Bean
+    public RedisCacheConfiguration cacheConfiguration(ObjectMapper objectMapper) {
+        var serializer = new CompressedJsonRedisSerializer<>(
+            objectMapper,
+            MyDto.class,
+            Deflater.BEST_COMPRESSION // niveau 9, 100% natif
+        );
+
+        return RedisCacheConfiguration.defaultCacheConfig()
+            .entryTtl(Duration.ofMinutes(30))
+            .disableCachingNullValues()
+            .serializeKeysWith(
+                SerializationPair.fromSerializer(RedisSerializer.string()))
+            .serializeValuesWith(
+                SerializationPair.fromSerializer(serializer));
+    }
+
+    // Si vous gérez plusieurs types de DTO
+    @Bean
+    public RedisCacheManagerBuilderCustomizer cacheManagerCustomizer(
+            ObjectMapper objectMapper) {
+        return builder -> builder
+            .withCacheConfiguration("myDtoCache",
+                RedisCacheConfiguration.defaultCacheConfig()
+                    .entryTtl(Duration.ofMinutes(15))
+                    .serializeValuesWith(SerializationPair.fromSerializer(
+                        new CompressedJsonRedisSerializer<>(
+                            objectMapper, MyDto.class, Deflater.BEST_COMPRESSION))));
+    }
+}
+
+
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.data.redis.serializer.RedisSerializer;
+import org.springframework.data.redis.serializer.SerializationException;
+
+import java.io.*;
+import java.util.zip.GZIPInputStream;
+import java.util.zip.GZIPOutputStream;
+import java.util.zip.Deflater;
+
+public class CompressedJsonRedisSerializer<T> implements RedisSerializer<T> {
+
+    private static final int BUFFER_SIZE = 512;
+    private final ObjectMapper objectMapper;
+    private final Class<T> type;
+    private final int compressionLevel; // Deflater.BEST_COMPRESSION = 9
+
+    public CompressedJsonRedisSerializer(ObjectMapper objectMapper,
+                                         Class<T> type,
+                                         int compressionLevel) {
+        this.objectMapper = objectMapper;
+        this.type = type;
+        this.compressionLevel = compressionLevel;
+    }
+
+    @Override
+    public byte[] serialize(T value) throws SerializationException {
+        if (value == null) return new byte[0];
+        try {
+            byte[] json = objectMapper.writeValueAsBytes(value);
+            var bos = new ByteArrayOutputStream(json.length / 3);
+            // Inner class anonyme pour accéder au Deflater et fixer le niveau
+            try (var gzip = new GZIPOutputStream(bos, BUFFER_SIZE) {
+                { def.setLevel(compressionLevel); } // bloc d'initialisation d'instance
+            }) {
+                gzip.write(json);
+            }
+            return bos.toByteArray();
+        } catch (IOException e) {
+            throw new SerializationException("Échec sérialisation/compression", e);
+        }
+    }
+
+    @Override
+    public T deserialize(byte[] bytes) throws SerializationException {
+        if (bytes == null || bytes.length == 0) return null;
+        try (var gzip = new GZIPInputStream(new ByteArrayInputStream(bytes), BUFFER_SIZE);
+             var bos = new ByteArrayOutputStream()) {
+            gzip.transferTo(bos); // natif depuis Java 9, optimisé en Java 21
+            return objectMapper.readValue(bos.toByteArray(), type);
+        } catch (IOException e) {
+            throw new SerializationException("Échec décompression/désérialisation", e);
+        }
+    }
+}
+
