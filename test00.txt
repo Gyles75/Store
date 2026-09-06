@@ -1,5 +1,3 @@
-Voici un résumé simple, prêt à réutiliser tel quel lors du daily.
-
 ## Le problème en une phrase
 
 On a deux sources d'adresse pour un même client (une venue de l'OCR de la carte d'identité/passeport/avis d'imposition, l'autre saisie à la main par le conseiller), et il faut vérifier automatiquement si elles désignent bien la même adresse malgré les petites différences d'écriture.
