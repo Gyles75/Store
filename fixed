@@ -12,4 +12,313 @@ Leur côté. Demandez la roadmap du JPD et dadrad :
   - Environnements de test et jeux de données disponibles
 
 
+Nous sommes la branche informatique CA, les caisses régionales CA nous ont confié de travailler sur l'octroi automatique d'un crédit à la consommation <= 3000 et > à 3000, ce que nous avons fait dans l'itération 1 ou lot 1 avec des regles comme verifier les charges du client via internal banking et d'autres regles, vérification de la piece d'identité (CNI ou passeport) et vérification du justificatif de domicile et de revenu (avis d'imposition qui fait office de justif de domicile et de revenu), la branche informatique des caisse (CATS) nous ont exposer une API DPJ pour récupérer les metadata de ces PJ (ils ont utiliser un outil RAD/LAD pour la reconnaisscance et tout). les controles sont en place. nous allons nous déplacer chez eux pour travailler sur l'itération 2, je pense qu'elle va consister peut-etre à interroger le service des impots directement, la banque de france via api tout ça sachant que c'est payant...etc coté CATS ils vont intégrer les évolutions du DPJ et du parcours RAD/LAD dans l'itération 2...etc comment je peux préparer cette journée de réunion et de discussion sachant qu'on sera plusieurs...etc
+
+Pour préparer cette journée, je te conseille d’arriver avec un petit dossier de **cadrage**, pas avec une solution technique déjà arrêtée : un bilan du lot 1, un schéma du parcours actuel, les hypothèses du lot 2 et une liste de décisions à prendre.
+
+Ton rôle, côté microservice d’octroi, sera surtout de faire le lien entre trois éléments : ce que CATS peut fournir, ce que le métier veut contrôler et la manière dont votre moteur doit réagir. L’objectif de la journée devrait être de repartir avec un périmètre partagé, des responsabilités claires et des dépendances identifiées — pas seulement une liste d’idées.
+
+## 1. Distingue dès le départ ce qui est acquis de ce qui reste une hypothèse
+
+D’après ce que tu décris :
+
+| Acquis du lot 1 | Hypothèses à confirmer pour le lot 2 |
+|---|---|
+| Règles d’octroi pour les parcours ≤ 3 000 € et > 3 000 € | Nouvelles règles ou évolution des règles existantes |
+| Vérification des charges via l’internal banking | Enrichissement des données utilisées pour apprécier la capacité de remboursement |
+| Contrôle des pièces d’identité, du domicile et des revenus | Renforcement de l’authenticité et des contrôles de cohérence |
+| Consommation des métadonnées de PJ via l’API DPJ exposée par CATS | Évolutions du contrat DPJ et du parcours RAD/LAD |
+| Contrôles déjà intégrés dans votre module | Éventuels nouveaux services externes : fiscalité, Banque de France, autres |
+
+La bonne question d’ouverture est donc :
+
+> « Quels problèmes précis du lot 1 veut-on résoudre dans le lot 2 : augmenter le taux d’octroi automatique, réduire la fraude, diminuer les reprises manuelles, fiabiliser les revenus ou améliorer le délai de réponse ? »
+
+Sans cette clarification, vous risquez de discuter longtemps de nouvelles API sans savoir quelle décision elles doivent améliorer.
+
+### Deux points à ne pas considérer comme acquis
+
+- L’accès aux données fiscales pour votre usage doit être confirmé. La DGFiP présente bien des API donnant accès à des données fiscales, mais les exemples bancaires cités sur sa page concernent notamment l’éligibilité au LEP. Cette présentation ne suffit pas à établir que votre parcours d’octroi de crédit peut les utiliser : il faut faire confirmer le service exact, le cadre d’accès et la finalité autorisée.[1]
+- Pour la Banque de France, il faut identifier le fichier et le dispositif réellement visés, plutôt que parler d’une « API Banque de France » générique. La documentation officielle distingue notamment le FICP, le FCC, leurs modalités techniques, leurs formalités d’accès et leurs grilles tarifaires. Il faut aussi vérifier si un service groupe existe déjà.[2]
+
+## 2. Prépare quatre supports simples avant la réunion
+
+### A. Un bilan du lot 1 sur une page
+
+Prépare une synthèse factuelle :
+
+- Parcours couverts et exclusions.
+- Règles actuellement exécutées.
+- Données consommées et systèmes fournisseurs.
+- Résultats possibles du moteur.
+- Limites et incidents connus.
+- Points encore manuels.
+
+Si les chiffres sont disponibles, apporte :
+
+- taux de dossiers traités automatiquement ;
+- principaux motifs de sortie du parcours automatique ;
+- taux de PJ inexploitables ou de métadonnées manquantes ;
+- temps de traitement DPJ et temps total du parcours ;
+- erreurs techniques et reprises manuelles.
+
+Si tu n’as pas les mesures, indique « à mesurer », sans les remplacer par des impressions.
+
+La question que ce bilan doit permettre de traiter est :
+
+> « Parmi les dossiers qui ne passent pas automatiquement aujourd’hui, lesquels pourraient passer grâce au lot 2, et pourquoi ? »
+
+### B. Un schéma de l’existant
+
+Un schéma très simple suffit, à corriger collectivement :
+
+```text
+Parcours de demande
+        |
+        v
+Module d’octroi automatique
+        |
+        +--> Données client / internal banking
+        |
+        +--> API DPJ CATS
+        |       |
+        |       +--> Parcours RAD/LAD / traitement des pièces
+        |
+        +--> Autres contrôles existants
+        |
+        v
+Résultat d’octroi + motifs + suite du parcours
+```
+
+Sur ce schéma, distingue :
+
+- qui produit la donnée ;
+- qui la contrôle ;
+- qui applique la règle métier ;
+- qui décide de l’issue du dossier ;
+- qui conserve la preuve.
+
+Ne présuppose pas que ces responsabilités sont déjà partagées de la même façon par toutes les équipes.
+
+### C. Une matrice « donnée → contrôle → décision »
+
+C’est probablement le support le plus utile pour travailler ensemble.
+
+| Besoin | Donnée nécessaire | Source actuelle | Évolution envisagée | Question à trancher |
+|---|---|---|---|---|
+| Identifier le client | État civil, références et validité du titre | DPJ | Métadonnées enrichies | Qui établit le rapprochement avec le demandeur ? |
+| Justifier les revenus | Nature, montant, période, titulaire | Avis d’imposition via DPJ | Vérification fiscale éventuelle | Quelle donnée est pertinente pour quelle règle ? |
+| Justifier le domicile | Adresse et date de référence | Avis d’imposition dans votre parcours | Contrôles complémentaires | Comment traiter un déménagement ou une divergence ? |
+| Vérifier les charges | Montants, catégories, récurrence | Internal banking | Enrichissement éventuel | Quelles charges sont couvertes ou restent inconnues ? |
+| Consulter le FICP | Résultat, date et preuve de consultation | À localiser dans l’existant | Réutilisation ou intégration à définir | Qui consulte, quand et comment transmet-on le résultat ? |
+
+Pour chaque ligne, ajoute deux colonnes pendant l’atelier : « responsable » et « décision attendue ».
+
+### D. Quelques dossiers de test anonymisés ou fictifs
+
+Prépare des situations concrètes, plutôt que seulement des questions abstraites :
+
+1. Dossier complet et cohérent.
+2. Pièce d’identité lisible, mais extraction du nom incertaine.
+3. Avis fiscal portant une adresse différente de celle du dossier.
+4. Avis fiscal authentique, mais revenus déclarés différents des revenus utilisés dans l’octroi.
+5. DPJ encore en cours de traitement.
+6. Service externe indisponible ou réponse ambiguë.
+7. Nouvelle pièce déposée après un premier contrôle.
+
+Pour chaque cas, demande :
+
+> « Quelle est la réponse attendue de notre module, quel motif renvoie-t-on et quelle est la suite du parcours ? »
+
+## 3. Les questions prioritaires à poser à CATS sur DPJ et RAD/LAD
+
+### Sur le contenu des réponses
+
+- Quelles nouvelles métadonnées seront exposées dans le lot 2 ?
+- Pour chaque champ, quelle est sa définition précise, son format et sa présence obligatoire ou facultative ?
+- La valeur provient-elle d’une extraction automatique, d’une correction humaine ou d’une source externe ?
+- Un niveau de confiance est-il fourni par champ ou uniquement pour le document ?
+- Comment distingue-t-on une donnée absente, illisible, non applicable et non encore traitée ?
+- Le résultat porte-t-il sur une pièce, un ensemble de pièces ou le dossier entier ?
+
+Ta question centrale peut être :
+
+> « Quand DPJ nous renvoie une donnée, est-ce une valeur extraite, une valeur vérifiée ou une conclusion de contrôle ? »
+
+Ces trois notions ne doivent pas être mélangées dans le contrat.
+
+### Sur la portée des contrôles
+
+- CATS fournit-il uniquement des données ou également des résultats de contrôle ?
+- Quels contrôles de cohérence entre pièces sont réalisés ?
+- Qui rapproche le titulaire de l’avis fiscal du demandeur ou du coemprunteur ?
+- Comment sont traités les noms d’usage, noms de naissance et différences d’écriture ?
+- Que signifie précisément un résultat « valide » : lisible, complet, cohérent, authentique ou accepté selon une règle métier ?
+
+Pour l’avis fiscal, distingue aussi l’extraction des informations, la vérification de l’intégrité du document et la vérification qu’il s’agit du dernier avis connu. Le service officiel de vérification et le 2D-Doc répondent à des aspects différents de ces contrôles.[3]
+
+### Sur le cycle de vie
+
+- Quels sont les statuts DPJ et leurs transitions ?
+- Comment sait-on que le résultat est définitif ?
+- Le mode de récupération prévu est-il un appel direct, du polling ou une notification ?
+- Quels délais sont observés et quels délais sont visés ?
+- Une nouvelle pièce invalide-t-elle les contrôles précédents ?
+- Une réponse déjà consommée peut-elle être corrigée ?
+- Comment identifie-t-on la version de la pièce et la version de son traitement ?
+
+### Sur la livraison
+
+- Le lot 1 continuera-t-il à fonctionner pendant le déploiement du lot 2 ?
+- Le contrat sera-t-il rétrocompatible ou versionné ?
+- Quand auront lieu la livraison de la documentation, celle des exemples et celle de l’environnement de recette ?
+- Quels jeux de test seront fournis ?
+- Qui prend en charge un incident lorsque DPJ répond correctement sur le plan technique, mais avec un résultat métier inexploitable ?
+
+## 4. Encadre les discussions sur les nouveaux services externes
+
+### Fiscalité : partir du besoin, pas du nom d’une API
+
+Pose d’abord :
+
+> « Veut-on vérifier l’avis déposé, récupérer des données fiscales à la source ou éviter de demander une pièce ? »
+
+Ce sont trois objectifs différents.
+
+Puis fais préciser :
+
+- Quel service exact est envisagé ?
+- L’accès pour la finalité d’octroi est-il confirmé, et par qui ?
+- Quels identifiants sont nécessaires ?
+- Quelles données et quels millésimes sont restitués ?
+- Quelle démarche est requise côté client ?
+- Qui gère l’habilitation et le contrat ?
+- Quel coût, s’il existe, et selon quelle unité de facturation ?
+- Que fait-on si le service ne retrouve pas la personne ou reste indisponible ?
+
+La DGFiP mentionne notamment le revenu fiscal de référence, le nombre de parts et l’adresse fiscale parmi les données proposées. Il faut donc demander au métier de définir explicitement leur utilisation : par exemple, ne pas assimiler automatiquement un revenu fiscal de référence à la donnée de revenu mensuel attendue par votre règle.[1]
+
+### Banque de France : commencer par localiser l’existant
+
+La Banque de France indique que les établissements consultent systématiquement le FICP avant d’accorder un nouveau crédit. La première question est donc de savoir où cette consultation est réalisée aujourd’hui dans votre chaîne, et non de présumer qu’elle doit être créée dans votre microservice.[4]
+
+Questions à poser :
+
+- Est-elle faite par le parcours, un autre composant, le système d’octroi ou un service mutualisé ?
+- Votre module doit-il déclencher la consultation ou consommer un résultat déjà disponible ?
+- Quelle date, quel identifiant de consultation et quelle preuve doivent être transmis ?
+- Quels critères imposent une nouvelle consultation ?
+- Comment traiter un problème de rapprochement d’identité ?
+- Quel est le comportement attendu si la consultation échoue ?
+- Qui porte la relation avec le service fournisseur et les coûts ?
+
+Point de vigilance : une inscription au FICP n’est pas, en elle-même, une interdiction légale de crédit. La politique d’octroi applicable doit donc être explicitée par le métier et les risques, et non déduite par l’équipe technique.[4]
+
+### Coûts : demander un modèle complet
+
+Évite une discussion limitée au « prix d’un appel ». Demande une estimation comprenant :
+
+- abonnement et frais d’intégration éventuels ;
+- appels initiaux ;
+- relances après échec ;
+- nouvelles consultations après modification du dossier ;
+- volumétrie par caisse et par parcours ;
+- support et exploitation.
+
+Pour réduire les appels, propose d’étudier leur place dans le parcours, mais sans supprimer ni repousser un contrôle requis. Toute réutilisation d’un résultat devra avoir des règles de fraîcheur et de validité approuvées.
+
+## 5. Apporte des propositions techniques, sous forme d’options à valider
+
+Tu peux participer activement sans arriver avec une architecture imposée.
+
+### Proposition 1 — Séparer résultat technique et résultat métier
+
+Par exemple, à discuter avec CATS et le métier :
+
+| Situation | Catégorie proposée | Suite à définir |
+|---|---|---|
+| Service en timeout | Incident technique | Reprise ou attente |
+| Traitement documentaire non terminé | En cours | Poursuite du traitement |
+| Document illisible | Pièce inexploitable | Nouveau dépôt ou intervention |
+| Données divergentes | Incohérence | Contrôle complémentaire |
+| Contrôle satisfait | Résultat métier positif | Poursuite de l’analyse |
+
+Ta formulation :
+
+> « Je propose qu’un incident technique ne soit jamais interprété implicitement comme un résultat métier défavorable. Définissons la suite attendue pour chaque situation. »
+
+### Proposition 2 — Rattacher les contrôles aux bonnes versions
+
+> « Si le client remplace son avis d’imposition, quels résultats deviennent caducs et quels contrôles faut-il rejouer ? »
+
+Propose de rattacher le résultat au minimum au dossier, à la pièce/version et à la date du contrôle.
+
+### Proposition 3 — Rendre la décision explicable
+
+Pour chaque règle déterminante, propose de pouvoir retrouver :
+
+- la donnée utilisée et sa source ;
+- sa date de référence ;
+- le résultat du contrôle ;
+- la version de la règle ;
+- le motif de décision.
+
+Les éléments réellement conservés et leur durée devront être validés avec les responsables concernés.
+
+### Proposition 4 — Prévoir une recette de bout en bout
+
+> « Je propose un jeu de dossiers partagé : mêmes entrées, mêmes métadonnées DPJ et même résultat attendu chez CATS, dans notre module et dans le parcours. »
+
+Cela permet de tester la signification des données, pas seulement le bon fonctionnement des appels HTTP.
+
+## 6. Propose un déroulé de journée orienté décisions
+
+Voici un ordre du jour possible, à adapter avec l’organisateur :
+
+| Créneau | Sujet | Résultat attendu |
+|---|---|---|
+| 9 h–9 h 30 | Objectifs, participants et périmètre | Objectifs du lot 2 et sujets hors périmètre |
+| 9 h 30–10 h 30 | Bilan du lot 1 et dossiers problématiques | Liste priorisée des limites à corriger |
+| 10 h 45–12 h | Évolutions DPJ et RAD/LAD | Données, contrôles, statuts et responsabilités |
+| 13 h–14 h | Services externes et cadre d’accès | Besoins, faisabilité à confirmer, coûts et dépendances |
+| 14 h–15 h | Parcours cible et cas d’erreur | Comportement attendu sur les scénarios |
+| 15 h 15–16 h | Contrats, recette et déploiement | Livrables techniques et jalons |
+| 16 h–16 h 30 | Arbitrages et actions | Décisions, responsables et échéances |
+
+Comme vous serez plusieurs, répartissez les rôles avant le déplacement :
+
+- une personne anime et surveille le temps ;
+- une personne note les décisions ;
+- chaque thème possède un référent ;
+- les sujets non résolus sont inscrits dans une liste d’actions.
+
+Vérifiez aussi que les questions métier, risque, conformité, tarification et exploitation pourront être tranchées par les personnes présentes — ou attribuées à un interlocuteur nommé. Une réunion entre équipes IT ne suffira pas nécessairement à les arbitrer.
+
+## 7. Les livrables avec lesquels repartir
+
+À la fin, cherchez à obtenir ces six éléments :
+
+1. Le périmètre du lot 2 : inclus, exclu, à instruire.
+2. La matrice des contrôles avec leurs données, sources, résultats et suites de parcours.
+3. La répartition des responsabilités entre votre équipe, CATS et les autres acteurs.
+4. La liste des évolutions du contrat DPJ.
+5. Les dépendances : habilitations, contrats, budgets, environnements et validations.
+6. Un plan d’action avec un responsable et une échéance par action.
+
+Utilisez un tableau commun :
+
+| Sujet | Décision ou question ouverte | Responsable | Échéance | Impact bloquant |
+|---|---|---|---|---|
+| Statuts du traitement DPJ | À préciser | À nommer | À fixer | Oui/non |
+| Service fiscal envisagé et accès | À confirmer | À nommer | À fixer | Oui/non |
+| Consultation FICP existante | À localiser | À nommer | À fixer | Oui/non |
+| Jeux de test partagés | À préparer | À nommer | À fixer | Oui/non |
+
+## Une prise de parole prête à utiliser
+
+> « Pour préparer l’intégration du lot 2, je propose qu’on parte des limites du lot 1 et des décisions métier qu’on veut améliorer. Pour chaque évolution DPJ ou nouveau service, il faudrait préciser la donnée attendue, sa signification, qui la contrôle, comment notre moteur l’utilise et ce qu’on fait si elle manque ou si le service est indisponible.
+>
+> De notre côté, on peut apporter le parcours actuel et des cas concrets. L’objectif serait de repartir avec le périmètre priorisé, les évolutions de contrat, les responsabilités et les dépendances datées. »
+
+C’est une posture utile pour toi : tu ne te limites pas à demander « quelle API va-t-on appeler ? » ; tu aides le groupe à définir ce qui rendra le lot 2 réellement intégrable et exploitable.
 
